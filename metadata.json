@@ -1,0 +1,6 @@
+{
+  "name": "Formula Universe - Interactive Math Revision Hub",
+  "description": "Playful, colorful, and interactive mathematical formula revision hub topic-wise for competitive exams like NIMCET, MCA entrance, and JEE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

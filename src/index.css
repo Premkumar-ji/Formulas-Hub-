@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #f5f3ff;
+    --bg-surface: #ffffff;
+    --card: #ffffff;
+    --card-hover: #faf8ff;
+    --ink: #171328;
+    --ink-muted: #5e5777;
+    --border: #e9e3f7;
+    --p1: #7c3aed;
+    --p2: #ec4899;
+    --p3: #06b6d4;
+    --accent: #f59e0b;
+    --math-bg: rgba(124, 58, 237, 0.06);
+    --math-border: rgba(124, 58, 237, 0.15);
+    --shadow: 0 8px 24px -4px rgba(90, 50, 180, 0.08), 0 2px 6px -1px rgba(90, 50, 180, 0.04);
+    --shadow-lg: 0 16px 36px -6px rgba(90, 50, 180, 0.14), 0 4px 12px -2px rgba(90, 50, 180, 0.08);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0d0b18;
+    --bg-surface: #141124;
+    --card: #191530;
+    --card-hover: #201b3d;
+    --ink: #f5f2ff;
+    --ink-muted: #a69ec4;
+    --border: #2d2650;
+    --p1: #9061f9;
+    --p2: #f472b6;
+    --p3: #22d3ee;
+    --accent: #fbbf24;
+    --math-bg: rgba(144, 97, 249, 0.12);
+    --math-border: rgba(144, 97, 249, 0.28);
+    --shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px -6px rgba(0, 0, 0, 0.65);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+
+  .font-mono-formula {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    font-feature-settings: "zero" 1, "tnum" 1;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.4);
+}
+
+/* Math symbols styling */
+.math-frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 3px;
+  font-size: 0.9em;
+  line-height: 1.1;
+}
+.math-num {
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 1px;
+}
+.math-den {
+  padding-top: 1px;
+}
+
+/* Math & KaTeX typography styling */
+.katex-container {
+  color: var(--ink);
+  transition: color 0.25s ease;
+}
+
+.katex-display {
+  margin: 0.5em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+.katex {
+  font-size: 1.12em;
+  text-rendering: auto;
+}
+
+/* Print mode optimization for quick cheat sheets */
+@media print {
+  header, .no-print, button, .fab {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .cat {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
