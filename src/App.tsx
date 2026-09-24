@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { TOPICS_DATA } from './data/topics';
 import { TopicData } from './types/formula';
