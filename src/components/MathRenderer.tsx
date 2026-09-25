@@ -29,13 +29,18 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
     }
 
     try {
-      return katex.renderToString(sourceLatex, {
+      const rawHtml = katex.renderToString(sourceLatex, {
         displayMode,
         throwOnError: false,
         strict: false,
         trust: true,
         output: 'htmlAndMathml',
       });
+      // Tag numeric digit spans so custom number font applies accurately to all numbers
+      return rawHtml.replace(
+        /<span class="mord([^"]*)">([0-9]+)<\/span>/g,
+        '<span class="mord$1 katex-number font-numbers">$2</span>'
+      );
     } catch {
       return null;
     }
@@ -43,7 +48,7 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
 
   if (!renderedHtml) {
     return (
-      <div className={`font-mono text-sm leading-relaxed overflow-x-auto ${className}`}>
+      <div className={`font-rounded font-medium text-xs sm:text-sm leading-relaxed overflow-x-auto ${className}`}>
         {math || latex}
       </div>
     );
@@ -51,8 +56,8 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
 
   return (
     <div
-      className={`katex-container overflow-x-auto max-w-full py-1.5 select-all text-center sm:text-left ${
-        displayMode ? 'my-1 text-base sm:text-lg min-h-[2.5rem] block w-full' : 'inline-block text-sm max-w-full align-middle'
+      className={`katex-container font-rounded overflow-x-auto max-w-full py-1 select-all text-center sm:text-left ${
+        displayMode ? 'my-0.5 text-xs sm:text-sm md:text-base min-h-[2rem] block w-full' : 'inline-block text-xs sm:text-sm max-w-full align-middle'
       } ${className}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />

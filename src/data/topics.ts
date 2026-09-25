@@ -1411,27 +1411,27 @@ export const TOPICS_DATA: TopicData[] = [
           {
             "id": "sigma-n",
             "title": "Sum of First n Natural Numbers (∑n)",
-            "formula": "∑n = 1 + 2 + 3 + ... + n = [n(n + 1)] / 2",
+            "formula": "\\sum_{k=1}^n k = \\frac{n(n + 1)}{2}",
             "explanation": "Triangular numbers summation.",
             "mustKnow": true,
-            "latex": "∑n = 1 + 2 + 3 + ... + n = [n(n + 1)] / 2"
+            "latex": "\\sum_{k=1}^n k = 1 + 2 + \\dots + n = \\frac{n(n + 1)}{2}"
           },
           {
             "id": "sigma-n2",
             "title": "Sum of Squares (∑n²)",
-            "formula": "∑n² = 1² + 2² + ... + n² = [n(n + 1)(2n + 1)] / 6",
+            "formula": "\\sum_{k=1}^n k^2 = \\frac{n(n + 1)(2n + 1)}{6}",
             "explanation": "Sum of first n squares.",
             "mustKnow": true,
-            "latex": "∑n^2 = 1^2 + 2^2 + ... + n^2 = [n(n + 1)(2n + 1)] / 6"
+            "latex": "\\sum_{k=1}^n k^2 = 1^2 + 2^2 + \\dots + n^2 = \\frac{n(n + 1)(2n + 1)}{6}"
           },
           {
             "id": "sigma-n3",
             "title": "Sum of Cubes (∑n³)",
-            "formula": "∑n³ = 1³ + 2³ + ... + n³ = [[n(n + 1)] / 2]² = (∑n)²",
+            "formula": "\\sum_{k=1}^n k^3 = \\left[ \\frac{n(n + 1)}{2} \\right]^2 = \\left( \\sum_{k=1}^n k \\right)^2",
             "explanation": "Exact square of the sum of first n numbers!",
             "mustKnow": true,
             "shortcut": "🎯 Remember: 1³ + 2³ + ... + n³ is simply (∑n)².",
-            "latex": "∑n^3 = 1^3 + 2^3 + ... + n^3 = [[n(n + 1)] / 2]^2 = (∑n)^2"
+            "latex": "\\sum_{k=1}^n k^3 = 1^3 + 2^3 + \\dots + n^3 = \\left[ \\frac{n(n + 1)}{2} \\right]^2 = \\left( \\sum_{k=1}^n k \\right)^2"
           }
         ]
       }
@@ -1603,10 +1603,10 @@ export const TOPICS_DATA: TopicData[] = [
           {
             "id": "binom-fraction-sum",
             "title": "Fractional Sum: ∑ Cᵣ / (r + 1)",
-            "formula": "C₀/1 + C₁/2 + C₂/3 + ... + Cₙ/(n+1) = (2ⁿ⁺¹ − 1) / (n + 1)",
+            "formula": "\\frac{C_0}{1} + \\frac{C_1}{2} + \\frac{C_2}{3} + \\dots + \\frac{C_n}{n+1} = \\frac{2^{n+1} - 1}{n + 1}",
             "explanation": "Obtained by integrating (1 + x)ⁿ from 0 to 1.",
             "mustKnow": true,
-            "latex": "C_0/1 + C_1/2 + C_2/3 + ... + C_n/(n+1) = (2^n⁺¹ − 1) / (n + 1)"
+            "latex": "\\frac{C_0}{1} + \\frac{C_1}{2} + \\frac{C_2}{3} + \\dots + \\frac{C_n}{n+1} = \\frac{2^{n+1} - 1}{n + 1}"
           },
           {
             "id": "binom-pascal-sum",
@@ -3552,11 +3552,41 @@ export const TOPICS_DATA: TopicData[] = [
         "formulas": [
           {
             "id": "func-even-odd",
-            "title": "Even & Odd Functions",
-            "formula": "Even: f(−x) = f(x)  (Symmetric about y-axis)\nOdd: f(−x) = −f(x)  (Symmetric about origin)\nEvery function can be uniquely decomposed: f(x) = [f(x)+f(−x)]/2 + [f(x)−f(−x)]/2",
-            "explanation": "Even parts cancel under symmetric integration: ∫₋ₐᵃ (odd) dx = 0.",
+            "title": "Even & Odd Functions & Unique Decomposition",
+            "formula": "Even function:\nf(−x) = f(x)\n→ Symmetric about the y-axis\n\nOdd function:\nf(−x) = −f(x)\n→ Symmetric about the origin\n\nEvery function f(x) can be uniquely decomposed into:\nf(x) = [f(x) + f(−x)]/2 + [f(x) − f(−x)]/2\n\nwhere\n\nEven part = [f(x) + f(−x)]/2\nOdd part  = [f(x) − f(−x)]/2",
+            "explanation": "Every real function f(x) with symmetric domain can be uniquely split into an even component f_e(x) = [f(x)+f(-x)]/2 and an odd component f_o(x) = [f(x)-f(-x)]/2.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Even: f(−x) = f(x)  (Symmetric about y-axis) \\\\ Odd: f(−x) = −f(x)  (Symmetric about origin) \\\\ Every function can be uniquely decomposed: f(x) = [f(x)+f(−x)]/2 + [f(x)−f(−x)]/2 \\end{aligned}"
+            "remember": "🎯 Memory: Even part = Average [f(x) + f(-x)]/2; Odd part = Half difference [f(x) - f(-x)]/2.",
+            "shortcut": "🎯 Quick Check: For e^x, Even part = (e^x + e^(-x))/2 = cosh x, and Odd part = (e^x - e^(-x))/2 = sinh x.",
+            "latex": "\\begin{aligned} &\\textbf{Even function:} \\quad f(-x) = f(x) \\implies \\text{Symmetric about the } y\\text{-axis} \\\\[4pt] &\\textbf{Odd function:} \\quad f(-x) = -f(x) \\implies \\text{Symmetric about the origin} \\\\[8pt] &\\textbf{Unique Decomposition:} \\\\[2pt] &f(x) = \\frac{f(x) + f(-x)}{2} + \\frac{f(x) - f(-x)}{2} \\\\[6pt] &\\text{where} \\quad \\text{Even part} = \\frac{f(x) + f(-x)}{2}, \\quad \\text{Odd part} = \\frac{f(x) - f(-x)}{2} \\end{aligned}",
+            "table": {
+              "headers": [
+                "Component / Function",
+                "Definition & Characteristic"
+              ],
+              "rows": [
+                {
+                  "feature": "Even Function",
+                  "value": "f(−x) = f(x)",
+                  "latex": "f(-x) = f(x) \\quad (\\text{Symmetric about } y\\text{-axis, e.g. } x^2, \\cos x)"
+                },
+                {
+                  "feature": "Odd Function",
+                  "value": "f(−x) = −f(x)",
+                  "latex": "f(-x) = -f(x) \\quad (\\text{Symmetric about origin, e.g. } x^3, \\sin x, \\tan x)"
+                },
+                {
+                  "feature": "Even Part f_e(x)",
+                  "value": "[f(x) + f(−x)] / 2",
+                  "latex": "f_e(x) = \\frac{f(x) + f(-x)}{2} \\implies f_e(-x) = f_e(x)"
+                },
+                {
+                  "feature": "Odd Part f_o(x)",
+                  "value": "[f(x) − f(−x)] / 2",
+                  "latex": "f_o(x) = \\frac{f(x) - f(-x)}{2} \\implies f_o(-x) = -f_o(x)"
+                }
+              ]
+            }
           },
           {
             "id": "func-periodic",
@@ -3760,14 +3790,183 @@ export const TOPICS_DATA: TopicData[] = [
     "gradient": "from-teal-600 to-cyan-700",
     "accentColor": "border-teal-600 text-teal-600",
     "bgTint": "bg-teal-600/10 text-teal-600",
-    "description": "Telescoping series, method of differences, arithmetic-geometric series (AGP) & summation tricks.",
-    "examWeightage": "Medium-High (NIMCET ~3-4 Qs)",
+    "description": "Maclaurin & binomial expansions in correct order, telescoping series, method of differences & AGP.",
+    "examWeightage": "High Frequency (NIMCET ~4-5 Qs)",
     "quickTips": [
-      "For telescoping series: express Tₙ = Vₙ − Vₙ₋₁ so terms collapse upon summation.",
-      "For AGP: Sₙ = a + (a+d)r + (a+2d)r² + ... Multiply by r, shift one term right, and subtract.",
-      "Sum of infinite AGP: S_∞ = a/(1−r) + (d·r)/(1−r)² for |r| < 1."
+      "Maclaurin Patterns: e^x (+ + + + +), e^(-x) (+ − + − +), log(1+x) (+ − + − +), log(1-x) (− − − − −).",
+      "log(1+x) − log(1-x) = 2(x + x³/3 + x⁵/5 + ...): ODD POWERS ONLY (all +).",
+      "log(1+x) + log(1-x) = −(x² + x⁴/2 + x⁶/3 + ...): EVEN POWERS ONLY (all −).",
+      "sin x: ODD powers alternating; cos x: EVEN powers alternating; tan x: ODD powers all +.",
+      "1/(1+x): (+ − + − +); 1/(1-x): (+ + + + +); a^x = e^(x log a); (1+x)ⁿ: Binomial Expansion."
     ],
     "categories": [
+      {
+        "id": "series-expansions",
+        "name": "MACLAURIN / BINOMIAL EXPANSIONS — CORRECT ORDER",
+        "badge": "13 Core Expansions",
+        "formulas": [
+          {
+            "id": "exp-ex",
+            "title": "1. e^x",
+            "formula": "e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\frac{x^4}{4!} + \\frac{x^5}{5!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}",
+            "explanation": "Standard exponential Maclaurin series expansion. Valid and convergent for all real numbers x ∈ ℝ.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: e^x → + + + + + (All positive signs, every power xⁿ divided by n!).",
+            "remember": "Sum starts at n = 0 with 0! = 1. Value at x = 1 gives Euler's number e ≈ 2.71828.",
+            "latex": "\\begin{aligned} e^x &= 1+x+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\frac{x^4}{4!}+\\frac{x^5}{5!}+\\cdots \\\\[6pt] e^x &= \\sum_{n=0}^{\\infty}\\frac{x^n}{n!} \\end{aligned}"
+          },
+          {
+            "id": "exp-e-minus-x",
+            "title": "2. e^(-x)",
+            "formula": "e^{-x} = 1 - x + \\frac{x^2}{2!} - \\frac{x^3}{3!} + \\frac{x^4}{4!} - \\frac{x^5}{5!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^n}{n!}",
+            "explanation": "Alternating exponential expansion obtained by replacing x with (-x) in e^x. Converges for all x ∈ ℝ.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: e^(-x) → + − + − + (Alternating signs; odd powers negative, even powers positive).",
+            "remember": "Adding gives e^x + e^(-x) = 2(1 + x²/2! + x⁴/4! + ...); Subtracting gives e^x - e^(-x) = 2(x + x³/3! + x⁵/5! + ...).",
+            "latex": "\\begin{aligned} e^{-x} &= 1-x+\\frac{x^2}{2!}-\\frac{x^3}{3!}+\\frac{x^4}{4!}-\\frac{x^5}{5!}+\\cdots \\\\[6pt] e^{-x} &= \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^n}{n!} \\end{aligned}"
+          },
+          {
+            "id": "exp-log-1-plus-x",
+            "title": "3. log(1+x)",
+            "formula": "\\log(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\frac{x^4}{4} + \\frac{x^5}{5} - \\cdots = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1} x^n}{n}",
+            "explanation": "Natural logarithm (base e) series. Essential distinction: denominators are plain integers n (NO factorials!).",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: log(1+x) → + − + − + (No factorials in denominator, starts with +x).",
+            "remember": "Condition: -1 < x ≤ 1. At x = 1: log(2) = 1 - 1/2 + 1/3 - 1/4 + 1/5 - ...",
+            "latex": "\\begin{aligned} \\log(1+x) &= x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\frac{x^4}{4}+\\frac{x^5}{5}-\\cdots \\\\[6pt] \\log(1+x) &= \\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1}x^n}{n} \\\\[6pt] &\\text{Condition: } -1 < x \\le 1 \\end{aligned}"
+          },
+          {
+            "id": "exp-log-1-minus-x",
+            "title": "4. log(1-x)",
+            "formula": "\\log(1-x) = -x - \\frac{x^2}{2} - \\frac{x^3}{3} - \\frac{x^4}{4} - \\frac{x^5}{5} - \\cdots = -\\sum_{n=1}^{\\infty} \\frac{x^n}{n}",
+            "explanation": "Formed by substituting (-x) into log(1+x). Crucial visual cue: EVERY single term is strictly negative.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: log(1-x) → − − − − − (ALL NEGATIVE terms, no factorials).",
+            "remember": "Condition: |x| < 1 (strictly -1 ≤ x < 1). Useful form: -log(1-x) = x + x²/2 + x³/3 + x⁴/4 + ...",
+            "latex": "\\begin{aligned} \\log(1-x) &= -x-\\frac{x^2}{2}-\\frac{x^3}{3}-\\frac{x^4}{4}-\\frac{x^5}{5}-\\cdots \\\\[6pt] \\log(1-x) &= -\\sum_{n=1}^{\\infty} \\frac{x^n}{n} \\\\[6pt] &\\text{Condition: } |x| < 1 \\end{aligned}"
+          },
+          {
+            "id": "exp-log-diff",
+            "title": "5. log(1+x) - log(1-x)",
+            "formula": "log(1+x) - log(1-x) = 2(x + x³/3 + x⁵/5 + x⁷/7 + ...) = 2 ∑_{n=0}^∞ [x^(2n+1) / (2n+1)]",
+            "explanation": "Subtracting log(1-x) cancels all even powers, leaving twice each odd power. Identical to log((1+x)/(1-x)).",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: log(1+x) − log(1-x) → ODD POWERS ONLY, ALL +",
+            "remember": "Condition: |x| < 1. NIMCET classic for calculating numerical logs (e.g. put x = 1/3 for log 2).",
+            "latex": "\\begin{aligned} \\log(1+x)-\\log(1-x) &= 2x+\\frac{2x^3}{3}+\\frac{2x^5}{5}+\\frac{2x^7}{7}+\\cdots \\\\[8pt] \\text{or} \\quad &\\boxed{\\log(1+x)-\\log(1-x) = 2\\left(x+\\frac{x^3}{3}+\\frac{x^5}{5}+\\frac{x^7}{7}+\\cdots\\right)} \\\\[8pt] \\text{General form:} \\quad &\\boxed{\\log(1+x)-\\log(1-x) = 2\\sum_{n=0}^{\\infty}\\frac{x^{2n+1}}{2n+1}} \\end{aligned}"
+          },
+          {
+            "id": "exp-log-sum",
+            "title": "6. log(1+x) + log(1-x)",
+            "formula": "log(1+x) + log(1-x) = -(x² + x⁴/2 + x⁶/3 + x⁸/4 + ...) = -∑_{n=1}^∞ [x^(2n) / n]",
+            "explanation": "Adding both logarithm expansions cancels all odd powers, leaving the negative sum of even powers. Equal to log(1 - x²).",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: log(1+x) + log(1-x) → EVEN POWERS ONLY, ALL −",
+            "remember": "Condition: |x| < 1. Note: Denominators are 1, 2, 3, 4 (corresponding to index n, where power is 2n).",
+            "latex": "\\begin{aligned} \\log(1+x)+\\log(1-x) &= -x^2-\\frac{x^4}{2}-\\frac{x^6}{3}-\\frac{x^8}{4}-\\cdots \\\\[8pt] \\text{or} \\quad &\\boxed{\\log(1+x)+\\log(1-x) = -\\left(x^2+\\frac{x^4}{2}+\\frac{x^6}{3}+\\frac{x^8}{4}+\\cdots\\right)} \\\\[8pt] \\text{General form:} \\quad &\\boxed{\\log(1+x)+\\log(1-x) = -\\sum_{n=1}^{\\infty}\\frac{x^{2n}}{n}} \\end{aligned}"
+          },
+          {
+            "id": "exp-sin-x",
+            "title": "7. sin x",
+            "formula": "\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\frac{x^9}{9!} - \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}",
+            "explanation": "Sine is an odd function; its Maclaurin series features ONLY odd powers of x with factorial denominators and alternating signs.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: sin x → ODD POWERS, ALTERNATING (+ - + -)",
+            "remember": "Limits shortcut: sin x ≈ x - x³/6. Used for lim[x→0] (x - sin x)/x³ = 1/6.",
+            "latex": "\\begin{aligned} \\sin x &= x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\frac{x^7}{7!}+\\frac{x^9}{9!}-\\cdots \\\\[6pt] \\sin x &= \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!} \\end{aligned}"
+          },
+          {
+            "id": "exp-cos-x",
+            "title": "8. cos x",
+            "formula": "\\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\frac{x^6}{6!} + \\frac{x^8}{8!} - \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}",
+            "explanation": "Cosine is an even function; its Maclaurin series features ONLY even powers of x with factorial denominators and alternating signs, starting with 1.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: cos x → EVEN POWERS, ALTERNATING (+ - + -)",
+            "remember": "Limits shortcut: cos x ≈ 1 - x²/2. Used for lim[x→0] (1 - cos x)/x² = 1/2.",
+            "latex": "\\begin{aligned} \\cos x &= 1-\\frac{x^2}{2!}+\\frac{x^4}{4!}-\\frac{x^6}{6!}+\\frac{x^8}{8!}-\\cdots \\\\[6pt] \\cos x &= \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!} \\end{aligned}"
+          },
+          {
+            "id": "exp-tan-x",
+            "title": "9. tan x",
+            "formula": "tan x = x + x³/3 + 2x⁵/15 + 17x⁷/315 + 62x⁹/2835 + ...",
+            "explanation": "Tangent expansion contains odd powers with strictly POSITIVE coefficients. Essential coefficients for NIMCET: 1, 1/3, 2/15, 17/315.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: tan x → ODD POWERS, ALL + (Coefficients: 1, 1/3, 2/15, 17/315).",
+            "remember": "Limits shortcut: tan x ≈ x + x³/3. Used for lim[x→0] (tan x - x)/x³ = 1/3 and lim[x→0] (tan x - sin x)/x³ = 1/2.",
+            "latex": "\\begin{aligned} \\tan x &= x+\\frac{x^3}{3}+\\frac{2x^5}{15}+\\frac{17x^7}{315}+\\frac{62x^9}{2835}+\\cdots \\\\[8pt] \\text{For quick NIMCET revision:} \\quad &\\boxed{\\tan x = x+\\frac{x^3}{3}+\\frac{2x^5}{15}+\\frac{17x^7}{315}+\\cdots} \\end{aligned}"
+          },
+          {
+            "id": "exp-one-plus-x-inv",
+            "title": "10. (1+x)^(-1)",
+            "formula": "(1+x)^(-1) = 1 - x + x² - x³ + x⁴ - x⁵ + ... = ∑_{n=0}^∞ (-1)ⁿ xⁿ   (|x| < 1)",
+            "explanation": "Binomial expansion for negative integer exponent -1. Forms an infinite geometric progression with common ratio (-x).",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: 1/(1+x) → + − + − + (Alternating signs, all coefficients are 1).",
+            "remember": "Condition: |x| < 1. If denominator is (1+x), signs alternate.",
+            "latex": "\\begin{aligned} (1+x)^{-1} &= 1-x+x^2-x^3+x^4-x^5+\\cdots \\\\[8pt] \\text{General form:} \\quad &\\boxed{(1+x)^{-1} = \\sum_{n=0}^{\\infty}(-1)^n x^n} \\\\[8pt] \\text{Condition:} \\quad &|x| < 1 \\end{aligned}"
+          },
+          {
+            "id": "exp-one-minus-x-inv",
+            "title": "11. (1-x)^(-1)",
+            "formula": "(1-x)^(-1) = 1 + x + x² + x³ + x⁴ + x⁵ + ... = ∑_{n=0}^∞ xⁿ   (|x| < 1)",
+            "explanation": "Standard infinite geometric series 1/(1-r) with r = x. All signs are strictly positive and all coefficients equal 1.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: 1/(1-x) → + + + + + (ALL POSITIVE terms, all coefficients are 1).",
+            "remember": "Condition: |x| < 1. If denominator is (1-x), all signs are positive.",
+            "latex": "\\begin{aligned} (1-x)^{-1} &= 1+x+x^2+x^3+x^4+x^5+\\cdots \\\\[8pt] \\text{General form:} \\quad &\\boxed{(1-x)^{-1} = \\sum_{n=0}^{\\infty}x^n} \\\\[8pt] \\text{Condition:} \\quad &|x| < 1 \\end{aligned}"
+          },
+          {
+            "id": "exp-a-power-x",
+            "title": "12. a^x",
+            "formula": "a^x = 1 + x log a + [x²(log a)²]/2! + [x³(log a)³]/3! + ... = ∑_{n=0}^∞ [xⁿ(log a)ⁿ / n!]   (a > 0)",
+            "explanation": "Since a^x = e^(x log a), substituting u = x log a into the e^u series yields powers of (x log a) divided by factorials.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: a^x → e^(x log a) (Same as e^x with x replaced by x log a).",
+            "remember": "Condition: a > 0. Verified by differentiation: d/dx(a^x) = a^x · log a.",
+            "latex": "\\begin{aligned} \\text{Since } a^x &= e^{x\\log a} \\text{ therefore:} \\\\[6pt] a^x &= 1+x\\log a+\\frac{x^2(\\log a)^2}{2!}+\\frac{x^3(\\log a)^3}{3!}+\\frac{x^4(\\log a)^4}{4!}+\\cdots \\\\[8pt] \\text{General form:} \\quad &\\boxed{a^x = \\sum_{n=0}^{\\infty}\\frac{x^n(\\log a)^n}{n!}} \\\\[8pt] \\text{Condition:} \\quad &a > 0 \\end{aligned}"
+          },
+          {
+            "id": "exp-binomial-general",
+            "title": "13. (1+x)^n",
+            "formula": "(1+x)ⁿ = 1 + nx + [n(n-1)/2!]x² + [n(n-1)(n-2)/3!]x³ + ... = ∑_{r=0}^∞ C(n,r) xʳ",
+            "explanation": "General Binomial Theorem for any rational/real index n. Terminates at (n+1) terms if n ∈ ℕ; infinite series if n ∉ ℕ.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Pattern Revision: (1+x)^n → BINOMIAL EXPANSION (Terminates at n if n is a positive integer).",
+            "remember": "Condition for infinite series: |x| < 1. General term: T_(r+1) = [n(n-1)...(n-r+1) / r!] · x^r.",
+            "latex": "\\begin{aligned} (1+x)^n &= 1+nx+\\frac{n(n-1)}{2!}x^2+\\frac{n(n-1)(n-2)}{3!}x^3+\\frac{n(n-1)(n-2)(n-3)}{4!}x^4+\\cdots \\\\[8pt] \\text{General form:} \\quad &\\boxed{(1+x)^n = \\sum_{r=0}^{\\infty}\\binom{n}{r}x^r} \\quad \\text{where } \\binom{n}{r} = \\frac{n(n-1)(n-2)\\cdots(n-r+1)}{r!} \\\\[8pt] \\text{For positive integer } n: \\quad &\\boxed{(1+x)^n = \\sum_{r=0}^{n}\\binom{n}{r}x^r} \\end{aligned}"
+          },
+          {
+            "id": "exp-quick-pattern-revision",
+            "title": "QUICK PATTERN REVISION (NIMCET Master Table)",
+            "formula": "e^x (+ + + + +) | e^(-x) (+ − + − +) | log(1+x) (+ − + − +) | log(1-x) (− − − − −) | sin x (ODD, ALT) | cos x (EVEN, ALT) | tan x (ODD, ALL +)",
+            "explanation": "Comparative pattern table for instant recall of signs, powers, factorials and conditions for all 13 expansions.",
+            "mustKnow": true,
+            "shortcut": "🎯 1-Second Exam Scan: Check if powers are odd/even, signs alternate or stay all (+/-), and if denominators have factorials or not.",
+            "latex": "\\begin{aligned} e^x &\\longrightarrow +\\;+\\;+\\;+\\;+ \\\\[2pt] e^{-x} &\\longrightarrow +\\;-\\;+\\;-\\;+ \\\\[2pt] \\log(1+x) &\\longrightarrow +\\;-\\;+\\;-\\;+ \\\\[2pt] \\log(1-x) &\\longrightarrow -\\;-\\;-\\;-\\;- \\\\[2pt] \\log(1+x) - \\log(1-x) &\\longrightarrow \\text{ODD POWERS ONLY, ALL } + \\\\[2pt] \\log(1+x) + \\log(1-x) &\\longrightarrow \\text{EVEN POWERS ONLY, ALL } - \\\\[2pt] \\sin x &\\longrightarrow \\text{ODD POWERS, ALTERNATING} \\\\[2pt] \\cos x &\\longrightarrow \\text{EVEN POWERS, ALTERNATING} \\\\[2pt] \\tan x &\\longrightarrow \\text{ODD POWERS, ALL } + \\\\[2pt] (1+x)^{-1} &\\longrightarrow +\\;-\\;+\\;-\\;+ \\\\[2pt] (1-x)^{-1} &\\longrightarrow +\\;+\\;+\\;+\\;+ \\\\[2pt] a^x &\\longrightarrow e^{(x\\log a)} \\\\[2pt] (1+x)^n &\\longrightarrow \\text{BINOMIAL EXPANSION} \\end{aligned}",
+            "table": {
+              "headers": [
+                "Series Expansion",
+                "Sign & Power Quick Pattern"
+              ],
+              "rows": [
+                { "feature": "e^x", "value": "+ + + + + (All positive terms, with factorials)", "latex": "e^x \\longrightarrow +\\;+\\;+\\;+\\;+" },
+                { "feature": "e^(-x)", "value": "+ − + − + (Alternating signs, with factorials)", "latex": "e^{-x} \\longrightarrow +\\;-\\;+\\;-\\;+" },
+                { "feature": "log(1+x)", "value": "+ − + − + (Alternating signs, no factorials)", "latex": "\\log(1+x) \\longrightarrow +\\;-\\;+\\;-\\;+" },
+                { "feature": "log(1-x)", "value": "− − − − − (ALL NEGATIVE terms, no factorials)", "latex": "\\log(1-x) \\longrightarrow -\\;-\\;-\\;-\\;-" },
+                { "feature": "log(1+x) − log(1-x)", "value": "ODD POWERS ONLY, ALL + (Factor of 2 outside)", "latex": "\\log(1+x) - \\log(1-x) \\longrightarrow \\text{ODD POWERS, ALL } +" },
+                { "feature": "log(1+x) + log(1-x)", "value": "EVEN POWERS ONLY, ALL − (Negative of even sum)", "latex": "\\log(1+x) + \\log(1-x) \\longrightarrow \\text{EVEN POWERS, ALL } -" },
+                { "feature": "sin x", "value": "ODD POWERS, ALTERNATING (+ − + − ...)", "latex": "\\sin x \\longrightarrow \\text{ODD POWERS, ALTERNATING}" },
+                { "feature": "cos x", "value": "EVEN POWERS, ALTERNATING (+ − + − ...)", "latex": "\\cos x \\longrightarrow \\text{EVEN POWERS, ALTERNATING}" },
+                { "feature": "tan x", "value": "ODD POWERS, ALL + (Coefficients: 1, 1/3, 2/15, 17/315)", "latex": "\\tan x \\longrightarrow \\text{ODD POWERS, ALL } +" },
+                { "feature": "1/(1+x) = (1+x)^(-1)", "value": "+ − + − + (Alternating signs, all coeff 1)", "latex": "(1+x)^{-1} \\longrightarrow +\\;-\\;+\\;-\\;+" },
+                { "feature": "1/(1-x) = (1-x)^(-1)", "value": "+ + + + + (ALL POSITIVE terms, all coeff 1)", "latex": "(1-x)^{-1} \\longrightarrow +\\;+\\;+\\;+\\;+" },
+                { "feature": "a^x", "value": "e^(x log a) (Powers of (x log a) with factorials)", "latex": "a^x \\longrightarrow e^{(x\\log a)}" },
+                { "feature": "(1+x)^n", "value": "BINOMIAL EXPANSION (Terminates at n if n ∈ ℕ)", "latex": "(1+x)^n \\longrightarrow \\text{BINOMIAL EXPANSION}" }
+              ]
+            }
+          }
+        ]
+      },
       {
         "id": "series-agp",
         "name": "Arithmetic-Geometric Progression (AGP)",
@@ -3775,11 +3974,12 @@ export const TOPICS_DATA: TopicData[] = [
           {
             "id": "agp-infinite",
             "title": "Sum of Infinite AGP (|r| < 1)",
-            "formula": "S_∞ = a / (1 − r) + (d · r) / (1 − r)²",
+            "formula": "S_∞ = \\frac{a}{1 - r} + \\frac{d \\cdot r}{(1 - r)^2}",
             "explanation": "Series where each term is the product of corresponding AP and GP terms.",
             "mustKnow": true,
             "shortcut": "🎯 Example: 1 + 2/3 + 3/9 + 4/27 + ... has a=1, d=1, r=1/3 ⇒ S_∞ = 1/(2/3) + (1/3)/(4/9) = 3/2 + 3/4 = 9/4.",
-            "latex": "S_ \\infty  = a / (1 − r) + (d  \\cdot  r) / (1 − r)^2"
+            "remember": "Sum exists if and only if |r| < 1.",
+            "latex": "S_\\infty = \\frac{a}{1 - r} + \\frac{d \\cdot r}{(1 - r)^2} \\quad (|r| < 1)"
           }
         ]
       },
@@ -3790,18 +3990,20 @@ export const TOPICS_DATA: TopicData[] = [
           {
             "id": "telescope-fraction",
             "title": "Standard Telescoping Fraction",
-            "formula": "1 / [n(n + 1)] = 1/n − 1/(n + 1)\n∑_{n=1}^k 1/[n(n+1)] = 1 − 1/(k + 1) = k / (k + 1)",
+            "formula": "\\frac{1}{n(n + 1)} = \\frac{1}{n} - \\frac{1}{n + 1}, \\quad \\sum_{n=1}^k \\frac{1}{n(n+1)} = \\frac{k}{k + 1}",
             "explanation": "Interior terms cancel out in adjacent pairs leaving only first and last boundary terms.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} 1 / [n(n + 1)] = 1/n − 1/(n + 1) \\\\ ∑_{n=1}^k 1/[n(n+1)] = 1 − 1/(k + 1) = k / (k + 1) \\end{aligned}"
+            "shortcut": "🎯 Shortcut: Sum of 1/[n(n+1)] up to k terms is always k/(k+1). As k → ∞, sum = 1.",
+            "latex": "\\begin{aligned} \\frac{1}{n(n + 1)} &= \\frac{1}{n} - \\frac{1}{n + 1} \\\\[6pt] \\sum_{n=1}^k \\frac{1}{n(n+1)} &= 1 - \\frac{1}{k + 1} = \\frac{k}{k + 1} \\end{aligned}"
           },
           {
             "id": "telescope-three",
             "title": "Telescoping with 3 Linear Factors",
-            "formula": "1 / [n(n+1)(n+2)] = ½ [ 1/(n(n+1)) − 1/((n+1)(n+2)) ]",
-            "explanation": "Splitting into difference of products of 2 consecutive factors.",
+            "formula": "\\frac{1}{n(n+1)(n+2)} = \\frac{1}{2} \\left[ \\frac{1}{n(n+1)} - \\frac{1}{(n+1)(n+2)} \\right]",
+            "explanation": "Splitting into difference of products of 2 consecutive factors using 1/(difference of first & last factor).",
             "mustKnow": true,
-            "latex": "1 / [n(n+1)(n+2)] = ½ [ 1/(n(n+1)) − 1/((n+1)(n+2)) ]"
+            "shortcut": "🎯 General Rule: 1/[n(n+1)...(n+r)] = 1/r · [1/(n...(n+r-1)) - 1/((n+1)...(n+r))].",
+            "latex": "\\frac{1}{n(n+1)(n+2)} = \\frac{1}{2} \\left[ \\frac{1}{n(n+1)} - \\frac{1}{(n+1)(n+2)} \\right]"
           }
         ]
       }

@@ -19,7 +19,8 @@ import {
   SlidersHorizontal,
   Share2,
   Sparkles,
-  BookOpen
+  BookOpen,
+  Type
 } from 'lucide-react';
 import { fireConfetti } from '../utils/confetti';
 
@@ -34,6 +35,7 @@ interface TopicViewProps {
   onToggleStarFormula: (formulaId: string) => void;
   targetFormulaId?: string;
   onOpenQuickRevision: () => void;
+  onOpenFontSettings?: () => void;
 }
 
 type FilterMode = 'all' | 'must-know' | 'shortcuts' | 'mistakes' | 'starred';
@@ -49,6 +51,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
   onToggleStarFormula,
   targetFormulaId,
   onOpenQuickRevision,
+  onOpenFontSettings,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
@@ -330,8 +333,21 @@ export const TopicView: React.FC<TopicViewProps> = ({
             </button>
           </div>
 
-          {/* Expand/Collapse All */}
+          {/* Actions: Fonts & Expand/Collapse All */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {onOpenFontSettings && (
+              <>
+                <button
+                  onClick={onOpenFontSettings}
+                  className="flex items-center gap-1 text-[11px] text-purple-600 dark:text-purple-400 hover:text-purple-700 font-semibold px-2 py-0.5 rounded-md hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-colors whitespace-nowrap"
+                  title="Customize Text & Number Fonts"
+                >
+                  <Type className="w-3 h-3 shrink-0" />
+                  <span>Fonts</span>
+                </button>
+                <span className="text-[var(--border)]">|</span>
+              </>
+            )}
             <button
               onClick={expandAll}
               className="text-[11px] text-[var(--ink-muted)] hover:text-purple-600 transition-colors font-medium whitespace-nowrap"
@@ -353,15 +369,24 @@ export const TopicView: React.FC<TopicViewProps> = ({
       <main className="max-w-6xl mx-auto px-3 sm:px-6 pt-6 w-full max-w-full min-w-0">
         {/* Quick Tips Box if available */}
         {topic.quickTips && topic.quickTips.length > 0 && !searchQuery && filterMode === 'all' && (
-          <div className="mb-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 p-4 text-xs text-[var(--ink)] flex items-start gap-3">
+          <div 
+            className="mb-6 rounded-2xl bg-amber-500/10 border p-4 text-xs text-[var(--ink)] flex items-start gap-3 w-full max-w-full min-w-0 box-border overflow-visible"
+            style={{
+              borderColor: '#f2a80a',
+              paddingLeft: '17px',
+              marginLeft: '0px',
+              marginRight: '0px',
+              marginTop: '47px',
+            }}
+          >
             <Lightbulb className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-            <div>
+            <div className="flex-1 min-w-0">
               <span className="font-bold text-amber-700 dark:text-amber-400 block mb-1">
                 Exam Strategy & Memory Cue for {topic.name}:
               </span>
               <ul className="list-disc list-inside space-y-0.5 text-[var(--ink-muted)]">
                 {topic.quickTips.map((tip, idx) => (
-                  <li key={idx}>{tip}</li>
+                  <li key={idx} className="break-words">{tip}</li>
                 ))}
               </ul>
             </div>
@@ -422,7 +447,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
                         <div
                           key={formula.id}
                           id={`formula-${formula.id}`}
-                          className={`fcard rounded-xl p-3.5 sm:p-4 bg-[var(--card)] border transition-all duration-200 flex flex-col justify-between relative w-full min-w-0 max-w-full overflow-hidden ${
+                          className={`fcard rounded-2xl p-3.5 sm:p-4 bg-[var(--card)] border transition-all duration-200 flex flex-col justify-between relative w-full min-w-0 max-w-full overflow-hidden ${
                             formula.mustKnow
                               ? 'border-purple-500/30 hover:border-purple-500 shadow-sm'
                               : 'border-[var(--border)] hover:border-purple-300'
@@ -462,7 +487,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               <FormulaTable table={formula.table} />
                             ) : (
                               <div
-                                className="formula rounded-xl p-3 sm:p-4 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0"
+                                className="formula rounded-2xl p-2.5 sm:p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0 font-rounded"
                                 style={{
                                   backgroundColor: 'var(--math-bg)',
                                   border: '1px solid var(--math-border)',

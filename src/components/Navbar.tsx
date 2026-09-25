@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Star, Moon, Sun, Home, BookOpen, Layers } from 'lucide-react';
+import { Sparkles, Star, Moon, Sun, Home, BookOpen, Layers, Type } from 'lucide-react';
 import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
@@ -8,6 +8,7 @@ interface NavbarProps {
   onOpenFavorites: () => void;
   onOpenQuickRevision: () => void;
   onOpenCheatSheet: () => void;
+  onOpenFontSettings: () => void;
   isDark: boolean;
   onToggleTheme: () => void;
   starredCount: number;
@@ -21,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenFavorites,
   onOpenQuickRevision,
   onOpenCheatSheet,
+  onOpenFontSettings,
   isDark,
   onToggleTheme,
   starredCount,
@@ -127,6 +129,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               {totalTopics ? Math.round((revisedCount / totalTopics) * 100) : 0}% Revised
             </span>
           </div>
+
+          {/* Font Customizer Button */}
+          <button
+            onClick={onOpenFontSettings}
+            className="flex items-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 shrink-0 text-xs font-semibold"
+            aria-label="Customize Text & Number Fonts"
+            title="Customize Text & Number Fonts (Aa / 123)"
+          >
+            <Type className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-200 shrink-0" />
+            <span className="hidden sm:inline">Fonts</span>
+          </button>
 
           {/* Theme Switcher Button */}
           <button

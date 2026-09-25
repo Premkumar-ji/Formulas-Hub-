@@ -85,10 +85,26 @@ export function autoConvertToLatex(text: string): string {
        .replace(/\bdet\b/g, '\\det ');
 
   // 6. Common fractions conversion
+  // Vulgar fraction glyphs
+  s = s.replace(/½/g, '\\frac{1}{2}')
+       .replace(/⅓/g, '\\frac{1}{3}')
+       .replace(/⅔/g, '\\frac{2}{3}')
+       .replace(/¼/g, '\\frac{1}{4}')
+       .replace(/¾/g, '\\frac{3}{4}')
+       .replace(/⅕/g, '\\frac{1}{5}')
+       .replace(/⅙/g, '\\frac{1}{6}')
+       .replace(/⅛/g, '\\frac{1}{8}');
+
   // Matches expressions like (n / 2) or (a / b)
   s = s.replace(/\(\s*([a-zA-Z0-9+\-*^]+)\s*\/\s*([a-zA-Z0-9+\-*^]+)\s*\)/g, '\\frac{$1}{$2}');
+  // Matches expressions like 1 / [n(n + 1)] or 1 / [expr]
+  s = s.replace(/([0-9a-zA-Z]+)\s*\/\s*\[([^\]]+)\]/g, '\\frac{$1}{$2}');
+  // Matches expressions like 1 / (expr) or a / (expr)
+  s = s.replace(/([0-9a-zA-Z]+)\s*\/\s*\(([^)]+)\)/g, '\\frac{$1}{$2}');
   // Matches simple numeric fractions like 1/2, 1/3, 1/4
   s = s.replace(/\b([0-9]+)\s*\/\s*([0-9]+)\b/g, '\\frac{$1}{$2}');
+  // Matches single variable fractions like 1/n or 1/k or a/b
+  s = s.replace(/\b([0-9a-zA-Z])\s*\/\s*([a-zA-Z])\b/g, '\\frac{$1}{$2}');
 
   // 7. Square roots: √(expr) -> \sqrt{expr}
   s = s.replace(/√\(([^)]+)\)/g, '\\sqrt{$1}');

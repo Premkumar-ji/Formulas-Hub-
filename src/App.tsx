@@ -8,6 +8,21 @@ import { FlashcardModal } from './components/FlashcardModal';
 import { StarredView } from './components/StarredView';
 import { CheatSheetModal } from './components/CheatSheetModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { FontCustomizerModal } from './components/FontCustomizerModal';
+import { 
+  getInitialTextFont, 
+  getInitialNumberFont, 
+  getInitialFontScale, 
+  getInitialTextFontWeight,
+  getInitialNumberFontWeight,
+  applyFontsToDOM, 
+  DEFAULT_TEXT_FONT, 
+  DEFAULT_NUMBER_FONT, 
+  DEFAULT_FONT_SCALE,
+  DEFAULT_TEXT_FONT_WEIGHT,
+  DEFAULT_NUMBER_FONT_WEIGHT
+} from './utils/fontManager';
+import { Type } from 'lucide-react';
 
 type AppView = 'index' | 'topic' | 'favorites' | 'cheat-sheet';
 
@@ -16,6 +31,34 @@ export default function App() {
   const [activeTopicId, setActiveTopicId] = useState<string>('trigonometry');
   const [targetFormulaId, setTargetFormulaId] = useState<string | undefined>();
   const [isFlashcardOpen, setIsFlashcardOpen] = useState<boolean>(false);
+  const [isFontModalOpen, setIsFontModalOpen] = useState<boolean>(false);
+
+  // Font customization state (text font, numbers font, scale, weights)
+  const [textFont, setTextFont] = useState<string>(getInitialTextFont);
+  const [numberFont, setNumberFont] = useState<string>(getInitialNumberFont);
+  const [fontScale, setFontScale] = useState<number>(getInitialFontScale);
+  const [textWeight, setTextWeight] = useState<number>(getInitialTextFontWeight);
+  const [numberWeight, setNumberWeight] = useState<number>(getInitialNumberFontWeight);
+
+  // Apply fonts on mount and whenever changed
+  useEffect(() => {
+    applyFontsToDOM(textFont, numberFont, fontScale, textWeight, numberWeight);
+  }, [textFont, numberFont, fontScale, textWeight, numberWeight]);
+
+  const handleResetFonts = useCallback(() => {
+    setTextFont(DEFAULT_TEXT_FONT);
+    setNumberFont(DEFAULT_NUMBER_FONT);
+    setFontScale(DEFAULT_FONT_SCALE);
+    setTextWeight(DEFAULT_TEXT_FONT_WEIGHT);
+    setNumberWeight(DEFAULT_NUMBER_FONT_WEIGHT);
+    applyFontsToDOM(
+      DEFAULT_TEXT_FONT, 
+      DEFAULT_NUMBER_FONT, 
+      DEFAULT_FONT_SCALE,
+      DEFAULT_TEXT_FONT_WEIGHT,
+      DEFAULT_NUMBER_FONT_WEIGHT
+    );
+  }, []);
 
   // Theme state
   const [isDark, setIsDark] = useState<boolean>(() => {
@@ -193,6 +236,7 @@ export default function App() {
         onOpenFavorites={handleOpenFavorites}
         onOpenQuickRevision={() => setIsFlashcardOpen(true)}
         onOpenCheatSheet={handleOpenCheatSheet}
+        onOpenFontSettings={() => setIsFontModalOpen(true)}
         isDark={isDark}
         onToggleTheme={handleToggleTheme}
         starredCount={starredFormulaIds.size}
@@ -227,6 +271,7 @@ export default function App() {
             onToggleStarFormula={handleToggleStarFormula}
             targetFormulaId={targetFormulaId}
             onOpenQuickRevision={() => setIsFlashcardOpen(true)}
+            onOpenFontSettings={() => setIsFontModalOpen(true)}
           />
         )}
 
@@ -257,6 +302,36 @@ export default function App() {
         starredFormulaIds={starredFormulaIds}
         onToggleStarFormula={handleToggleStarFormula}
       />
+
+      {/* Typography & Font Customizer Modal */}
+      <FontCustomizerModal
+        isOpen={isFontModalOpen}
+        onClose={() => setIsFontModalOpen(false)}
+        currentTextFont={textFont}
+        currentNumberFont={numberFont}
+        currentScale={fontScale}
+        currentTextWeight={textWeight}
+        currentNumberWeight={numberWeight}
+        onSelectTextFont={setTextFont}
+        onSelectNumberFont={setNumberFont}
+        onSelectScale={setFontScale}
+        onSelectTextWeight={setTextWeight}
+        onSelectNumberWeight={setNumberWeight}
+        onResetDefaults={handleResetFonts}
+      />
+
+      {/* Floating Font Customizer Trigger Button */}
+      <button
+        onClick={() => setIsFontModalOpen(true)}
+        className="fixed bottom-5 left-5 z-30 p-2.5 sm:p-3 rounded-full bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-800 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 no-print backdrop-blur-md"
+        title="Customize Text & Number Fonts Separately"
+        aria-label="Customize Text & Number Fonts Separately"
+      >
+        <Type className="w-4 h-4 text-cyan-300 shrink-0" />
+        <span className="text-xs font-bold max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-purple-100">
+          Customize Fonts
+        </span>
+      </button>
 
       {/* Clean quiet footer */}
       <footer className="mt-auto py-6 border-t border-[var(--border)] bg-[var(--card)]/50 text-center text-xs text-[var(--ink-muted)] no-print w-full max-w-full">
