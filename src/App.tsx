@@ -7,6 +7,7 @@ import { TopicView } from './components/TopicView';
 import { FlashcardModal } from './components/FlashcardModal';
 import { StarredView } from './components/StarredView';
 import { CheatSheetModal } from './components/CheatSheetModal';
+import { OfflineIndicator } from './components/OfflineIndicator';
 
 type AppView = 'index' | 'topic' | 'favorites' | 'cheat-sheet';
 
@@ -278,6 +279,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+      
+      {/* Offline Toast Notification */}
+      <OfflineIndicator />
     </div>
   );
 }

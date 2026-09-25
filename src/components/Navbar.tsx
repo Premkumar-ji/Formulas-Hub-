@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, Star, Moon, Sun, Home, BookOpen, Layers } from 'lucide-react';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
   currentView: 'index' | 'topic' | 'favorites' | 'cheat-sheet';
@@ -107,8 +108,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Zone 3: Primary Actions (Progress tracker + Theme switch) */}
+        {/* Zone 3: Primary Actions (Progress tracker + Theme switch + Offline install) */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <PWAInstallButton variant="nav" />
+
           {/* Progress pill */}
           <div
             className="hidden lg:flex items-center gap-2 bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs border border-white/10"

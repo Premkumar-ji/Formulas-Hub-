@@ -13,8 +13,10 @@ import {
   Flame, 
   GraduationCap,
   Layers,
-  ChevronRight
+  ChevronRight,
+  WifiOff
 } from 'lucide-react';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface IndexViewProps {
   topics: TopicData[];
@@ -116,9 +118,14 @@ export const IndexView: React.FC<IndexViewProps> = ({
         <div className="absolute -left-16 -bottom-16 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl min-w-0">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs font-semibold text-purple-200 mb-4 max-w-full">
+          <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs font-semibold text-purple-200 mb-4 max-w-full">
             <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
-            <span className="truncate">NIMCET · MCA Entrance · JEE · Formula Hub</span>
+            <span>NIMCET · MCA Entrance · JEE Prep</span>
+            <span className="opacity-40 hidden min-[400px]:inline">·</span>
+            <span className="text-emerald-300 inline-flex items-center gap-1 font-medium">
+              <WifiOff className="w-3 h-3 text-emerald-400" />
+              <span>100% Offline Ready</span>
+            </span>
           </div>
 
           <h1 className="font-heading font-extrabold text-2xl sm:text-4xl md:text-5xl tracking-tight leading-tight mb-3 sm:mb-4">
@@ -232,19 +239,22 @@ export const IndexView: React.FC<IndexViewProps> = ({
           )}
         </div>
 
-        {/* Quick Revision Flashcard Prompt Banner */}
+        {/* Quick Revision Flashcard Prompt Banner & Offline Install Button */}
         <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-white/10">
           <div className="flex items-center gap-2 text-xs text-purple-200">
             <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
             <span>Have 5 minutes? Test your active memory with random flashcard drills!</span>
           </div>
-          <button
-            onClick={onOpenQuickRevision}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-purple-950 shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5 shrink-0"
-          >
-            <Sparkles className="w-3.5 h-3.5 shrink-0" />
-            <span>Launch Quick Flashcards</span>
-          </button>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
+            <PWAInstallButton variant="hero" />
+            <button
+              onClick={onOpenQuickRevision}
+              className="w-full sm:w-auto px-4 py-2.5 rounded-2xl text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-purple-950 shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5 shrink-0"
+            >
+              <Sparkles className="w-3.5 h-3.5 shrink-0" />
+              <span>Launch Quick Flashcards</span>
+            </button>
+          </div>
         </div>
       </section>
 
