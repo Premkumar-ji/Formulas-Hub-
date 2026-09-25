@@ -41,7 +41,40 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Fundamental reciprocal relations defined for all real values where denominator ≠ 0.",
             "mustKnow": true,
             "remember": "cosecθ·sinθ = 1, secθ·cosθ = 1, tanθ·cotθ = 1.",
-            "latex": "\\sin\\theta = \\frac{1}{\\csc\\theta}, \\quad \\cos\\theta = \\frac{1}{\\sec\\theta}, \\quad \\tan\\theta = \\frac{1}{\\cot\\theta}"
+            "latex": "\\sin\\theta = \\frac{1}{\\csc\\theta}, \\quad \\cos\\theta = \\frac{1}{\\sec\\theta}, \\quad \\tan\\theta = \\frac{1}{\\cot\\theta}",
+            "table": {
+              "headers": [
+                "Trigonometric Function",
+                "Reciprocal / Quotient Identity"
+              ],
+              "rows": [
+                {
+                  "feature": "Cosecant (csc θ)",
+                  "value": "1 / sin θ",
+                  "latex": "\\csc\\theta = \\frac{1}{\\sin\\theta}"
+                },
+                {
+                  "feature": "Secant (sec θ)",
+                  "value": "1 / cos θ",
+                  "latex": "\\sec\\theta = \\frac{1}{\\cos\\theta}"
+                },
+                {
+                  "feature": "Cotangent (cot θ)",
+                  "value": "1 / tan θ",
+                  "latex": "\\cot\\theta = \\frac{1}{\\tan\\theta}"
+                },
+                {
+                  "feature": "Tangent Quotient",
+                  "value": "sin θ / cos θ",
+                  "latex": "\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}"
+                },
+                {
+                  "feature": "Cotangent Quotient",
+                  "value": "cos θ / sin θ",
+                  "latex": "\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}"
+                }
+              ]
+            }
           },
           {
             "id": "trig-quotient",
@@ -187,7 +220,35 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Converts sums/differences of wave terms into factored products.",
             "mustKnow": true,
             "commonMistake": "⚠️ For cosC − cosD, notice the angle order inside the second sine is (D−C)/2 or a negative sign outside!",
-            "latex": "\\begin{aligned} sinC + sinD = 2 \\sin ((C+D)/2) \\cos ((C−D)/2) \\\\ sinC − sinD = 2 \\cos ((C+D)/2) \\sin ((C−D)/2) \\\\ cosC + cosD = 2 \\cos ((C+D)/2) \\cos ((C−D)/2) \\\\ cosC − cosD = 2 \\sin ((C+D)/2) \\sin ((D−C)/2) = −2 \\sin ((C+D)/2) \\sin ((C−D)/2) \\end{aligned}"
+            "latex": "\\begin{aligned} sinC + sinD = 2 \\sin ((C+D)/2) \\cos ((C−D)/2) \\\\ sinC − sinD = 2 \\cos ((C+D)/2) \\sin ((C−D)/2) \\\\ cosC + cosD = 2 \\cos ((C+D)/2) \\cos ((C−D)/2) \\\\ cosC − cosD = 2 \\sin ((C+D)/2) \\sin ((D−C)/2) = −2 \\sin ((C+D)/2) \\sin ((C−D)/2) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Sum / Difference of Waves",
+                "Factored Product Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "sin C + sin D",
+                  "value": "2 sin((C + D)/2) cos((C - D)/2)",
+                  "latex": "2\\sin\\left(\\frac{C + D}{2}\\right)\\cos\\left(\\frac{C - D}{2}\\right)"
+                },
+                {
+                  "feature": "sin C - sin D",
+                  "value": "2 cos((C + D)/2) sin((C - D)/2)",
+                  "latex": "2\\cos\\left(\\frac{C + D}{2}\\right)\\sin\\left(\\frac{C - D}{2}\\right)"
+                },
+                {
+                  "feature": "cos C + cos D",
+                  "value": "2 cos((C + D)/2) cos((C - D)/2)",
+                  "latex": "2\\cos\\left(\\frac{C + D}{2}\\right)\\cos\\left(\\frac{C - D}{2}\\right)"
+                },
+                {
+                  "feature": "cos C - cos D",
+                  "value": "-2 sin((C + D)/2) sin((C - D)/2) = 2 sin((C + D)/2) sin((D - C)/2)",
+                  "latex": "-2\\sin\\left(\\frac{C + D}{2}\\right)\\sin\\left(\\frac{C - D}{2}\\right) = 2\\sin\\left(\\frac{C + D}{2}\\right)\\sin\\left(\\frac{D - C}{2}\\right)"
+                }
+              ]
+            }
           },
           {
             "id": "trig-prod-to-sum",
@@ -195,7 +256,35 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "2 sinA cosB = sin(A+B) + sin(A−B)\n2 cosA sinB = sin(A+B) − sin(A−B)\n2 cosA cosB = cos(A+B) + cos(A−B)\n2 sinA sinB = cos(A−B) − cos(A+B)",
             "explanation": "Standard integration tool to linearize multiplied sine/cosine.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} 2\\sin A\\cos B &= \\sin(A+B) + \\sin(A-B) \\\\ 2\\cos A\\sin B &= \\sin(A+B) - \\sin(A-B) \\\\ 2\\cos A\\cos B &= \\cos(A+B) + \\cos(A-B) \\\\ 2\\sin A\\sin B &= \\cos(A-B) - \\cos(A+B) \\end{aligned}"
+            "latex": "\\begin{aligned} 2\\sin A\\cos B &= \\sin(A+B) + \\sin(A-B) \\\\ 2\\cos A\\sin B &= \\sin(A+B) - \\sin(A-B) \\\\ 2\\cos A\\cos B &= \\cos(A+B) + \\cos(A-B) \\\\ 2\\sin A\\sin B &= \\cos(A-B) - \\cos(A+B) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Product Expression",
+                "Sum / Difference Representation"
+              ],
+              "rows": [
+                {
+                  "feature": "2 sin A cos B",
+                  "value": "sin(A + B) + sin(A - B)",
+                  "latex": "\\sin(A + B) + \\sin(A - B)"
+                },
+                {
+                  "feature": "2 cos A sin B",
+                  "value": "sin(A + B) - sin(A - B)",
+                  "latex": "\\sin(A + B) - \\sin(A - B)"
+                },
+                {
+                  "feature": "2 cos A cos B",
+                  "value": "cos(A + B) + cos(A - B)",
+                  "latex": "\\cos(A + B) + \\cos(A - B)"
+                },
+                {
+                  "feature": "2 sin A sin B",
+                  "value": "cos(A - B) - cos(A + B)",
+                  "latex": "\\cos(A - B) - \\cos(A + B)"
+                }
+              ]
+            }
           }
         ]
       },
@@ -321,42 +410,336 @@ export const TOPICS_DATA: TopicData[] = [
     "gradient": "from-pink-500 to-rose-600",
     "accentColor": "border-pink-500 text-pink-600",
     "bgTint": "bg-pink-500/10 text-pink-600",
-    "description": "Classical, conditional, Bayes’ theorem, independent events, binomial distribution, expectation & variance.",
+    "description": "Classical & axiomatic probability, deck & dice facts, conditional probability, Bayes’ theorem, independence, binomial & discrete distributions.",
     "examWeightage": "Very High (NIMCET ~5-7 Qs)",
     "quickTips": [
+      "Two dice sum shortcut: For sum 2 ≤ S ≤ 7, ways = S − 1; for 8 ≤ S ≤ 12, ways = 13 − S. Sum 7 has peak probability 6/36 = 1/6.",
       "P(A ∪ B) = P(A) + P(B) − P(A ∩ B). If mutually exclusive, P(A ∩ B) = 0.",
-      "For independent events: P(A ∩ B) = P(A) · P(B).",
-      "Odds in favour of event A = P(A) : P(A'). Odds against A = P(A') : P(A)."
+      "For independent events: P(A ∩ B) = P(A) · P(B) and P(at least one) = 1 − ∏[1 − P(Aᵢ)].",
+      "Deck of 52 cards = 26 Red + 26 Black = 4 suits × 13 ranks. 12 Face cards (4K, 4Q, 4J) and 16 Honor cards (4A + 12 Face).",
+      "Binomial B(n, p): Mean = np, Var = npq. Mean > Variance always. Max variance = n/4 when p = q = 1/2."
     ],
     "categories": [
       {
         "id": "prob-fundamentals",
-        "name": "Basic Probability & Addition Theorem",
+        "name": "Classical Probability, Sample Spaces & Addition Theorems",
         "formulas": [
           {
             "id": "prob-classical",
             "title": "Classical Probability & Range",
             "formula": "P(E) = n(E) / n(S),   0 ≤ P(E) ≤ 1\nP(E') = 1 − P(E)",
-            "explanation": "Ratio of favourable elementary outcomes to total sample space size.",
+            "explanation": "n(E) = favourable elementary outcomes, n(S) = total outcomes in sample space S. Impossible event: P(∅) = 0, Sure event: P(S) = 1.",
             "mustKnow": true,
+            "remember": "Memory: Favourable ÷ Total outcomes; Total certainty = 1.",
+            "shortcut": "🎯 Worked Example: Roll a fair 6-sided die. P(even) = 3/6 = 1/2 for favourable set {2, 4, 6}.",
             "latex": "P(E) = \\frac{n(E)}{n(S)}, \\quad 0 \\le P(E) \\le 1, \\quad P(E') = 1 - P(E)"
           },
           {
-            "id": "prob-addition-2",
-            "title": "Addition Theorem (2 Events)",
-            "formula": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)",
-            "explanation": "If A and B are mutually exclusive (disjoint), P(A ∩ B) = 0 ⇒ P(A ∪ B) = P(A) + P(B).",
+            "id": "prob-sample-spaces",
+            "title": "Sample Space Sizes n(S) (NIMCET Add)",
+            "formula": "2 coins → 4  |  3 coins → 8  |  1 die → 6  |  2 dice → 36  |  deck → 52",
+            "explanation": "Standard total sample space sizes n(S) that appear repeatedly in MCA entrance and competitive exams — memorise cold instead of recomputing under pressure.",
             "mustKnow": true,
+            "remember": "Memory: Know these values cold — saves critical seconds under pressure.",
+            "shortcut": "🎯 Shortcut: Rolling 2 dice has 36 outcomes. Sum 7 has 6 favourable pairs → P(Sum=7) = 6/36 = 1/6.",
+            "latex": "n(S)_{\\text{coins}} = 2^n, \\quad n(S)_{\\text{dice}} = 6^n, \\quad n(S)_{\\text{deck}} = 52",
+            "table": {
+              "headers": [
+                "Random Experiment / Trial",
+                "Sample Space Size n(S)"
+              ],
+              "rows": [
+                {
+                  "feature": "Single Fair Coin Toss",
+                  "value": "n(S) = 2¹ = 2 ({H, T})",
+                  "latex": "n(S) = 2^1 = 2 \\quad \\{H, T\\}"
+                },
+                {
+                  "feature": "Toss of 2 Coins (or 1 Coin Twice)",
+                  "value": "n(S) = 2² = 4 ({HH, HT, TH, TT})",
+                  "latex": "n(S) = 2^2 = 4 \\quad \\{HH, HT, TH, TT\\}"
+                },
+                {
+                  "feature": "Toss of 3 Coins",
+                  "value": "n(S) = 2³ = 8",
+                  "latex": "n(S) = 2^3 = 8"
+                },
+                {
+                  "feature": "Toss of n Coins (General)",
+                  "value": "n(S) = 2ⁿ",
+                  "latex": "n(S) = 2^n"
+                },
+                {
+                  "feature": "Single 6-Sided Die Roll",
+                  "value": "n(S) = 6¹ = 6 ({1, 2, 3, 4, 5, 6})",
+                  "latex": "n(S) = 6^1 = 6 \\quad \\{1, 2, 3, 4, 5, 6\\}"
+                },
+                {
+                  "feature": "Pair of 2 Dice Rolled",
+                  "value": "n(S) = 6² = 36 ({ (1,1), ..., (6,6) })",
+                  "latex": "n(S) = 6^2 = 36 \\quad \\{(1,1), \\dots, (6,6)\\}"
+                },
+                {
+                  "feature": "Rolling of n Dice",
+                  "value": "n(S) = 6ⁿ",
+                  "latex": "n(S) = 6^n"
+                },
+                {
+                  "feature": "Standard Deck of Playing Cards",
+                  "value": "n(S) = 52 cards",
+                  "latex": "n(S) = 52 \\text{ cards}"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prob-deck-cards",
+            "title": "Deck of 52 Cards Facts & Breakdown (NIMCET Add)",
+            "formula": "52 Cards = 26 Red + 26 Black | 4 Suits × 13 Cards | 12 Face Cards",
+            "explanation": "Standard 52-card playing deck breakdown essential for solving playing cards probability problems in competitive exams.",
+            "mustKnow": true,
+            "remember": "Memory: 52 = 4 × 13; Face cards = 3 × 4 = 12; Honor cards = 4 × 4 = 16.",
+            "shortcut": "🎯 Quick Values: P(Face Card) = 12/52 = 3/13 | P(Red Honor) = 8/52 = 2/13 | P(Spade or Ace) = (13 + 3)/52 = 4/13.",
+            "latex": "N = 52, \\quad \\text{Suits} = 4 \\times 13, \\quad \\text{Face} = 12, \\quad \\text{Honor} = 16",
+            "table": {
+              "headers": [
+                "Card Category / Property",
+                "Count & Mathematical Breakdown"
+              ],
+              "rows": [
+                {
+                  "feature": "Total Pack Size",
+                  "value": "52 cards (4 suits of 13 cards each)",
+                  "latex": "52 \\text{ cards} \\quad (4 \\times 13)"
+                },
+                {
+                  "feature": "Color Breakdown",
+                  "value": "26 Red (Hearts ♥, Diamonds ♦) and 26 Black (Spades ♠, Clubs ♣)",
+                  "latex": "26 \\text{ Red } (\\heartsuit, \\diamondsuit), \\quad 26 \\text{ Black } (\\spadesuit, \\clubsuit)"
+                },
+                {
+                  "feature": "Four Suits (13 cards each)",
+                  "value": "13 Spades (♠), 13 Clubs (♣), 13 Hearts (♥), 13 Diamonds (♦)",
+                  "latex": "13\\spadesuit, \\quad 13\\clubsuit, \\quad 13\\heartsuit, \\quad 13\\diamondsuit"
+                },
+                {
+                  "feature": "Face (Court) Cards",
+                  "value": "12 cards (4 Kings, 4 Queens, 4 Jacks) — 6 Red, 6 Black",
+                  "latex": "12 \\text{ cards } (4K, 4Q, 4J) \\implies P = \\frac{12}{52} = \\frac{3}{13}"
+                },
+                {
+                  "feature": "Honor Cards (Aces + Face Cards)",
+                  "value": "16 cards (4 Aces + 12 Face Cards)",
+                  "latex": "16 \\text{ cards } (4A + 4K + 4Q + 4J) \\implies P = \\frac{16}{52} = \\frac{4}{13}"
+                },
+                {
+                  "feature": "Numbered (Pip) Cards",
+                  "value": "36 cards (numbers 2 through 10 in each of 4 suits)",
+                  "latex": "36 \\text{ cards } (9 \\times 4) \\implies P = \\frac{36}{52} = \\frac{9}{13}"
+                },
+                {
+                  "feature": "Non-Face Cards",
+                  "value": "40 cards (36 numbered cards + 4 Aces)",
+                  "latex": "40 \\text{ cards} \\implies P = \\frac{40}{52} = \\frac{10}{13}"
+                },
+                {
+                  "feature": "Aces Count",
+                  "value": "4 cards (1 per suit: 2 Red, 2 Black)",
+                  "latex": "4 \\text{ Aces} \\implies P(\\text{Ace}) = \\frac{4}{52} = \\frac{1}{13}"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prob-dice-sums",
+            "title": "Two Dice Sums Frequency & Shortcut Table (NIMCET Add)",
+            "formula": "Sum 2 to 12 on 2 Dice | Peak at Sum 7 (P = 6/36 = 1/6) | Symmetric",
+            "explanation": "High-yield distribution of sums when two fair dice are thrown. The outcomes form a triangular distribution symmetric about sum 7.",
+            "mustKnow": true,
+            "remember": "Memory: Symmetric pyramid centered at 7. Peak frequency is 6.",
+            "shortcut": "🎯 Shortcut Count Rule: For sum 2 ≤ S ≤ 7, ways = S − 1. For sum 8 ≤ S ≤ 12, ways = 13 − S.",
+            "latex": "P(S) = \\begin{cases} \\frac{S - 1}{36} & 2 \\le S \\le 7 \\\\[4pt] \\frac{13 - S}{36} & 8 \\le S \\le 12 \\end{cases}",
+            "table": {
+              "headers": [
+                "Sum on 2 Dice (S)",
+                "Favourable Pairs & Exact Probability"
+              ],
+              "rows": [
+                {
+                  "feature": "Sum = 2 or 12",
+                  "value": "1 pair: (1,1) or (6,6) → P = 1/36",
+                  "latex": "1 \\text{ pair} \\implies P = \\frac{1}{36}"
+                },
+                {
+                  "feature": "Sum = 3 or 11",
+                  "value": "2 pairs: (1,2),(2,1) or (5,6),(6,5) → P = 2/36 = 1/18",
+                  "latex": "2 \\text{ pairs} \\implies P = \\frac{2}{36} = \\frac{1}{18}"
+                },
+                {
+                  "feature": "Sum = 4 or 10",
+                  "value": "3 pairs: (1,3),(2,2),(3,1) or (4,6),(5,5),(6,4) → P = 3/36 = 1/12",
+                  "latex": "3 \\text{ pairs} \\implies P = \\frac{3}{36} = \\frac{1}{12}"
+                },
+                {
+                  "feature": "Sum = 5 or 9",
+                  "value": "4 pairs → P = 4/36 = 1/9",
+                  "latex": "4 \\text{ pairs} \\implies P = \\frac{4}{36} = \\frac{1}{9}"
+                },
+                {
+                  "feature": "Sum = 6 or 8",
+                  "value": "5 pairs → P = 5/36",
+                  "latex": "5 \\text{ pairs} \\implies P = \\frac{5}{36}"
+                },
+                {
+                  "feature": "Sum = 7 (Maximum Frequency)",
+                  "value": "6 pairs: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) → P = 6/36 = 1/6",
+                  "latex": "6 \\text{ pairs (Peak)} \\implies P = \\frac{6}{36} = \\frac{1}{6}"
+                },
+                {
+                  "feature": "Any Doublet (Equal Numbers)",
+                  "value": "6 pairs: (1,1),(2,2),(3,3),(4,4),(5,5),(6,6) → P = 6/36 = 1/6",
+                  "latex": "6 \\text{ pairs} \\implies P(\\text{Doublet}) = \\frac{6}{36} = \\frac{1}{6}"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prob-addition-2",
+            "title": "Addition Theorem (2 Events) & Set Relations",
+            "formula": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)",
+            "explanation": "Axiomatic probability relations for union, intersection, symmetric difference, and complement of two arbitrary events.",
+            "mustKnow": true,
+            "remember": "Memory: Add both individual probabilities, then subtract overlap once.",
             "shortcut": "🎯 Exactly one of A or B occurs = P(A ∪ B) − P(A ∩ B) = P(A) + P(B) − 2P(A ∩ B).",
-            "latex": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)"
+            "latex": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
+            "table": {
+              "headers": [
+                "Event Set Condition / Description",
+                "Mathematical Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "General Union (At least one occurs)",
+                  "value": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)",
+                  "latex": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)"
+                },
+                {
+                  "feature": "Mutually Exclusive Events (A ∩ B = ∅)",
+                  "value": "P(A ∪ B) = P(A) + P(B)  (since P(A ∩ B) = 0)",
+                  "latex": "P(A \\cup B) = P(A) + P(B) \\quad (P(A \\cap B) = 0)"
+                },
+                {
+                  "feature": "Only Event A Occurs (A − B)",
+                  "value": "P(A ∩ B') = P(A) − P(A ∩ B)",
+                  "latex": "P(A \\cap B') = P(A) - P(A \\cap B)"
+                },
+                {
+                  "feature": "Only Event B Occurs (B − A)",
+                  "value": "P(B ∩ A') = P(B) − P(A ∩ B)",
+                  "latex": "P(B \\cap A') = P(B) - P(A \\cap B)"
+                },
+                {
+                  "feature": "Exactly One of A or B Occurs",
+                  "value": "P(A Δ B) = P(A) + P(B) − 2P(A ∩ B)",
+                  "latex": "P(A \\Delta B) = P(A) + P(B) - 2P(A \\cap B)"
+                },
+                {
+                  "feature": "Neither A nor B Occurs (De Morgan's)",
+                  "value": "P(A' ∩ B') = 1 − P(A ∪ B)",
+                  "latex": "P(A' \\cap B') = 1 - P(A \\cup B)"
+                },
+                {
+                  "feature": "At Least One Does Not Occur",
+                  "value": "P(A' ∪ B') = 1 − P(A ∩ B)",
+                  "latex": "P(A' \\cup B') = 1 - P(A \\cap B)"
+                }
+              ]
+            }
           },
           {
             "id": "prob-addition-3",
-            "title": "Addition Theorem (3 Events)",
-            "formula": "P(A∪B∪C) = P(A) + P(B) + P(C) − [P(A∩B) + P(B∩C) + P(C∩A)] + P(A∩B∩C)",
-            "explanation": "Inclusion-Exclusion principle for three arbitrary events.",
+            "title": "Addition Theorem (3 Events) & Multi-Set Relations",
+            "formula": "P(A∪B∪C) = ∑P(A) − ∑P(A∩B) + P(A∩B∩C)",
+            "explanation": "Inclusion-Exclusion theorem and partition breakdowns for three arbitrary events.",
             "mustKnow": true,
-            "latex": "P(A \\cup B \\cup C) = P(A) + P(B) + P(C) - [P(A \\cap B) + P(B \\cap C) + P(C \\cap A)] + P(A \\cap B \\cap C)"
+            "remember": "Memory: + (Singles) − (Pairs) + (Triple overlap).",
+            "latex": "P(A \\cup B \\cup C) = P(A) + P(B) + P(C) - [P(A \\cap B) + P(B \\cap C) + P(C \\cap A)] + P(A \\cap B \\cap C)",
+            "table": {
+              "headers": [
+                "Three-Event Condition",
+                "Mathematical Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "At Least One of A, B, C Occurs",
+                  "value": "P(A ∪ B ∪ C) = ∑P(A) − ∑P(A ∩ B) + P(A ∩ B ∩ C)",
+                  "latex": "P(A \\cup B \\cup C) = \\sum P(A) - \\sum P(A \\cap B) + P(A \\cap B \\cap C)"
+                },
+                {
+                  "feature": "Exactly One of A, B, C Occurs",
+                  "value": "∑P(A) − 2∑P(A ∩ B) + 3P(A ∩ B ∩ C)",
+                  "latex": "\\sum P(A) - 2\\sum P(A \\cap B) + 3P(A \\cap B \\cap C)"
+                },
+                {
+                  "feature": "Exactly Two of A, B, C Occur",
+                  "value": "∑P(A ∩ B) − 3P(A ∩ B ∩ C)",
+                  "latex": "\\sum P(A \\cap B) - 3P(A \\cap B \\cap C)"
+                },
+                {
+                  "feature": "At Least Two of A, B, C Occur",
+                  "value": "∑P(A ∩ B) − 2P(A ∩ B ∩ C)",
+                  "latex": "\\sum P(A \\cap B) - 2P(A \\cap B \\cap C)"
+                },
+                {
+                  "feature": "None of the Three Occurs",
+                  "value": "P(A' ∩ B' ∩ C') = 1 − P(A ∪ B ∪ C)",
+                  "latex": "P(A' \\cap B' \\cap C') = 1 - P(A \\cup B \\cup C)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prob-odds",
+            "title": "Odds in Favour & Odds Against (NIMCET Add)",
+            "formula": "Odds in favour = P(E)/P(E') = m/n  ⇒  P(E) = m/(m+n)\nOdds against = P(E')/P(E) = n/m  ⇒  P(E) = m/(m+n)",
+            "explanation": "Conversion between competitive exam odds ratios and exact probability values.",
+            "mustKnow": true,
+            "remember": "Memory: Favour = for ÷ against; Against = against ÷ for. Total parts = sum of ratio numbers.",
+            "shortcut": "🎯 Trick: If odds against solving a problem are 3 to 2, then favourable = 2, unfavourable = 3, so P = 2/(2+3) = 2/5.",
+            "latex": "\\text{Odds in Favour} = \\frac{P(E)}{P(E')} = \\frac{m}{n} \\implies P(E) = \\frac{m}{m + n}, \\quad P(E') = \\frac{n}{m + n}",
+            "table": {
+              "headers": [
+                "Odds Concept / Expression",
+                "Formula & Exact Probability"
+              ],
+              "rows": [
+                {
+                  "feature": "Definition of Odds in Favour",
+                  "value": "Ratio of favourable outcomes to unfavourable outcomes: m/n",
+                  "latex": "\\text{Odds in Favour} = \\frac{P(E)}{P(E')} = \\frac{m}{n}"
+                },
+                {
+                  "feature": "Probability from Odds in Favour (m : n)",
+                  "value": "P(E) = m / (m + n),  P(E') = n / (m + n)",
+                  "latex": "P(E) = \\frac{m}{m+n}, \\quad P(E') = \\frac{n}{m+n}"
+                },
+                {
+                  "feature": "Definition of Odds Against",
+                  "value": "Ratio of unfavourable outcomes to favourable outcomes: a/b",
+                  "latex": "\\text{Odds Against} = \\frac{P(E')}{P(E)} = \\frac{a}{b}"
+                },
+                {
+                  "feature": "Probability from Odds Against (a : b)",
+                  "value": "P(E) = b / (a + b),  P(E') = a / (a + b)",
+                  "latex": "P(E) = \\frac{b}{a+b}, \\quad P(E') = \\frac{a}{a+b}"
+                },
+                {
+                  "feature": "Fundamental Reciprocal Property",
+                  "value": "Odds in Favour × Odds Against = 1",
+                  "latex": "\\text{Odds in Favour}(E) \\times \\text{Odds Against}(E) = 1"
+                }
+              ]
+            }
           }
         ]
       },
@@ -366,29 +749,71 @@ export const TOPICS_DATA: TopicData[] = [
         "formulas": [
           {
             "id": "prob-cond-def",
-            "title": "Conditional Probability P(A | B)",
-            "formula": "P(A | B) = P(A ∩ B) / P(B),   where P(B) > 0",
-            "explanation": "Probability of event A occurring given that event B has already occurred.",
+            "title": "Conditional Probability & Multiplication Theorem",
+            "formula": "P(A | B) = P(A ∩ B) / P(B),   P(B) > 0\nP(A ∩ B) = P(B) · P(A | B) = P(A) · P(B | A)",
+            "explanation": "Probability of event A occurring given that event B has already occurred. Occurrence of condition B shrinks the entire sample space down to event B.",
             "mustKnow": true,
-            "latex": "P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}, \\quad P(B) > 0"
+            "remember": "Memory: Condition shrinks the universe from S down to B.",
+            "shortcut": "🎯 Three events multiplication rule: P(A ∩ B ∩ C) = P(A) · P(B | A) · P(C | A ∩ B).",
+            "latex": "P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}, \\quad P(A \\cap B) = P(B) P(A \\mid B) = P(A) P(B \\mid A)"
           },
           {
             "id": "prob-independent",
-            "title": "Independent Events Condition",
+            "title": "Independent Events & Associated Theorems",
             "formula": "P(A ∩ B) = P(A) · P(B)   ⇔   P(A | B) = P(A)",
-            "explanation": "Occurrence of B gives no information regarding the likelihood of A.",
+            "explanation": "Occurrence of event B provides zero information regarding event A. Crucial theorem: If A and B are independent, so are (A, B'), (A', B), and (A', B').",
             "mustKnow": true,
-            "commonMistake": "⚠️ Mutually exclusive ≠ Independent! Two non-empty events cannot be both simultaneously.",
-            "latex": "P(A \\cap B) = P(A) \\cdot P(B) \\iff P(A \\mid B) = P(A)"
+            "remember": "Memory: If events don't affect each other, probabilities multiply directly.",
+            "commonMistake": "⚠️ Mutually Exclusive ≠ Independent! Two non-empty events cannot be both simultaneously. If disjoint, P(A ∩ B) = 0 ≠ P(A)·P(B).",
+            "latex": "P(A \\cap B) = P(A) \\cdot P(B) \\iff P(A \\mid B) = P(A)",
+            "table": {
+              "headers": [
+                "Independence Feature / Theorem",
+                "Mathematical Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Definition Condition",
+                  "value": "P(A ∩ B) = P(A) · P(B)",
+                  "latex": "P(A \\cap B) = P(A) \\cdot P(B) \\iff P(A \\mid B) = P(A)"
+                },
+                {
+                  "feature": "Complement Theorem 1",
+                  "value": "If A, B are independent ⇒ A and B' are independent",
+                  "latex": "P(A \\cap B') = P(A) P(B') = P(A)[1 - P(B)]"
+                },
+                {
+                  "feature": "Complement Theorem 2",
+                  "value": "If A, B are independent ⇒ A' and B' are independent",
+                  "latex": "P(A' \\cap B') = P(A') P(B') = [1 - P(A)][1 - P(B)]"
+                },
+                {
+                  "feature": "At Least One of Two Independent Events",
+                  "value": "P(A ∪ B) = 1 − P(A')·P(B')",
+                  "latex": "P(A \\cup B) = 1 - P(A')P(B') = 1 - [1 - P(A)][1 - P(B)]"
+                },
+                {
+                  "feature": "Exactly One of Two Independent Events",
+                  "value": "P(A)·P(B') + P(A')·P(B)",
+                  "latex": "P(A)(1 - P(B)) + P(B)(1 - P(A))"
+                },
+                {
+                  "feature": "Mutually Exclusive vs Independent",
+                  "value": "If P(A)>0, P(B)>0: Disjoint events (P(A∩B)=0) are NEVER independent",
+                  "latex": "P(A \\cap B) = 0 \\implies P(A \\cap B) \\ne P(A)P(B)"
+                }
+              ]
+            }
           },
           {
             "id": "prob-at-least-one",
-            "title": "At Least One Event Occurring (Independent)",
+            "title": "At Least One Event Occurring (n Independent Events)",
             "formula": "P(at least one of A₁, A₂, ..., Aₙ) = 1 − P(A₁') · P(A₂') · ... · P(Aₙ')",
-            "explanation": "Essential competitive shortcut: complement of \"none occurs\".",
+            "explanation": "Premier competitive exam shortcut: Always solve \"at least one\" via the complement of \"none occurs\".",
             "mustKnow": true,
-            "shortcut": "🎯 High-yield trick: Whenever question asks \"at least one\", always calculate 1 − P(None)!",
-            "latex": "P(\\text{at least one of } A_1, \\dots, A_n) = 1 - P(A_1')P(A_2')\\dots P(A_n')"
+            "remember": "Memory: At least one = 1 − None.",
+            "shortcut": "🎯 Example: Toss n coins. P(at least 1 head) = 1 − P(no heads) = 1 − (1/2)ⁿ.",
+            "latex": "P(\\text{at least one}) = 1 - \\prod_{i=1}^n [1 - P(A_i)] = 1 - P(A_1')P(A_2')\\dots P(A_n')"
           }
         ]
       },
@@ -400,42 +825,223 @@ export const TOPICS_DATA: TopicData[] = [
             "id": "prob-total-law",
             "title": "Law of Total Probability",
             "formula": "P(A) = ∑ [P(Eᵢ) · P(A | Eᵢ)]   for partition {E₁, E₂, ..., Eₙ}",
-            "explanation": "Weighted sum of probabilities across mutually exclusive exhaustive states.",
+            "explanation": "Weighted sum of probabilities across mutually exclusive and exhaustive partition states E₁, E₂, ..., Eₙ of sample space S.",
             "mustKnow": true,
-            "latex": "P(A) = ∑ [P(E_i)  \\cdot  P(A | E_i)]   for partition {E_1, E_2, ..., E_n}"
+            "remember": "Memory: Sum of all path probabilities leading to target outcome A.",
+            "latex": "P(A) = \\sum_{i=1}^n P(E_i) \\cdot P(A \\mid E_i) \\quad \\text{where } \\bigcup_{i=1}^n E_i = S, \\; E_i \\cap E_j = \\emptyset"
           },
           {
             "id": "prob-bayes",
-            "title": "Bayes' Theorem (Reverse Probability)",
+            "title": "Bayes' Theorem (Reverse / Inverse Probability)",
             "formula": "P(Eₖ | A) = [P(Eₖ) · P(A | Eₖ)] / (∑ [P(Eᵢ) · P(A | Eᵢ)])",
-            "explanation": "Updates prior probability P(Eₖ) into posterior probability after evidence A is observed.",
+            "explanation": "Computes posterior probability of cause Eₖ given that evidence or effect A has occurred.",
             "mustKnow": true,
-            "shortcut": "🎯 Template: Posterior = (Path probability of interest) / (Sum of all possible paths).",
-            "latex": "P(A_k \\mid B) = \\frac{P(A_k)P(B \\mid A_k)}{\\sum_{i=1}^n P(A_i)P(B \\mid A_i)}"
+            "remember": "Memory: Posterior = (Target path) ÷ (Sum of all possible paths).",
+            "shortcut": "🎯 Template: P(Eₖ | A) = (Prior × Likelihood) / (Total Evidence P(A)).",
+            "latex": "P(E_k \\mid A) = \\frac{P(E_k) \\cdot P(A \\mid E_k)}{\\sum_{i=1}^n P(E_i) \\cdot P(A \\mid E_i)}",
+            "table": {
+              "headers": [
+                "Bayes' Component / Step",
+                "Mathematical Interpretation"
+              ],
+              "rows": [
+                {
+                  "feature": "Prior Probability: P(Eₖ)",
+                  "value": "Initial probability of hypothesis/cause before observing evidence A",
+                  "latex": "P(E_k) \\quad (\\text{Prior Belief})"
+                },
+                {
+                  "feature": "Likelihood: P(A | Eₖ)",
+                  "value": "Probability that evidence A occurs given hypothesis Eₖ is true",
+                  "latex": "P(A \\mid E_k) \\quad (\\text{Likelihood})"
+                },
+                {
+                  "feature": "Total Evidence (Denominator)",
+                  "value": "Sum of all path probabilities leading to A: ∑ P(Eᵢ)·P(A|Eᵢ)",
+                  "latex": "P(A) = \\sum_{i=1}^n P(E_i) P(A \\mid E_i)"
+                },
+                {
+                  "feature": "Posterior Probability: P(Eₖ | A)",
+                  "value": "Updated probability of cause Eₖ after evidence A is witnessed",
+                  "latex": "P(E_k \\mid A) = \\frac{P(E_k) P(A \\mid E_k)}{P(A)}"
+                }
+              ]
+            }
           }
         ]
       },
       {
         "id": "prob-distributions",
-        "name": "Random Variables & Binomial Distribution",
+        "name": "Random Variables & Probability Distributions",
         "formulas": [
           {
             "id": "prob-expectation-variance",
-            "title": "Expectation E(X) & Variance Var(X)",
-            "formula": "E(X) = μ = ∑ xᵢ P(xᵢ)\nVar(X) = σ² = E(X²) − [E(X)]² = ∑ xᵢ² P(xᵢ) − μ²",
-            "explanation": "Measures central location and dispersion of a discrete random variable.",
+            "title": "Expectation E(X), Variance Var(X) & Linear Properties",
+            "formula": "E(X) = μ = ∑ xᵢ P(xᵢ)\nVar(X) = σ² = E(X²) − [E(X)]² = ∑ xᵢ² P(xᵢ) − μ²\nSD = σ = √(Var(X))",
+            "explanation": "Fundamental moments measuring central tendency and dispersion of a discrete random variable with PMF P(X = xᵢ).",
             "mustKnow": true,
-            "shortcut": "🎯 Linear properties: E(aX + b) = a E(X) + b  |  Var(aX + b) = a² Var(X).",
-            "latex": "\\begin{aligned} E(X) =  \\mu  = ∑ x_i P(x_i) \\\\ Var(X) = σ^2 = E(X^2) − [E(X)]^2 = ∑ x_i^2 P(x_i) −  \\mu ^2 \\end{aligned}"
+            "remember": "Memory: Mean shifts with addition, variance scales only with multiplication.",
+            "shortcut": "🎯 Adding a constant shifts mean: E(X+b) = E(X)+b, but does NOT alter spread: Var(X+b) = Var(X).",
+            "latex": "\\mu = E(X) = \\sum x_i P(x_i), \\quad \\sigma^2 = \\text{Var}(X) = E(X^2) - [E(X)]^2, \\quad \\sigma = \\sqrt{\\text{Var}(X)}",
+            "table": {
+              "headers": [
+                "Property / Transformation",
+                "Mathematical Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Expected Value (Mean μ)",
+                  "value": "E(X) = ∑ xᵢ P(xᵢ)",
+                  "latex": "E(X) = \\mu = \\sum_{i} x_i P(x_i)"
+                },
+                {
+                  "feature": "Variance (σ²)",
+                  "value": "Var(X) = E(X²) − [E(X)]²",
+                  "latex": "\\text{Var}(X) = \\sigma^2 = E(X^2) - [E(X)]^2"
+                },
+                {
+                  "feature": "Standard Deviation (σ)",
+                  "value": "SD(X) = √(Var(X))",
+                  "latex": "\\sigma = \\sqrt{\\text{Var}(X)}"
+                },
+                {
+                  "feature": "Expectation of Linear Function",
+                  "value": "E(aX + b) = a·E(X) + b",
+                  "latex": "E(aX + b) = a E(X) + b"
+                },
+                {
+                  "feature": "Variance of Linear Function",
+                  "value": "Var(aX + b) = a²·Var(X)",
+                  "latex": "\\text{Var}(aX + b) = a^2 \\text{Var}(X)"
+                },
+                {
+                  "feature": "SD of Linear Function",
+                  "value": "SD(aX + b) = |a|·SD(X)",
+                  "latex": "\\text{SD}(aX + b) = |a| \\text{SD}(X)"
+                },
+                {
+                  "feature": "Sum of Independent Variables",
+                  "value": "Var(X ± Y) = Var(X) + Var(Y)  (if X, Y independent)",
+                  "latex": "\\text{Var}(X \\pm Y) = \\text{Var}(X) + \\text{Var}(Y)"
+                },
+                {
+                  "feature": "Product of Independent Variables",
+                  "value": "E(XY) = E(X) · E(Y)  (if X, Y independent)",
+                  "latex": "E(XY) = E(X) \\cdot E(Y)"
+                }
+              ]
+            }
           },
           {
             "id": "prob-binomial-dist",
             "title": "Binomial Distribution B(n, p)",
-            "formula": "P(X = r) = ⁿCᵣ · pʳ · qⁿ⁻ʳ,   where q = 1 − p\nMean = n·p  |  Variance = n·p·q  |  SD = √(n·p·q)",
-            "explanation": "Applies to n independent Bernoulli trials with constant probability p.",
+            "formula": "P(X = r) = ⁿCᵣ · pʳ · qⁿ⁻ʳ,   q = 1 − p\nMean = n·p  |  Variance = n·p·q  |  SD = √(n·p·q)",
+            "explanation": "Probability of obtaining exactly r successes in n independent and identically distributed Bernoulli trials with constant success probability p.",
             "mustKnow": true,
-            "shortcut": "🎯 Fact: For binomial distribution, Mean > Variance (since q < 1).",
-            "latex": "\\begin{aligned} P(X = r) = ^nC_r  \\cdot  pʳ  \\cdot  q^n⁻ʳ,   where q = 1 − p \\\\ Mean = n \\cdot p  |  Variance = n \\cdot p \\cdot q  |  SD = \\sqrt{n \\cdot p \\cdot q} \\end{aligned}"
+            "remember": "Memory: Mean > Variance always! Max variance = n/4 when p = 1/2.",
+            "shortcut": "🎯 Mode: If (n+1)p is an integer m, bimodal at m and m−1. If (n+1)p is not integer, single mode at ⌊(n+1)p⌋.",
+            "latex": "P(X = r) = \\binom{n}{r} p^r q^{n-r}, \\quad \\mu = np, \\quad \\sigma^2 = npq, \\quad \\sigma = \\sqrt{npq}",
+            "table": {
+              "headers": [
+                "Distribution Feature / Parameter",
+                "Mathematical Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Probability Mass Function (PMF)",
+                  "value": "P(X = r) = ⁿCᵣ · pʳ · qⁿ⁻ʳ",
+                  "latex": "P(X = r) = \\binom{n}{r} p^r q^{n-r} \\quad (r = 0, 1, \\dots, n)"
+                },
+                {
+                  "feature": "Complement Probability (q)",
+                  "value": "q = 1 - p",
+                  "latex": "q = 1 - p"
+                },
+                {
+                  "feature": "Expected Value (Mean μ)",
+                  "value": "n · p",
+                  "latex": "\\mu = E(X) = n p"
+                },
+                {
+                  "feature": "Variance (σ²)",
+                  "value": "n · p · q",
+                  "latex": "\\sigma^2 = \\text{Var}(X) = n p q"
+                },
+                {
+                  "feature": "Standard Deviation (σ)",
+                  "value": "√(n · p · q)",
+                  "latex": "\\sigma = \\sqrt{n p q}"
+                },
+                {
+                  "feature": "Mean vs Variance Relation",
+                  "value": "Mean > Variance always (since 0 < q < 1)",
+                  "latex": "\\text{Mean} > \\text{Variance} \\quad (q < 1)"
+                },
+                {
+                  "feature": "Maximum Variance",
+                  "value": "n / 4 (achieved when p = q = 1/2)",
+                  "latex": "\\text{Var}_{\\max} = \\frac{n}{4} \\quad \\left(p = q = \\frac{1}{2}\\right)"
+                },
+                {
+                  "feature": "Mode Determination",
+                  "value": "If (n+1)p = m (integer) → two modes: m and m−1; Else → ⌊(n+1)p⌋",
+                  "latex": "\\text{Mode} = \\begin{cases} m \\text{ and } m - 1 & (n+1)p = m \\in \\mathbb{Z} \\\\[2pt] \\lfloor(n+1)p\\rfloor & (n+1)p \\notin \\mathbb{Z} \\end{cases}"
+                },
+                {
+                  "feature": "Consecutive Terms Ratio",
+                  "value": "P(X = r+1) / P(X = r) = [(n − r)/(r + 1)] · (p / q)",
+                  "latex": "\\frac{P(X = r+1)}{P(X = r)} = \\frac{n - r}{r + 1} \\cdot \\frac{p}{q}"
+                }
+              ]
+            }
+          },
+          {
+            "id": "prob-poisson-geometric",
+            "title": "Poisson & Geometric Distributions (NIMCET Add)",
+            "formula": "Poisson: P(X = r) = (e^(−λ) · λʳ) / r!,  Mean = Var = λ\nGeometric: P(X = k) = q^(k−1) · p,  Mean = 1/p",
+            "explanation": "Special discrete distributions frequently tested in NIMCET and advanced MCA entrance exams.",
+            "mustKnow": false,
+            "remember": "Memory: Poisson has Mean = Variance = λ. Geometric models trial of first success.",
+            "shortcut": "🎯 Poisson is the limiting form of Binomial B(n, p) when n → ∞, p → 0, and np = λ (finite).",
+            "latex": "P_{\\text{Poisson}}(X = r) = \\frac{e^{-\\lambda} \\lambda^r}{r!}, \\quad P_{\\text{Geometric}}(X = k) = q^{k-1} p",
+            "table": {
+              "headers": [
+                "Distribution & Property",
+                "Formula / Mathematical Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Poisson PMF",
+                  "value": "P(X = r) = (e^(−λ) · λʳ) / r!",
+                  "latex": "P(X = r) = \\frac{e^{-\\lambda} \\lambda^r}{r!} \\quad (r = 0, 1, 2, \\dots)"
+                },
+                {
+                  "feature": "Poisson Mean & Variance",
+                  "value": "Mean = λ,  Variance = λ (Mean = Variance)",
+                  "latex": "\\mu = \\lambda, \\quad \\sigma^2 = \\lambda \\quad (\\text{Mean} = \\text{Variance})"
+                },
+                {
+                  "feature": "Poisson as Limit of Binomial",
+                  "value": "n → ∞,  p → 0,  with λ = n·p (constant)",
+                  "latex": "n \\to \\infty, \\quad p \\to 0, \\quad \\lambda = n p"
+                },
+                {
+                  "feature": "Geometric Distribution PMF",
+                  "value": "P(X = k) = q^(k−1) · p (First success on k-th trial)",
+                  "latex": "P(X = k) = q^{k-1} p \\quad (k = 1, 2, 3, \\dots)"
+                },
+                {
+                  "feature": "Geometric Mean (Expected Trials)",
+                  "value": "E(X) = 1 / p",
+                  "latex": "E(X) = \\frac{1}{p}"
+                },
+                {
+                  "feature": "Geometric Variance",
+                  "value": "Var(X) = q / p²",
+                  "latex": "\\text{Var}(X) = \\frac{q}{p^2} = \\frac{1 - p}{p^2}"
+                }
+              ]
+            }
           }
         ]
       }
@@ -477,7 +1083,35 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "D > 0: Real and distinct roots\nD = 0: Real and equal roots (x = −b/2a)\nD < 0: Complex conjugate roots (p ± iq)\nD is perfect square (rational coeffs): Rational roots",
             "explanation": "Key determinant of root multiplicity and real/complex nature.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} D &> 0 \\implies \\text{Real and distinct} \\\\ D &= 0 \\implies \\text{Real and equal } \\left(x = -\\frac{b}{2a}\\right) \\\\ D &< 0 \\implies \\text{Complex conjugates } (p \\pm iq) \\end{aligned}"
+            "latex": "\\begin{aligned} D &> 0 \\implies \\text{Real and distinct} \\\\ D &= 0 \\implies \\text{Real and equal } \\left(x = -\\frac{b}{2a}\\right) \\\\ D &< 0 \\implies \\text{Complex conjugates } (p \\pm iq) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Condition on D = b² - 4ac",
+                "Nature of Roots"
+              ],
+              "rows": [
+                {
+                  "feature": "D > 0 (Non-square, rational coeffs)",
+                  "value": "Real, distinct, and irrational (conjugate surd pair p ± √q)",
+                  "latex": "\\text{Real, distinct, irrational } (p \\pm \\sqrt{q})"
+                },
+                {
+                  "feature": "D > 0 (Perfect square, rational coeffs)",
+                  "value": "Real, distinct, and rational",
+                  "latex": "\\text{Real, distinct, and rational}"
+                },
+                {
+                  "feature": "D = 0",
+                  "value": "Real, equal, and repeated (x = -b / (2a))",
+                  "latex": "\\text{Real, equal, repeated } \\left(x = -\\frac{b}{2a}\\right)"
+                },
+                {
+                  "feature": "D < 0 (Real coeffs)",
+                  "value": "Complex conjugate pair (p ± iq)",
+                  "latex": "\\text{Complex conjugates } (p \\pm iq)"
+                }
+              ]
+            }
           },
           {
             "id": "quad-vieta",
@@ -486,7 +1120,40 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Symmetric root relations that avoid solving the actual quadratic.",
             "mustKnow": true,
             "shortcut": "🎯 Useful identities: α² + β² = (α+β)² − 2αβ  |  α³ + β³ = (α+β)³ − 3αβ(α+β).",
-            "latex": "\\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha\\beta = \\frac{c}{a}, \\quad |\\alpha - \\beta| = \\frac{\\sqrt{D}}{|a|}"
+            "latex": "\\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha\\beta = \\frac{c}{a}, \\quad |\\alpha - \\beta| = \\frac{\\sqrt{D}}{|a|}",
+            "table": {
+              "headers": [
+                "Root Relation (Roots α, β)",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Sum of Roots (α + β)",
+                  "value": "-b / a",
+                  "latex": "\\alpha + \\beta = -\\frac{b}{a}"
+                },
+                {
+                  "feature": "Product of Roots (α · β)",
+                  "value": "c / a",
+                  "latex": "\\alpha\\beta = \\frac{c}{a}"
+                },
+                {
+                  "feature": "Difference of Roots (|α - β|)",
+                  "value": "√D / |a|",
+                  "latex": "|\\alpha - \\beta| = \\frac{\\sqrt{D}}{|a|}"
+                },
+                {
+                  "feature": "Sum of Squares (α² + β²)",
+                  "value": "(α + β)² - 2αβ = (b² - 2ac) / a²",
+                  "latex": "\\alpha^2 + \\beta^2 = \\frac{b^2 - 2ac}{a^2}"
+                },
+                {
+                  "feature": "Sum of Cubes (α³ + β³)",
+                  "value": "(α + β)³ - 3αβ(α + β)",
+                  "latex": "\\alpha^3 + \\beta^3 = (\\alpha+\\beta)^3 - 3\\alpha\\beta(\\alpha+\\beta)"
+                }
+              ]
+            }
           }
         ]
       },
@@ -532,7 +1199,40 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Extremum coordinates of the quadratic polynomial curve.",
             "mustKnow": true,
             "shortcut": "🎯 Axis of symmetry is always vertical line x = −b/(2a).",
-            "latex": "y_{\\min} = -\\frac{D}{4a} \\text{ at } x = -\\frac{b}{2a} \\quad (a > 0)"
+            "latex": "y_{\\min} = -\\frac{D}{4a} \\text{ at } x = -\\frac{b}{2a} \\quad (a > 0)",
+            "table": {
+              "headers": [
+                "Geometrical Feature of y = ax² + bx + c",
+                "Coordinates / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Vertex Coordinates (V)",
+                  "value": "(-b / (2a), -D / (4a))",
+                  "latex": "V = \\left(-\\frac{b}{2a}, -\\frac{D}{4a}\\right)"
+                },
+                {
+                  "feature": "Axis of Symmetry",
+                  "value": "x = -b / (2a)",
+                  "latex": "x = -\\frac{b}{2a}"
+                },
+                {
+                  "feature": "Minimum Value (if a > 0)",
+                  "value": "-D / (4a) at x = -b / (2a)",
+                  "latex": "y_{\\min} = -\\frac{D}{4a} \\quad \\left(\\text{at } x = -\\frac{b}{2a}\\right)"
+                },
+                {
+                  "feature": "Maximum Value (if a < 0)",
+                  "value": "-D / (4a) at x = -b / (2a)",
+                  "latex": "y_{\\max} = -\\frac{D}{4a} \\quad \\left(\\text{at } x = -\\frac{b}{2a}\\right)"
+                },
+                {
+                  "feature": "Curve Opening Direction",
+                  "value": "Concave upward if a > 0; downward if a < 0",
+                  "latex": "a > 0 \\implies \\cup, \\quad a < 0 \\implies \\cap"
+                }
+              ]
+            }
           },
           {
             "id": "quad-location-k",
@@ -662,7 +1362,45 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Extremely popular for finding minimum/maximum values of algebraic expressions.",
             "mustKnow": true,
             "shortcut": "🎯 Optimization Shortcut: Minimum value of (x + k/x) for x > 0 is 2√k (by AM ≥ GM).",
-            "latex": "AM \\ge GM \\ge HM \\implies \\frac{a + b}{2} \\ge \\sqrt{ab} \\ge \\frac{2ab}{a + b}, \\quad G^2 = A \\cdot H"
+            "latex": "AM \\ge GM \\ge HM \\implies \\frac{a + b}{2} \\ge \\sqrt{ab} \\ge \\frac{2ab}{a + b}, \\quad G^2 = A \\cdot H",
+            "table": {
+              "headers": [
+                "Mean Type / Property",
+                "Formula / Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Arithmetic Mean (AM)",
+                  "value": "(a + b) / 2",
+                  "latex": "AM = \\frac{a + b}{2}"
+                },
+                {
+                  "feature": "Geometric Mean (GM)",
+                  "value": "√(ab) (for a, b > 0)",
+                  "latex": "GM = \\sqrt{ab}"
+                },
+                {
+                  "feature": "Harmonic Mean (HM)",
+                  "value": "2ab / (a + b)",
+                  "latex": "HM = \\frac{2ab}{a + b}"
+                },
+                {
+                  "feature": "Order of Inequality",
+                  "value": "AM ≥ GM ≥ HM",
+                  "latex": "AM \\ge GM \\ge HM"
+                },
+                {
+                  "feature": "Equality Condition",
+                  "value": "AM = GM = HM ⇔ a = b",
+                  "latex": "a = b"
+                },
+                {
+                  "feature": "Product Relation",
+                  "value": "GM² = AM · HM",
+                  "latex": "GM^2 = AM \\cdot HM"
+                }
+              ]
+            }
           }
         ]
       },
@@ -951,7 +1689,50 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Letters going into wrong envelopes formula.",
             "mustKnow": true,
             "shortcut": "🎯 Memorize: D₃ = 2, D₄ = 9, D₅ = 44 saves 2 full minutes in exam.",
-            "latex": "D_n = n! \\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right]"
+            "latex": "D_n = n! \\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right]",
+            "table": {
+              "headers": [
+                "Items Count (n)",
+                "Number of Derangements Dₙ"
+              ],
+              "rows": [
+                {
+                  "feature": "n = 1",
+                  "value": "0",
+                  "latex": "D_1 = 0"
+                },
+                {
+                  "feature": "n = 2",
+                  "value": "1",
+                  "latex": "D_2 = 1"
+                },
+                {
+                  "feature": "n = 3",
+                  "value": "2",
+                  "latex": "D_3 = 2"
+                },
+                {
+                  "feature": "n = 4",
+                  "value": "9",
+                  "latex": "D_4 = 9"
+                },
+                {
+                  "feature": "n = 5",
+                  "value": "44",
+                  "latex": "D_5 = 44"
+                },
+                {
+                  "feature": "General Formula for Dₙ",
+                  "value": "n! · [1 - 1/1! + 1/2! - 1/3! + ... + (-1)ⁿ/n!]",
+                  "latex": "D_n = n!\\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right]"
+                },
+                {
+                  "feature": "Recurrence Relation",
+                  "value": "Dₙ = (n - 1)(Dₙ₋₁ + Dₙ₋₂)",
+                  "latex": "D_n = (n - 1)(D_{n-1} + D_{n-2})"
+                }
+              ]
+            }
           },
           {
             "id": "pnc-sum-of-digits",
@@ -983,96 +1764,1015 @@ export const TOPICS_DATA: TopicData[] = [
     "gradient": "from-emerald-600 to-green-700",
     "accentColor": "border-emerald-600 text-emerald-600",
     "bgTint": "bg-emerald-600/10 text-emerald-600",
-    "description": "Matrix algebra, properties of determinants, adjoint & inverse, Cramer’s rule & system of equations.",
+    "description": "Complete NIMCET revision: types, basic properties, transformations, special forms, matrix–determinant links, adjoint/inverse & high-speed shortcuts.",
     "examWeightage": "Very High (NIMCET ~5-6 Qs)",
     "quickTips": [
-      "|adj(A)| = |A|ⁿ⁻¹, where n is the order of matrix A.",
-      "|A · B| = |A| · |B|, |k·A| = kⁿ · |A|.",
-      "A · adj(A) = adj(A) · A = |A| · Iₙ."
+      "Three operations distinction: Rᵢ → Rᵢ + kRⱼ leaves D unchanged; Rᵢ → kRᵢ multiplies D by k; Rᵢ ↔ Rⱼ changes sign to −D.",
+      "|kA| = kⁿ|A| for n×n matrix. |AB| = |A||B| = |BA| even though AB ≠ BA.",
+      "|adj(A)| = |A|ⁿ⁻¹, |adj(adj(A))| = |A|^{(n−1)²}, and A·adj(A) = |A|Iₙ.",
+      "Reversal law: (AB)ᵀ = BᵀAᵀ and (AB)⁻¹ = B⁻¹A⁻¹. For equations: AX = B ⇒ X = A⁻¹B, while XA = B ⇒ X = BA⁻¹.",
+      "Odd-order skew-symmetric matrix has |A| = 0. If row or column sum is constant/zero, factor out sum immediately."
     ],
     "categories": [
       {
-        "id": "mat-properties",
-        "name": "Properties of Determinants",
+        "id": "mat-cat-types",
+        "name": "(A) Types & Classifications of Matrices & Determinants",
         "formulas": [
           {
-            "id": "det-scale-product",
-            "title": "Scalar Multiplication & Product Property",
-            "formula": "|k · A| = kⁿ · |A|   (where n is order of square matrix A)\n|A · B| = |A| · |B|  |  |Aᵀ| = |A|  |  |A⁻¹| = 1 / |A|",
-            "explanation": "Scalar factored out is raised to the dimension power n.",
+            "id": "mat-matrix-types",
+            "title": "Types of Matrices (Comprehensive Classification)",
+            "formula": "A = [aᵢⱼ]_{m×n}: Row, Column, Square, Zero, Diagonal, Scalar, Identity, Triangular, Symmetric, Skew-Symmetric, Orthogonal",
+            "explanation": "Essential definitions of matrix types and structures tested in NIMCET conceptual and objective questions.",
             "mustKnow": true,
-            "commonMistake": "⚠️ Do not write |kA| = k|A|! It is k raised to order n.",
-            "latex": "\\begin{aligned} |k  \\cdot  A| = k^n  \\cdot  |A|   (where n is order of square matrix A) \\\\ |A  \\cdot  B| = |A|  \\cdot  |B|  |  |Aᵀ| = |A|  |  |A⁻¹| = 1 / |A| \\end{aligned}"
+            "remember": "Memory: Triangular → multiply diagonal; Skew-symmetric → main diagonal is all zeroes.",
+            "shortcut": "🎯 Check order first: For product A_{m×n} B_{n×p}, inner dimensions must match, outer give product order m×p.",
+            "latex": "A = [a_{ij}]_{m \\times n}, \\quad A^T = A \\;(\\text{Symmetric}), \\quad A^T = -A \\;(\\text{Skew-Symmetric}), \\quad A^T A = I \\;(\\text{Orthogonal})",
+            "table": {
+              "headers": [
+                "Matrix Type",
+                "Defining Mathematical Condition / Example"
+              ],
+              "rows": [
+                {
+                  "feature": "Row Matrix",
+                  "value": "Only 1 row (Order 1 × n)",
+                  "latex": "[1 \\quad 2 \\quad 3] \\quad (1 \\times 3)"
+                },
+                {
+                  "feature": "Column Matrix",
+                  "value": "Only 1 column (Order m × 1)",
+                  "latex": "\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} \\quad (3 \\times 1)"
+                },
+                {
+                  "feature": "Square Matrix",
+                  "value": "Number of rows = Number of columns (n × n)",
+                  "latex": "m = n \\quad (n \\times n)"
+                },
+                {
+                  "feature": "Zero / Null Matrix (O)",
+                  "value": "Every element is 0 (aᵢⱼ = 0 for all i, j)",
+                  "latex": "O = \\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}"
+                },
+                {
+                  "feature": "Diagonal Matrix",
+                  "value": "All non-diagonal elements are 0 (aᵢⱼ = 0 for i ≠ j)",
+                  "latex": "\\text{diag}(d_1, d_2, \\dots, d_n) = \\begin{bmatrix} d_1 & 0 & 0 \\\\ 0 & d_2 & 0 \\\\ 0 & 0 & d_3 \\end{bmatrix}"
+                },
+                {
+                  "feature": "Scalar Matrix",
+                  "value": "Diagonal matrix with all diagonal elements equal",
+                  "latex": "A = k I_n = \\begin{bmatrix} k & 0 & 0 \\\\ 0 & k & 0 \\\\ 0 & 0 & k \\end{bmatrix}"
+                },
+                {
+                  "feature": "Identity / Unit Matrix (I)",
+                  "value": "Diagonal elements = 1, all other elements = 0",
+                  "latex": "I_n = [\\delta_{ij}] \\implies AI = IA = A"
+                },
+                {
+                  "feature": "Upper Triangular Matrix",
+                  "value": "All entries below main diagonal are 0 (aᵢⱼ = 0 for i > j)",
+                  "latex": "\\begin{bmatrix} a & * & * \\\\ 0 & b & * \\\\ 0 & 0 & c \\end{bmatrix}"
+                },
+                {
+                  "feature": "Lower Triangular Matrix",
+                  "value": "All entries above main diagonal are 0 (aᵢⱼ = 0 for i < j)",
+                  "latex": "\\begin{bmatrix} a & 0 & 0 \\\\ * & b & 0 \\\\ * & * & c \\end{bmatrix}"
+                },
+                {
+                  "feature": "Symmetric Matrix",
+                  "value": "Aᵀ = A (satisfies aᵢⱼ = aⱼᵢ)",
+                  "latex": "A^T = A \\iff a_{ij} = a_{ji}"
+                },
+                {
+                  "feature": "Skew-Symmetric Matrix",
+                  "value": "Aᵀ = −A (satisfies aᵢⱼ = −aⱼᵢ; all diagonal entries aᵢᵢ = 0)",
+                  "latex": "A^T = -A \\implies a_{ii} = 0, \\; a_{ij} = -a_{ji}"
+                },
+                {
+                  "feature": "Singular Matrix",
+                  "value": "|A| = 0 (Matrix inverse A⁻¹ does NOT exist)",
+                  "latex": "|A| = 0 \\implies A^{-1} \\text{ does not exist}"
+                },
+                {
+                  "feature": "Non-Singular Matrix",
+                  "value": "|A| ≠ 0 (Matrix inverse A⁻¹ exists)",
+                  "latex": "|A| \\neq 0 \\implies A^{-1} \\text{ exists}"
+                },
+                {
+                  "feature": "Orthogonal Matrix",
+                  "value": "Aᵀ A = A Aᵀ = I (A⁻¹ = Aᵀ and |A| = ±1)",
+                  "latex": "A^T A = I \\implies A^{-1} = A^T, \\quad |A| = \\pm 1"
+                }
+              ]
+            }
           },
           {
-            "id": "det-zero-conditions",
-            "title": "Conditions for Determinant = 0",
-            "formula": "|A| = 0 if:\n(1) Any row or column has all zero entries\n(2) Any two rows or columns are identical or proportional",
-            "explanation": "Singular matrix condition.",
+            "id": "det-types-orders",
+            "title": "Types & Orders of Determinants",
+            "formula": "Order 1: |a| = a  |  Order 2: |[a,b;c,d]| = ad − bc  |  Triangular: |A| = a₁₁·a₂₂···aₙₙ",
+            "explanation": "Standard determinant forms and orders evaluated in NIMCET examinations.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} |A| = 0 if: \\\\ (1) Any row or column has all zero entries \\\\ (2) Any two rows or columns are identical or proportional \\end{aligned}"
+            "remember": "Memory: Main diagonal product − other diagonal product; Triangular = multiply diagonal.",
+            "latex": "|a| = a, \\quad \\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc, \\quad |A_{\\text{triangular}}| = \\prod_{i=1}^n a_{ii}",
+            "table": {
+              "headers": [
+                "Determinant Order / Form",
+                "Evaluation Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Order 1 Determinant",
+                  "value": "|a| = a (e.g. |5| = 5, |−7| = −7)",
+                  "latex": "|a| = a"
+                },
+                {
+                  "feature": "Order 2 Determinant",
+                  "value": "ad − bc (Main diagonal − Off diagonal)",
+                  "latex": "\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc"
+                },
+                {
+                  "feature": "Order 3 Determinant",
+                  "value": "Cofactor expansion along any row/column or Sarrus rule",
+                  "latex": "\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = a(ei - fh) - b(di - fg) + c(dh - eg)"
+                },
+                {
+                  "feature": "Diagonal Determinant",
+                  "value": "Product of diagonal entries: a · b · c",
+                  "latex": "\\begin{vmatrix} a & 0 & 0 \\\\ 0 & b & 0 \\\\ 0 & 0 & c \\end{vmatrix} = abc"
+                },
+                {
+                  "feature": "Upper Triangular Determinant",
+                  "value": "Product of diagonal entries: a · b · c",
+                  "latex": "\\begin{vmatrix} a & * & * \\\\ 0 & b & * \\\\ 0 & 0 & c \\end{vmatrix} = abc"
+                },
+                {
+                  "feature": "Lower Triangular Determinant",
+                  "value": "Product of diagonal entries: a · b · c",
+                  "latex": "\\begin{vmatrix} a & 0 & 0 \\\\ * & b & 0 \\\\ * & * & c \\end{vmatrix} = abc"
+                },
+                {
+                  "feature": "Singular Determinant",
+                  "value": "|A| = 0",
+                  "latex": "|A| = 0"
+                },
+                {
+                  "feature": "Non-Singular Determinant",
+                  "value": "|A| ≠ 0 (Invertible)",
+                  "latex": "|A| \\neq 0"
+                }
+              ]
+            }
           },
           {
-            "id": "det-skew-symmetric",
-            "title": "Skew-Symmetric Matrix Determinant",
-            "formula": "If A is skew-symmetric (Aᵀ = −A) of ODD order n: |A| = 0\nIf of EVEN order: |A| is always a perfect square",
-            "explanation": "Classic competitive objective shortcut question.",
+            "id": "mat-equality-trace",
+            "title": "Equality of Matrices & Trace Properties",
+            "formula": "A = B ⇔ aᵢⱼ = bᵢⱼ  |  tr(A) = ∑ aᵢᵢ\ntr(A + B) = tr(A) + tr(B)  |  tr(AB) = tr(BA)",
+            "explanation": "Trace is the sum of main diagonal entries of a square matrix. It possesses cyclical commutative invariance.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} If A is skew-symmetric (Aᵀ = −A) of ODD order n: |A| = 0 \\\\ If of EVEN order: |A| is always a perfect square \\end{aligned}"
+            "remember": "Memory: Trace is linear and cyclically commutative (tr(AB) = tr(BA)).",
+            "latex": "\\text{tr}(A) = \\sum_{i=1}^n a_{ii}, \\quad \\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B), \\quad \\text{tr}(AB) = \\text{tr}(BA)",
+            "table": {
+              "headers": [
+                "Equality / Trace Property",
+                "Mathematical Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Equality Criterion (A = B)",
+                  "value": "Orders are identical and corresponding elements are equal: aᵢⱼ = bᵢⱼ",
+                  "latex": "A = B \\iff a_{ij} = b_{ij} \\quad \\forall i, j"
+                },
+                {
+                  "feature": "Trace Definition: tr(A)",
+                  "value": "Sum of diagonal elements: a₁₁ + a₂₂ + ··· + aₙₙ",
+                  "latex": "\\text{tr}(A) = a_{11} + a_{22} + \\dots + a_{nn} = \\sum_{i=1}^n a_{ii}"
+                },
+                {
+                  "feature": "Trace of Sum",
+                  "value": "tr(A + B) = tr(A) + tr(B)",
+                  "latex": "\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)"
+                },
+                {
+                  "feature": "Trace of Scalar Multiple",
+                  "value": "tr(kA) = k · tr(A)",
+                  "latex": "\\text{tr}(kA) = k \\cdot \\text{tr}(A)"
+                },
+                {
+                  "feature": "Trace Commutative Invariance",
+                  "value": "tr(AB) = tr(BA) (even if AB ≠ BA)",
+                  "latex": "\\text{tr}(AB) = \\text{tr}(BA)"
+                },
+                {
+                  "feature": "Trace of Transpose",
+                  "value": "tr(Aᵀ) = tr(A)",
+                  "latex": "\\text{tr}(A^T) = \\text{tr}(A)"
+                }
+              ]
+            }
           }
         ]
       },
       {
-        "id": "mat-adjoint-inverse",
-        "name": "Adjoint & Inverse Formulas",
+        "id": "mat-cat-basic-properties",
+        "name": "(B) Basic Operations & Fundamental Properties",
         "formulas": [
           {
-            "id": "mat-inverse-formula",
-            "title": "Matrix Inverse A⁻¹",
-            "formula": "A⁻¹ = adj(A) / |A|,   provided |A| ≠ 0",
-            "explanation": "Inverse exists if and only if matrix is non-singular (|A| ≠ 0).",
+            "id": "mat-addition-scalar",
+            "title": "Matrix Addition, Subtraction & Scalar Multiplication",
+            "formula": "A ± B = [aᵢⱼ ± bᵢⱼ]  |  kA = [k·aᵢⱼ]\nA + B = B + A  |  k(A + B) = kA + kB",
+            "explanation": "Addition requires matrices of the same order. Scalar multiplication multiplies every entry by k.",
             "mustKnow": true,
-            "latex": "A⁻¹ = adj(A) / |A|,   provided |A|  \\neq  0"
+            "remember": "Memory: Addition is entry-wise and commutative; scalar multiplication scales every element.",
+            "latex": "A + B = B + A, \\quad (A + B) + C = A + (B + C), \\quad k(A + B) = kA + kB, \\quad k(lA) = (kl)A"
           },
           {
-            "id": "mat-adj-properties",
+            "id": "mat-multiplication-props",
+            "title": "Matrix Multiplication & Core Properties",
+            "formula": "(A_{m×n})(B_{n×p}) = C_{m×p}  |  AB ≠ BA (Generally)\nAB = O does NOT imply A = O or B = O",
+            "explanation": "Row by column dot product multiplication. Fundamental distinction: Matrix multiplication is associative and distributive, but generally NOT commutative.",
+            "mustKnow": true,
+            "remember": "Memory: Inside same → outside gives answer (m×n)(n×p) → m×p. AB ≠ BA!",
+            "commonMistake": "⚠️ AB = O does not mean A = O or B = O! Two non-zero matrices can have zero product.",
+            "latex": "c_{ij} = \\sum_{k=1}^n a_{ik} b_{kj}, \\quad (AB)C = A(BC), \\quad A(B + C) = AB + AC, \\quad AB \\neq BA",
+            "table": {
+              "headers": [
+                "Multiplication Property",
+                "Mathematical Expression & Meaning"
+              ],
+              "rows": [
+                {
+                  "feature": "Dimension Compatibility Rule",
+                  "value": "Columns of A must equal rows of B: (m×n) · (n×p) → (m×p)",
+                  "latex": "(m \\times n) \\times (n \\times p) \\longrightarrow m \\times p"
+                },
+                {
+                  "feature": "Associative Law",
+                  "value": "(AB)C = A(BC)",
+                  "latex": "(AB)C = A(BC)"
+                },
+                {
+                  "feature": "Distributive Laws",
+                  "value": "A(B + C) = AB + AC  and  (A + B)C = AC + BC",
+                  "latex": "A(B + C) = AB + AC, \\quad (A + B)C = AC + BC"
+                },
+                {
+                  "feature": "Non-Commutative Nature",
+                  "value": "Generally AB ≠ BA (Order of factors matters critically)",
+                  "latex": "AB \\neq BA \\quad (\\text{Generally})"
+                },
+                {
+                  "feature": "Zero Divisors Possibility",
+                  "value": "AB = O is possible even when A ≠ O and B ≠ O",
+                  "latex": "AB = O \\not\\implies A = O \\text{ or } B = O"
+                },
+                {
+                  "feature": "Multiplicative Identity",
+                  "value": "AI = IA = A",
+                  "latex": "AI = IA = A"
+                },
+                {
+                  "feature": "Zero Matrix Annihilation",
+                  "value": "AO = OA = O",
+                  "latex": "AO = OA = O"
+                }
+              ]
+            }
+          },
+          {
+            "id": "det-fundamental-properties",
+            "title": "Fundamental Properties of Determinants",
+            "formula": "Rᵢ ↔ Rⱼ ⇒ D' = −D  |  Rᵢ = Rⱼ ⇒ D = 0  |  Rᵢ = kRⱼ ⇒ D = 0  |  Zero row ⇒ D = 0",
+            "explanation": "Core axiomatic determinant behaviors under row/column interchange, equality, and proportionality.",
+            "mustKnow": true,
+            "remember": "Memory: Swap → sign changes; Equal or proportional rows → determinant is 0.",
+            "shortcut": "🎯 Quick Check: If you spot identical rows or proportional rows, write D = 0 immediately without expansion.",
+            "latex": "\\begin{aligned} R_i \\leftrightarrow R_j &\\implies D' = -D \\\\ R_i = R_j &\\implies D = 0 \\\\ R_i = k R_j &\\implies D = 0 \\\\ \\text{Zero row/col} &\\implies D = 0 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Determinant Condition / Operation",
+                "Effect on Determinant Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Interchanging Two Rows (Rᵢ ↔ Rⱼ)",
+                  "value": "Sign of determinant changes: D' = −D",
+                  "latex": "R_i \\leftrightarrow R_j \\implies D' = -D"
+                },
+                {
+                  "feature": "Interchanging Two Columns (Cᵢ ↔ Cⱼ)",
+                  "value": "Sign of determinant changes: D' = −D",
+                  "latex": "C_i \\leftrightarrow C_j \\implies D' = -D"
+                },
+                {
+                  "feature": "Two Rows Identical (Rᵢ = Rⱼ)",
+                  "value": "Determinant value is 0",
+                  "latex": "R_i = R_j \\implies D = 0"
+                },
+                {
+                  "feature": "Two Columns Identical (Cᵢ = Cⱼ)",
+                  "value": "Determinant value is 0",
+                  "latex": "C_i = C_j \\implies D = 0"
+                },
+                {
+                  "feature": "Two Rows Proportional (Rᵢ = k·Rⱼ)",
+                  "value": "Determinant value is 0",
+                  "latex": "R_i = k R_j \\implies D = 0"
+                },
+                {
+                  "feature": "Two Columns Proportional (Cᵢ = k·Cⱼ)",
+                  "value": "Determinant value is 0",
+                  "latex": "C_i = k C_j \\implies D = 0"
+                },
+                {
+                  "feature": "All Elements of a Row/Column Zero",
+                  "value": "Determinant value is 0",
+                  "latex": "D = 0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "det-cofactor-expansion",
+            "title": "Cofactor Expansion & Checkerboard Sign Pattern",
+            "formula": "D = aᵢ₁ Cᵢ₁ + aᵢ₂ Cᵢ₂ + ··· + aᵢₙ Cᵢₙ = |A|\naᵢ₁ Cⱼ₁ + aᵢ₂ Cⱼ₂ + ··· + aᵢₙ Cⱼₙ = 0  (for i ≠ j)",
+            "explanation": "Expanding along any row/column gives |A|. Multiplying elements of one row by cofactors of another row yields 0.",
+            "mustKnow": true,
+            "remember": "Memory: Checkerboard signs: + − + / − + − / + − +. Same row → |A|, other row → 0.",
+            "latex": "C_{ij} = (-1)^{i+j} M_{ij}, \\quad \\sum_{k=1}^n a_{ik} C_{jk} = \\begin{cases} |A| & i = j \\\\ 0 & i \\neq j \\end{cases}"
+          }
+        ]
+      },
+      {
+        "id": "mat-cat-row-col-ops",
+        "name": "(C) Row & Column Operations & Transformations",
+        "formulas": [
+          {
+            "id": "det-row-col-transformations",
+            "title": "Row & Column Operations on Determinants",
+            "formula": "Rᵢ → Rᵢ + kRⱼ ⇒ D' = D (No Change)\nRᵢ → kRᵢ ⇒ D' = k·D  |  Common factor from row comes outside once",
+            "explanation": "The mathematical rules governing determinant changes under elementary row and column operations.",
+            "mustKnow": true,
+            "remember": "Memory: Add/subtract multiples → NO CHANGE. Multiply single row → D multiplied by k.",
+            "shortcut": "🎯 Adding a multiple of another row creates zeroes without altering D — the single fastest determinant evaluation tool.",
+            "latex": "R_i \\to R_i + k R_j \\implies D' = D, \\quad R_i \\to k R_i \\implies D' = kD, \\quad R_i \\to \\frac{R_i}{k} \\implies D' = \\frac{D}{k}",
+            "table": {
+              "headers": [
+                "Transformation Operation",
+                "Effect on Determinant (D')"
+              ],
+              "rows": [
+                {
+                  "feature": "Add Multiple of Another Row: Rᵢ → Rᵢ + kRⱼ",
+                  "value": "Determinant does NOT change: D' = D",
+                  "latex": "R_i \\to R_i + k R_j \\implies D' = D"
+                },
+                {
+                  "feature": "Add Multiple of Another Col: Cᵢ → Cᵢ + kCⱼ",
+                  "value": "Determinant does NOT change: D' = D",
+                  "latex": "C_i \\to C_i + k C_j \\implies D' = D"
+                },
+                {
+                  "feature": "Multiply Single Row by k: Rᵢ → kRᵢ",
+                  "value": "Determinant multiplied by k: D' = k · D",
+                  "latex": "R_i \\to k R_i \\implies D' = k D"
+                },
+                {
+                  "feature": "Divide Single Row by k: Rᵢ → Rᵢ / k",
+                  "value": "Determinant divided by k: D' = D / k",
+                  "latex": "R_i \\to \\frac{R_i}{k} \\implies D' = \\frac{D}{k}"
+                },
+                {
+                  "feature": "Common Factor from a Row",
+                  "value": "Comes outside the determinant once: |[ka, kb; c, d]| = k·|[a, b; c, d]|",
+                  "latex": "\\begin{vmatrix} ka & kb \\\\ c & d \\end{vmatrix} = k \\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}"
+                },
+                {
+                  "feature": "Row Swap: Rᵢ ↔ Rⱼ",
+                  "value": "Determinant sign reverses: D' = −D",
+                  "latex": "R_i \\leftrightarrow R_j \\implies D' = -D"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mat-elementary-ops-rank",
+            "title": "Elementary Matrix Operations & Rank of a Matrix",
+            "formula": "Operations: Rᵢ ↔ Rⱼ, Rᵢ → kRᵢ, Rᵢ → Rᵢ + kRⱼ\nrank(A) ≤ min(m, n)  |  |A| ≠ 0 ⇔ rank(A) = n",
+            "explanation": "Rank is the maximum number of linearly independent rows or columns. Inversion is performed via [A | I] → [I | A⁻¹].",
+            "mustKnow": true,
+            "remember": "Memory: Non-singular n×n matrix always has full rank n.",
+            "latex": "\\text{rank}(A) \\le \\min(m, n), \\quad |A| \\neq 0 \\iff \\text{rank}(A) = n, \\quad [A \\mid I] \\xrightarrow{\\text{row ops}} [I \\mid A^{-1}]",
+            "table": {
+              "headers": [
+                "Matrix Property / Method",
+                "Mathematical Fact / Condition"
+              ],
+              "rows": [
+                {
+                  "feature": "Elementary Operation 1 (Interchange)",
+                  "value": "Swap two rows: Rᵢ ↔ Rⱼ",
+                  "latex": "R_i \\leftrightarrow R_j"
+                },
+                {
+                  "feature": "Elementary Operation 2 (Scaling)",
+                  "value": "Multiply row by non-zero scalar: Rᵢ → kRᵢ (k ≠ 0)",
+                  "latex": "R_i \\to k R_i \\quad (k \\neq 0)"
+                },
+                {
+                  "feature": "Elementary Operation 3 (Linear Combo)",
+                  "value": "Add multiple of another row: Rᵢ → Rᵢ + kRⱼ",
+                  "latex": "R_i \\to R_i + k R_j"
+                },
+                {
+                  "feature": "Rank Bound (m × n Matrix)",
+                  "value": "rank(A) ≤ min(m, n)",
+                  "latex": "\\text{rank}(A) \\le \\min(m, n)"
+                },
+                {
+                  "feature": "Rank of Non-Singular Matrix",
+                  "value": "|A| ≠ 0 ⇔ rank(A) = n (Full Rank)",
+                  "latex": "|A| \\neq 0 \\iff \\text{rank}(A) = n"
+                },
+                {
+                  "feature": "Matrix Inversion via Gauss-Jordan",
+                  "value": "[A | I] transformed by row operations into [I | A⁻¹]",
+                  "latex": "[A \\mid I] \\longrightarrow [I \\mid A^{-1}]"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mat-cat-special-forms",
+        "name": "(D) Special Matrix Forms & Factor Theorems",
+        "formulas": [
+          {
+            "id": "mat-transpose-properties",
+            "title": "Transpose Properties & Reversal Law",
+            "formula": "(Aᵀ)ᵀ = A  |  (A ± B)ᵀ = Aᵀ ± Bᵀ  |  (kA)ᵀ = kAᵀ\n(AB)ᵀ = BᵀAᵀ (Order Reverses!)  |  |Aᵀ| = |A|",
+            "explanation": "Transpose swaps rows and columns: (Aᵀ)ᵢⱼ = aⱼᵢ. Crucial rule: Product transpose reverses matrix order.",
+            "mustKnow": true,
+            "remember": "Memory: Transpose preserves determinant: |Aᵀ| = |A|. Reversal: (AB)ᵀ = BᵀAᵀ.",
+            "latex": "(A^T)^T = A, \\quad (AB)^T = B^T A^T, \\quad |A^T| = |A|, \\quad (A + B)^T = A^T + B^T",
+            "table": {
+              "headers": [
+                "Transpose Property",
+                "Mathematical Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Involution (Double Transpose)",
+                  "value": "(Aᵀ)ᵀ = A",
+                  "latex": "(A^T)^T = A"
+                },
+                {
+                  "feature": "Linearity (Sum / Difference)",
+                  "value": "(A ± B)ᵀ = Aᵀ ± Bᵀ",
+                  "latex": "(A \\pm B)^T = A^T \\pm B^T"
+                },
+                {
+                  "feature": "Scalar Invariance",
+                  "value": "(kA)ᵀ = k · Aᵀ",
+                  "latex": "(kA)^T = k A^T"
+                },
+                {
+                  "feature": "Product Reversal Law",
+                  "value": "(AB)ᵀ = Bᵀ · Aᵀ (Order reverses)",
+                  "latex": "(AB)^T = B^T A^T"
+                },
+                {
+                  "feature": "Multiple Product Reversal",
+                  "value": "(ABC)ᵀ = Cᵀ Bᵀ Aᵀ",
+                  "latex": "(ABC)^T = C^T B^T A^T"
+                },
+                {
+                  "feature": "Determinant Transpose Invariance",
+                  "value": "|Aᵀ| = |A|",
+                  "latex": "|A^T| = |A|"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mat-symmetric-skew",
+            "title": "Symmetric, Skew-Symmetric & Orthogonal Matrices",
+            "formula": "A = (A + Aᵀ)/2 + (A − Aᵀ)/2\nSkew-symmetric: aᵢᵢ = 0  |  Odd order: |A| = 0  |  Orthogonal: |A| = ±1",
+            "explanation": "Every square matrix is uniquely decomposable into symmetric and skew-symmetric components. Odd-order skew-symmetric determinants are always zero.",
+            "mustKnow": true,
+            "remember": "Memory: Skew-symmetric: diagonal = 0; odd order |A| = 0; orthogonal |A| = ±1 and A⁻¹ = Aᵀ.",
+            "shortcut": "🎯 Any 3×3 skew-symmetric matrix has |A| = 0 immediately without calculating.",
+            "latex": "A = \\frac{A + A^T}{2} + \\frac{A - A^T}{2}, \\quad |A_{\\text{odd skew}}| = 0, \\quad A^T A = I \\implies |A| = \\pm 1",
+            "table": {
+              "headers": [
+                "Special Matrix Property",
+                "Mathematical Expression & Characteristic"
+              ],
+              "rows": [
+                {
+                  "feature": "Symmetric Matrix Definition",
+                  "value": "Aᵀ = A (Satisfies aᵢⱼ = aⱼᵢ)",
+                  "latex": "A^T = A \\iff a_{ij} = a_{ji}"
+                },
+                {
+                  "feature": "Skew-Symmetric Matrix Definition",
+                  "value": "Aᵀ = −A (Satisfies aᵢⱼ = −aⱼᵢ and diagonal elements aᵢᵢ = 0)",
+                  "latex": "A^T = -A \\implies a_{ii} = 0"
+                },
+                {
+                  "feature": "Odd-Order Skew-Symmetric Determinant",
+                  "value": "|A| = 0 for any odd order n (e.g., 3×3)",
+                  "latex": "|A| = 0 \\quad (n = 1, 3, 5, \\dots)"
+                },
+                {
+                  "feature": "Even-Order Skew-Symmetric Determinant",
+                  "value": "|A| is always a perfect square",
+                  "latex": "|A| = k^2 \\quad (n = 2, 4, \\dots)"
+                },
+                {
+                  "feature": "Canonical Decomposition Theorem",
+                  "value": "A = (A + Aᵀ)/2 (Symmetric) + (A − Aᵀ)/2 (Skew-Symmetric)",
+                  "latex": "A = \\underbrace{\\frac{A + A^T}{2}}_{\\text{Symmetric}} + \\underbrace{\\frac{A - A^T}{2}}_{\\text{Skew-Symmetric}}"
+                },
+                {
+                  "feature": "Orthogonal Matrix Definition",
+                  "value": "Aᵀ A = A Aᵀ = I",
+                  "latex": "A^T A = I \\implies A^{-1} = A^T"
+                },
+                {
+                  "feature": "Orthogonal Determinant",
+                  "value": "|A| = ±1 (Since |Aᵀ||A| = |A|² = 1)",
+                  "latex": "|A| = \\pm 1"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mat-eigenvalues-properties",
+            "title": "Eigenvalues, Trace & Determinant Properties",
+            "formula": "|A − λI| = 0  |  ∑ λᵢ = tr(A)  |  ∏ λᵢ = |A|\nEigenvalues of A⁻¹ are 1/λᵢ  |  Eigenvalues of Aᵏ are λᵢᵏ",
+            "explanation": "Eigenvalues are roots of the characteristic polynomial |A − λI| = 0. The sum of eigenvalues equals the trace, and their product equals the determinant.",
+            "mustKnow": true,
+            "remember": "Memory: Sum of eigenvalues = trace; product of eigenvalues = determinant.",
+            "shortcut": "🎯 Quick verification: If matrix has trace = 5 and determinant = 6, eigenvalues must be 2 and 3 because 2+3=5 and 2×3=6.",
+            "latex": "|A - \\lambda I| = 0, \\quad \\sum_{i=1}^n \\lambda_i = \\text{tr}(A), \\quad \\prod_{i=1}^n \\lambda_i = |A|",
+            "table": {
+              "headers": [
+                "Eigenvalue Property",
+                "Mathematical Formula (Eigenvalues λ₁, ..., λₙ)"
+              ],
+              "rows": [
+                {
+                  "feature": "Characteristic Equation",
+                  "value": "|A − λI| = 0 (Roots are eigenvalues λᵢ)",
+                  "latex": "|A - \\lambda I| = 0"
+                },
+                {
+                  "feature": "Sum of Eigenvalues",
+                  "value": "λ₁ + λ₂ + ··· + λₙ = tr(A) (Sum of diagonal elements)",
+                  "latex": "\\sum_{i=1}^n \\lambda_i = \\text{tr}(A)"
+                },
+                {
+                  "feature": "Product of Eigenvalues",
+                  "value": "λ₁ · λ₂ ··· λₙ = |A| (Determinant of matrix)",
+                  "latex": "\\prod_{i=1}^n \\lambda_i = |A|"
+                },
+                {
+                  "feature": "Eigenvalues of Matrix Inverse A⁻¹",
+                  "value": "1/λ₁, 1/λ₂, ..., 1/λₙ (for invertible A)",
+                  "latex": "\\frac{1}{\\lambda_1}, \\; \\frac{1}{\\lambda_2}, \\; \\dots, \\; \\frac{1}{\\lambda_n}"
+                },
+                {
+                  "feature": "Eigenvalues of Matrix Power Aᵏ",
+                  "value": "λ₁ᵏ, λ₂ᵏ, ..., λₙᵏ",
+                  "latex": "\\lambda_1^k, \\; \\lambda_2^k, \\; \\dots, \\; \\lambda_n^k"
+                },
+                {
+                  "feature": "Eigenvalues of Scalar Multiple kA",
+                  "value": "kλ₁, kλ₂, ..., kλₙ",
+                  "latex": "k\\lambda_1, \\; k\\lambda_2, \\; \\dots, \\; k\\lambda_n"
+                },
+                {
+                  "feature": "Eigenvalues of Shifted Matrix A + cI",
+                  "value": "λ₁ + c, λ₂ + c, ..., λₙ + c",
+                  "latex": "\\lambda_1 + c, \\; \\lambda_2 + c, \\; \\dots, \\; \\lambda_n + c"
+                },
+                {
+                  "feature": "Eigenvalues of Transpose Aᵀ",
+                  "value": "Same eigenvalues as A (since |Aᵀ − λI| = |A − λI|)",
+                  "latex": "\\lambda(A^T) = \\lambda(A)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mat-cayley-hamilton",
+            "title": "Cayley–Hamilton Theorem (Why It's Useful, How to Use It & Examples)",
+            "formula": "|A − λI| = 0  ⇒  A² − tr(A)·A + |A|·I = O  (for 2×2)\nA² = tr(A)·A − |A|·I  |  A⁻¹ = (tr(A)·I − A) / |A|",
+            "explanation": "Every square matrix satisfies its own characteristic polynomial equation. Instead of performing tedious matrix multiplications, Cayley-Hamilton lets you reduce high matrix powers (A³, A⁴, A¹⁰) to linear terms (pA + qI) and compute inverses A⁻¹ without finding adjoints.",
+            "mustKnow": true,
+            "remember": "Memory: Replace λ with A and constant c with cI. For 2×2: A² − tr(A)A + |A|I = O always.",
+            "shortcut": "🎯 Worked Example: Let A = [[2, 3], [1, 2]]. Here tr(A) = 4, |A| = 1.\n1. Equation: A² − 4A + I = O ⇒ A² = 4A − I.\n2. Inverse in 3 seconds: Multiply by A⁻¹ ⇒ A − 4I + A⁻¹ = O ⇒ A⁻¹ = 4I − A = [[2, −3], [−1, 2]].\n3. High Powers: A³ = A(4A − I) = 4A² − A = 4(4A − I) − A = 15A − 4I = [[26, 45], [15, 26]].",
+            "latex": "P(\\lambda) = |A - \\lambda I| = 0 \\implies P(A) = O, \\quad A^2 - \\text{tr}(A)A + |A|I = O, \\quad A^{-1} = \\frac{\\text{tr}(A)I - A}{|A|}",
+            "table": {
+              "headers": [
+                "Cayley–Hamilton Step / Application",
+                "Method, Formula & Step-by-Step Worked Example"
+              ],
+              "rows": [
+                {
+                  "feature": "Theorem Statement",
+                  "value": "Every square matrix A satisfies its characteristic equation: P(A) = O",
+                  "latex": "|A - \\lambda I| = 0 \\implies P(A) = O"
+                },
+                {
+                  "feature": "Standard 2×2 Characteristic Equation",
+                  "value": "A² − tr(A)·A + |A|·I = O (Replace λ → A and constant c → cI)",
+                  "latex": "A^2 - \\text{tr}(A)A + |A|I = O"
+                },
+                {
+                  "feature": "Step 1: How to Set It Up",
+                  "value": "Compute tr(A) = a₁₁ + a₂₂ and |A| = ad − bc. Substitute directly into A² − tr(A)A + |A|I = O.",
+                  "latex": "\\text{tr}(A) = a_{11} + a_{22}, \\quad |A| = ad - bc"
+                },
+                {
+                  "feature": "Why Useful #1: Higher Powers (A³, A⁴, A¹⁰)",
+                  "value": "Rearrange to A² = tr(A)·A − |A|·I. Multiply by A iteratively to reduce any power to linear pA + qI.",
+                  "latex": "A^2 = \\text{tr}(A)A - |A|I \\implies A^3 = \\text{tr}(A)A^2 - |A|A"
+                },
+                {
+                  "feature": "Why Useful #2: Instant Inverse A⁻¹",
+                  "value": "Multiply A² − tr(A)·A + |A|·I = O by A⁻¹ to get A⁻¹ = (tr(A)·I − A) / |A| without any cofactors!",
+                  "latex": "A^{-1} = \\frac{\\text{tr}(A)I - A}{|A|} \\quad (|A| \\neq 0)"
+                },
+                {
+                  "feature": "Why Useful #3: Polynomial Evaluation",
+                  "value": "Given large polynomial f(A), divide by characteristic polynomial P(A). The remainder R(A) gives the exact value.",
+                  "latex": "f(A) = Q(A) \\cdot P(A) + R(A) = R(A) \\quad (\\text{since } P(A) = O)"
+                },
+                {
+                  "feature": "Concrete Worked Example: Matrix A",
+                  "value": "Let A = [[2, 3], [1, 2]] ⇒ tr(A) = 4, |A| = 4 − 3 = 1 ⇒ A² − 4A + I = O",
+                  "latex": "A = \\begin{bmatrix} 2 & 3 \\\\ 1 & 2 \\end{bmatrix} \\implies A^2 - 4A + I = O"
+                },
+                {
+                  "feature": "Example Application: Finding A⁻¹",
+                  "value": "A − 4I + A⁻¹ = O ⇒ A⁻¹ = 4I − A = [[2, −3], [−1, 2]] in seconds!",
+                  "latex": "A^{-1} = 4I - A = \\begin{bmatrix} 2 & -3 \\\\ -1 & 2 \\end{bmatrix}"
+                },
+                {
+                  "feature": "Example Application: Finding A³",
+                  "value": "A³ = 4A² − A = 4(4A − I) − A = 15A − 4I = [[26, 45], [15, 26]]",
+                  "latex": "A^3 = 15A - 4I = \\begin{bmatrix} 26 & 45 \\\\ 15 & 26 \\end{bmatrix}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mat-cat-det-properties",
+        "name": "(E) Matrix–Determinant Properties & Connections",
+        "formulas": [
+          {
+            "id": "mat-det-master-properties",
+            "title": "Master Matrix–Determinant Connections",
+            "formula": "|kA| = kⁿ·|A|  |  |AB| = |A|·|B| = |BA|  |  |Aᵐ| = |A|ᵐ  |  |A⁻¹| = 1/|A|  |  |I| = 1",
+            "explanation": "The core matrix-determinant identities evaluated most frequently in NIMCET examination papers.",
+            "mustKnow": true,
+            "remember": "Memory: Entire matrix scaled by k → kⁿ factor out! Product determinant is commutative: |AB| = |BA|.",
+            "commonMistake": "⚠️ For 3×3 matrix: |2A| = 2³|A| = 8|A|, NOT 2|A|! Scaling one row gives 2|A|; scaling entire matrix gives 8|A|.",
+            "latex": "|kA| = k^n |A|, \\quad |AB| = |A||B| = |BA|, \\quad |A^m| = |A|^m, \\quad |A^{-1}| = \\frac{1}{|A|}, \\quad |I| = 1",
+            "table": {
+              "headers": [
+                "Matrix–Determinant Property",
+                "Identity Formula (Order n)"
+              ],
+              "rows": [
+                {
+                  "feature": "Scalar Multiple of Matrix: |kA|",
+                  "value": "kⁿ · |A| (k is raised to matrix dimension n)",
+                  "latex": "|kA| = k^n |A|"
+                },
+                {
+                  "feature": "Product Property: |AB|",
+                  "value": "|A| · |B|",
+                  "latex": "|AB| = |A| \\cdot |B|"
+                },
+                {
+                  "feature": "Product Commutativity of Determinant",
+                  "value": "|AB| = |BA| (Holds even though AB ≠ BA!)",
+                  "latex": "|AB| = |A||B| = |B||A| = |BA|"
+                },
+                {
+                  "feature": "Matrix Power Property: |Aᵐ|",
+                  "value": "|A|ᵐ",
+                  "latex": "|A^m| = |A|^m"
+                },
+                {
+                  "feature": "Inverse Matrix Determinant: |A⁻¹|",
+                  "value": "1 / |A| = |A|⁻¹ (Provided |A| ≠ 0)",
+                  "latex": "|A^{-1}| = \\frac{1}{|A|} = |A|^{-1}"
+                },
+                {
+                  "feature": "Identity Matrix Determinant: |I|",
+                  "value": "|I| = 1 (Since AI = A ⇒ |A||I| = |A|)",
+                  "latex": "|I| = 1"
+                },
+                {
+                  "feature": "Transpose Determinant: |Aᵀ|",
+                  "value": "|Aᵀ| = |A|",
+                  "latex": "|A^T| = |A|"
+                },
+                {
+                  "feature": "Invertibility Condition",
+                  "value": "A is invertible ⇔ |A| ≠ 0 (Non-singular)",
+                  "latex": "|A| \\neq 0 \\iff A^{-1} \\text{ exists}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mat-cat-adjoint-inverse",
+        "name": "(F) Adjoint, Inverse & Systems of Linear Equations",
+        "formulas": [
+          {
+            "id": "mat-adjoint-master-identities",
             "title": "Adjoint Master Identities",
-            "formula": "(1) A · adj(A) = |A| · Iₙ\n(2) |adj(A)| = |A|ⁿ⁻¹\n(3) adj(adj(A)) = |A|ⁿ⁻² · A\n(4) |adj(adj(A))| = |A|^{(n−1)²}",
-            "explanation": "Most frequent determinant-matrix exam identities.",
+            "formula": "A·adj(A) = |A|·Iₙ  |  |adj(A)| = |A|ⁿ⁻¹  |  adj(adj(A)) = |A|ⁿ⁻²·A\n|adj(adj(A))| = |A|^{(n−1)²}  |  adj(kA) = kⁿ⁻¹·adj(A)",
+            "explanation": "Master adjoint identities that appear in almost every competitive MCA entrance exam.",
             "mustKnow": true,
-            "shortcut": "🎯 For 3×3 matrix (n=3): |adj(A)| = |A|²  and  |adj(adj(A))| = |A|⁴.",
-            "latex": "\\begin{aligned} A \\cdot \\text{adj}(A) &= \\det(A) I_n \\\\ |\\text{adj}(A)| &= |A|^{n-1} \\\\ \\text{adj}(\\text{adj}(A)) &= |A|^{n-2} A \\\\ |\\text{adj}(\\text{adj}(A))| &= |A|^{(n-1)^2} \\end{aligned}"
+            "remember": "Memory: For 3×3 (n=3): |adj A| = |A|², |adj(adj A)| = |A|⁴, adj(kA) = k² adj(A).",
+            "shortcut": "🎯 If |A| = 3 for 3×3 matrix: |adj A| = 3² = 9, |adj(adj A)| = 3⁴ = 81. Solved in 3 seconds!",
+            "latex": "A \\cdot \\text{adj}(A) = |A| I_n, \\quad |\\text{adj}(A)| = |A|^{n-1}, \\quad |\\text{adj}(\\text{adj}(A))| = |A|^{(n-1)^2}, \\quad \\text{adj}(kA) = k^{n-1} \\text{adj}(A)",
+            "table": {
+              "headers": [
+                "Adjoint Identity (Square Matrix A of order n)",
+                "Mathematical Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Fundamental Adjoint Equation",
+                  "value": "A · adj(A) = (adj A) · A = |A| · Iₙ",
+                  "latex": "A \\cdot \\text{adj}(A) = (\\text{adj} A) \\cdot A = |A| \\cdot I_n"
+                },
+                {
+                  "feature": "Determinant of Adjoint",
+                  "value": "|adj(A)| = |A|ⁿ⁻¹ (For 3×3: |A|²)",
+                  "latex": "|\\text{adj}(A)| = |A|^{n-1}"
+                },
+                {
+                  "feature": "Adjoint of Adjoint Matrix",
+                  "value": "adj(adj(A)) = |A|ⁿ⁻² · A (For 3×3: |A| · A)",
+                  "latex": "\\text{adj}(\\text{adj}(A)) = |A|^{n-2} \\cdot A"
+                },
+                {
+                  "feature": "Determinant of Double Adjoint",
+                  "value": "|adj(adj(A))| = |A|^{(n−1)²} (For 3×3: |A|⁴)",
+                  "latex": "|\\text{adj}(\\text{adj}(A))| = |A|^{(n-1)^2}"
+                },
+                {
+                  "feature": "Adjoint of Scalar Multiple: adj(kA)",
+                  "value": "kⁿ⁻¹ · adj(A) (For 3×3: k² · adj(A))",
+                  "latex": "\\text{adj}(kA) = k^{n-1} \\text{adj}(A)"
+                },
+                {
+                  "feature": "Adjoint of Product (Reversal Law)",
+                  "value": "adj(AB) = adj(B) · adj(A)",
+                  "latex": "\\text{adj}(AB) = \\text{adj}(B) \\cdot \\text{adj}(A)"
+                },
+                {
+                  "feature": "Adjoint of Inverse",
+                  "value": "adj(A⁻¹) = A / |A| = (adj A)⁻¹",
+                  "latex": "\\text{adj}(A^{-1}) = \\frac{A}{|A|} = (\\text{adj} A)^{-1}"
+                },
+                {
+                  "feature": "Transpose of Adjoint",
+                  "value": "adj(Aᵀ) = (adj A)ᵀ",
+                  "latex": "\\text{adj}(A^T) = (\\text{adj} A)^T"
+                }
+              ]
+            }
           },
           {
-            "id": "mat-2x2-shortcut",
-            "title": "2×2 Inverse Shortcut",
-            "formula": "For A = [[a, b], [c, d]]:\nA⁻¹ = (1 / (ad − bc)) · [[d, −b], [−c, a]]",
-            "explanation": "Swap main diagonal elements, negate off-diagonal elements, divide by |A|.",
+            "id": "mat-inverse-equations",
+            "title": "Inverse Formula, Properties & Matrix Equations",
+            "formula": "A⁻¹ = adj(A)/|A|  |  (AB)⁻¹ = B⁻¹A⁻¹  |  (Aᵀ)⁻¹ = (A⁻¹)ᵀ\nAX = B ⇒ X = A⁻¹B  |  XA = B ⇒ X = BA⁻¹",
+            "explanation": "Matrix inverse exists if and only if |A| ≠ 0. Watch out for multiplication direction in matrix equations!",
             "mustKnow": true,
-            "shortcut": "🎯 Swap a & d, put minus on b & c in 5 seconds!",
-            "latex": "\\begin{aligned} For A = [[a, b], [c, d]]: \\\\ A⁻¹ = (1 / (ad − bc))  \\cdot  [[d, −b], [−c, a]] \\end{aligned}"
+            "remember": "Memory: 2×2: swap diagonal, negate off-diagonal, divide by det. Inverse reverses order: (AB)⁻¹ = B⁻¹A⁻¹.",
+            "commonMistake": "⚠️ AX = B gives X = A⁻¹B (left multiply). Do NOT write X = BA⁻¹! For XA = B, multiply from right: X = BA⁻¹.",
+            "latex": "A^{-1} = \\frac{\\text{adj}(A)}{|A|}, \\quad (AB)^{-1} = B^{-1} A^{-1}, \\quad AX = B \\implies X = A^{-1} B, \\quad XA = B \\implies X = B A^{-1}",
+            "table": {
+              "headers": [
+                "Inverse Property / Equation",
+                "Mathematical Formula & Procedure"
+              ],
+              "rows": [
+                {
+                  "feature": "Inverse Definition",
+                  "value": "A · A⁻¹ = A⁻¹ · A = I (Requires |A| ≠ 0)",
+                  "latex": "A A^{-1} = A^{-1} A = I \\quad (|A| \\neq 0)"
+                },
+                {
+                  "feature": "Inverse Calculation Formula",
+                  "value": "A⁻¹ = adj(A) / |A|",
+                  "latex": "A^{-1} = \\frac{\\text{adj}(A)}{|A|}"
+                },
+                {
+                  "feature": "2×2 Fast Inverse Shortcut",
+                  "value": "Swap a & d, negate b & c, divide by (ad − bc)",
+                  "latex": "\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}^{-1} = \\frac{1}{ad - bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}"
+                },
+                {
+                  "feature": "Double Inverse",
+                  "value": "(A⁻¹)⁻¹ = A",
+                  "latex": "(A^{-1})^{-1} = A"
+                },
+                {
+                  "feature": "Product Inverse (Reversal)",
+                  "value": "(AB)⁻¹ = B⁻¹ · A⁻¹ (Order reverses)",
+                  "latex": "(AB)^{-1} = B^{-1} A^{-1}"
+                },
+                {
+                  "feature": "Transpose of Inverse",
+                  "value": "(Aᵀ)⁻¹ = (A⁻¹)ᵀ",
+                  "latex": "(A^T)^{-1} = (A^{-1})^T"
+                },
+                {
+                  "feature": "Scalar Multiple Inverse",
+                  "value": "(kA)⁻¹ = (1/k) · A⁻¹ (k ≠ 0)",
+                  "latex": "(kA)^{-1} = \\frac{1}{k} A^{-1}"
+                },
+                {
+                  "feature": "Matrix Power Inverse",
+                  "value": "(Aⁿ)⁻¹ = (A⁻¹)ⁿ = A⁻ⁿ",
+                  "latex": "(A^n)^{-1} = (A^{-1})^n = A^{-n}"
+                },
+                {
+                  "feature": "Solving AX = B",
+                  "value": "X = A⁻¹ · B (Pre-multiply by A⁻¹)",
+                  "latex": "AX = B \\implies X = A^{-1} B"
+                },
+                {
+                  "feature": "Solving XA = B",
+                  "value": "X = B · A⁻¹ (Post-multiply by A⁻¹)",
+                  "latex": "XA = B \\implies X = B A^{-1}"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mat-cramer-consistency",
+            "title": "Cramer's Rule & Consistency of Linear Equations",
+            "formula": "x = D₁/D, y = D₂/D, z = D₃/D  (where D = |A| ≠ 0)\nD ≠ 0 ⇒ Unique  |  D = 0 & all Dᵢ = 0 ⇒ Infinite  |  D = 0 & any Dᵢ ≠ 0 ⇒ No Solution",
+            "explanation": "Determinant criterion for solvability and consistency of non-homogeneous linear systems AX = B.",
+            "mustKnow": true,
+            "remember": "Memory: D ≠ 0 → unique; D = 0 and all zeroes → infinite; D = 0 and non-zero numerator → no solution.",
+            "shortcut": "🎯 Parameters question (λ, μ): Set D = 0 to find critical λ for non-uniqueness, then test D₁, D₂ for μ.",
+            "latex": "x_i = \\frac{D_i}{D}, \\quad D = |A|, \\quad \\begin{cases} D \\neq 0 & \\text{Unique Solution (Consistent)} \\\\ D = 0, D_i = 0 & \\text{Infinitely Many Solutions (Consistent)} \\\\ D = 0, \\exists D_i \\neq 0 & \\text{No Solution (Inconsistent)} \\end{cases}",
+            "table": {
+              "headers": [
+                "Cramer's Determinant Conditions",
+                "System Nature & Solutions"
+              ],
+              "rows": [
+                {
+                  "feature": "D ≠ 0",
+                  "value": "Consistent with Unique Solution: x = D₁/D, y = D₂/D, z = D₃/D",
+                  "latex": "\\text{Unique Solution } \\left(x_i = \\frac{D_i}{D}\\right) \\quad [\\text{Consistent}]"
+                },
+                {
+                  "feature": "D = 0 and D₁ = D₂ = D₃ = 0",
+                  "value": "Consistent with Infinitely Many Solutions (Dependent planes)",
+                  "latex": "\\text{Infinitely Many Solutions } [\\text{Consistent}]"
+                },
+                {
+                  "feature": "D = 0 and at least one Dᵢ ≠ 0",
+                  "value": "Inconsistent with No Solution (Parallel / intersecting planes with no common point)",
+                  "latex": "\\text{No Solution } [\\text{Inconsistent}]"
+                },
+                {
+                  "feature": "Homogeneous System (AX = O): D ≠ 0",
+                  "value": "Trivial Solution only: x = y = z = 0",
+                  "latex": "D \\neq 0 \\implies x = y = z = 0 \\quad (\\text{Trivial})"
+                },
+                {
+                  "feature": "Homogeneous System (AX = O): D = 0",
+                  "value": "Non-Trivial (Infinite) Solutions exist",
+                  "latex": "D = 0 \\implies \\text{Non-Trivial Solutions Exist}"
+                }
+              ]
+            }
           }
         ]
       },
       {
-        "id": "mat-system-equations",
-        "name": "Cramer's Rule & System Consistency",
+        "id": "mat-cat-nimcet-shortcuts",
+        "name": "(G) NIMCET High-Yield Patterns & Shortcuts",
         "formulas": [
           {
-            "id": "mat-cramer",
-            "title": "Cramer's Rule",
-            "formula": "x = D₁/D,  y = D₂/D,  z = D₃/D,   where D ≠ 0",
-            "explanation": "Direct determinant evaluation for non-homogeneous linear systems.",
+            "id": "mat-three-operations-distinction",
+            "title": "The Three Fundamental Operations Distinction",
+            "formula": "Rᵢ → Rᵢ + kRⱼ ⇒ D unchanged\nRᵢ → kRᵢ ⇒ D → kD\nRᵢ ↔ Rⱼ ⇒ D → −D",
+            "explanation": "The three operations must NEVER be confused under exam pressure. They are the bedrock of determinant shortcuts.",
             "mustKnow": true,
-            "latex": "x = \\frac{\\Delta_x}{\\Delta}, \\quad y = \\frac{\\Delta_y}{\\Delta}, \\quad z = \\frac{\\Delta_z}{\\Delta} \\quad (\\Delta \\neq 0)"
+            "remember": "Memory: Addition → SAME; Multiply single row → ×k; Swap → NEGATIVE.",
+            "shortcut": "🎯 Never confuse scaling one row vs scaling entire matrix: |kA| = kⁿ|A|, but R₁ → kR₁ gives k|A|.",
+            "latex": "\\begin{aligned} R_i \\to R_i + k R_j &\\implies D' = D \\quad (\\text{Unchanged}) \\\\ R_i \\to k R_i &\\implies D' = kD \\quad (\\times k) \\\\ R_i \\leftrightarrow R_j &\\implies D' = -D \\quad (\\text{Sign changes}) \\\\ A \\to kA &\\implies |kA| = k^n |A| \\quad (\\text{Entire } n\\times n \\text{ matrix}) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Operation Type",
+                "Exact Effect on Determinant Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Type 1: Row Addition (Rᵢ → Rᵢ + kRⱼ)",
+                  "value": "D' = D (Value remains completely unchanged)",
+                  "latex": "D' = D \\quad (\\text{Unchanged})"
+                },
+                {
+                  "feature": "Type 2: Row Scaling (Rᵢ → kRᵢ)",
+                  "value": "D' = k · D (Multiplied by k)",
+                  "latex": "D' = kD \\quad (\\text{Scaled by } k)"
+                },
+                {
+                  "feature": "Type 3: Row Interchange (Rᵢ ↔ Rⱼ)",
+                  "value": "D' = −D (Sign flips to negative)",
+                  "latex": "D' = -D \\quad (\\text{Sign Inverted})"
+                },
+                {
+                  "feature": "Matrix Scaling: A → kA (Order n)",
+                  "value": "|kA| = kⁿ · |A| (Every row contributes a factor k)",
+                  "latex": "|kA| = k^n |A|"
+                }
+              ]
+            }
           },
           {
-            "id": "mat-consistency",
-            "title": "Consistency Criteria for System of Equations",
-            "formula": "(1) Unique Solution: D ≠ 0 (Consistent)\n(2) Infinite Solutions: D = D₁ = D₂ = D₃ = 0 (Consistent)\n(3) No Solution: D = 0 and at least one Dᵢ ≠ 0 (Inconsistent)",
-            "explanation": "Crucial for finding parameter values (λ, μ) for solvability.",
+            "id": "mat-speed-eval-tricks",
+            "title": "High-Speed Determinant Evaluation Tricks",
+            "formula": "Row sum = S ⇒ C₁ → C₁ + C₂ + ··· + Cₙ factors S out\nRow sum = 0 ⇒ D = 0  |  Make 2 rows equal ⇒ D = 0  |  Make row 0 ⇒ D = 0",
+            "explanation": "High-speed shortcuts designed to evaluate competitive NIMCET determinant problems in under 30 seconds without cofactor expansion.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} (1) Unique Solution: D  \\neq  0 (Consistent) \\\\ (2) Infinite Solutions: D = D_1 = D_2 = D_3 = 0 (Consistent) \\\\ (3) No Solution: D = 0 and at least one D_i  \\neq  0 (Inconsistent) \\end{aligned}"
+            "remember": "Memory: Row sum constant → add all columns to C₁ and take constant out. Row sum zero → D = 0 immediately.",
+            "shortcut": "🎯 If every row sums to the same constant S, replace C₁ → C₁ + C₂ + C₃. First column becomes S, factor it out!",
+            "latex": "\\sum_{j=1}^n a_{ij} = 0 \\implies |A| = 0, \\quad \\sum_{j=1}^n a_{ij} = S \\implies |A| = S \\begin{vmatrix} 1 & a_{12} & \\dots \\\\ 1 & a_{22} & \\dots \\\\ 1 & a_{32} & \\dots \\end{vmatrix}",
+            "table": {
+              "headers": [
+                "NIMCET Shortcut / Pattern",
+                "Exam Action & Instant Result"
+              ],
+              "rows": [
+                {
+                  "feature": "Row Sum Constant (∑ aᵢⱼ = S)",
+                  "value": "Apply C₁ → C₁ + C₂ + ··· + Cₙ. First column becomes [S, S, ..., S]ᵀ. Factor S out.",
+                  "latex": "C_1 \\to \\sum C_j \\implies \\text{Factor out } S"
+                },
+                {
+                  "feature": "Row Sum Zero (∑ aᵢⱼ = 0)",
+                  "value": "Apply C₁ → C₁ + C₂ + ··· + Cₙ. First column becomes all zeroes ⇒ |A| = 0 instantly!",
+                  "latex": "\\sum_{j=1}^n a_{ij} = 0 \\implies |A| = 0"
+                },
+                {
+                  "feature": "Column Sum Zero (∑ aᵢⱼ = 0)",
+                  "value": "Apply R₁ → R₁ + R₂ + ··· + Rₙ. First row becomes all zeroes ⇒ |A| = 0 instantly!",
+                  "latex": "\\sum_{i=1}^n a_{ij} = 0 \\implies |A| = 0"
+                },
+                {
+                  "feature": "Make Two Rows Equal",
+                  "value": "If one row operation yields R₂ = R₃, then D = 0 immediately.",
+                  "latex": "R_2 = R_3 \\implies D = 0"
+                },
+                {
+                  "feature": "Make an Entire Row Zero",
+                  "value": "If an operation creates [0, 0, 0], then D = 0 immediately.",
+                  "latex": "R_i = [0 \\; 0 \\; 0] \\implies D = 0"
+                },
+                {
+                  "feature": "Odd-Order Skew-Symmetric",
+                  "value": "Any 3×3 with aᵢⱼ = −aⱼᵢ and zeroes on diagonal has |A| = 0 in 1 second.",
+                  "latex": "|A_{3\\times3}| = 0 \\quad (A^T = -A)"
+                },
+                {
+                  "feature": "Fast 2×2 Inverse",
+                  "value": "Swap diagonal, negate off-diagonal, divide by ad − bc.",
+                  "latex": "A^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}"
+                },
+                {
+                  "feature": "Order Reversal Checklist",
+                  "value": "(AB)ᵀ = BᵀAᵀ  and  (AB)⁻¹ = B⁻¹A⁻¹  and  adj(AB) = adj(B)adj(A)",
+                  "latex": "(AB)^{-1} = B^{-1} A^{-1}, \\quad (AB)^T = B^T A^T"
+                },
+                {
+                  "feature": "Cayley–Hamilton Shortcut (Powers & Inverse)",
+                  "value": "For 2×2: A² = tr(A)A − |A|I and A⁻¹ = (tr(A)I − A)/|A|. High powers A³ = tr(A)A² − |A|A without manual products.",
+                  "latex": "A^2 = \\text{tr}(A)A - |A|I, \\quad A^{-1} = \\frac{\\text{tr}(A)I - A}{|A|}"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1106,7 +2806,50 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "(1) Slope-intercept: y = mx + c\n(2) Point-slope: y − y₁ = m(x − x₁)\n(3) Intercept: x/a + y/b = 1\n(4) Normal form: x cosα + y sinα = p",
             "explanation": "Core algebraic representations of straight lines.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} (1) Slope-intercept: y = mx + c \\\\ (2) Point-slope: y − y_1 = m(x − x_1) \\\\ (3) Intercept: x/a + y/b = 1 \\\\ (4) Normal form: x \\cos  \\alpha  + y \\sin  \\alpha  = p \\end{aligned}"
+            "latex": "\\begin{aligned} (1) Slope-intercept: y = mx + c \\\\ (2) Point-slope: y − y_1 = m(x − x_1) \\\\ (3) Intercept: x/a + y/b = 1 \\\\ (4) Normal form: x \\cos  \\alpha  + y \\sin  \\alpha  = p \\end{aligned}",
+            "table": {
+              "headers": [
+                "Line Form",
+                "Standard Equation"
+              ],
+              "rows": [
+                {
+                  "feature": "Slope-Intercept Form",
+                  "value": "y = mx + c",
+                  "latex": "y = mx + c"
+                },
+                {
+                  "feature": "Point-Slope Form",
+                  "value": "y - y_1 = m(x - x_1)",
+                  "latex": "y - y_1 = m(x - x_1)"
+                },
+                {
+                  "feature": "Two-Point Form",
+                  "value": "y - y_1 = ((y_2 - y_1)/(x_2 - x_1))(x - x_1)",
+                  "latex": "y - y_1 = \\frac{y_2 - y_1}{x_2 - x_1}(x - x_1)"
+                },
+                {
+                  "feature": "Intercept Form",
+                  "value": "x/a + y/b = 1",
+                  "latex": "\\frac{x}{a} + \\frac{y}{b} = 1"
+                },
+                {
+                  "feature": "Normal / Perpendicular Form",
+                  "value": "x cosα + y sinα = p",
+                  "latex": "x\\cos\\alpha + y\\sin\\alpha = p"
+                },
+                {
+                  "feature": "Parametric / Symmetric Form",
+                  "value": "(x - x_1)/cosθ = (y - y_1)/sinθ = r",
+                  "latex": "\\frac{x - x_1}{\\cos\\theta} = \\frac{y - y_1}{\\sin\\theta} = r"
+                },
+                {
+                  "feature": "General Algebraic Form",
+                  "value": "ax + by + c = 0",
+                  "latex": "ax + by + c = 0"
+                }
+              ]
+            }
           },
           {
             "id": "line-perp-dist",
@@ -1145,7 +2888,60 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Standard: (x − h)² + (y − k)² = r²\nGeneral: x² + y² + 2gx + 2fy + c = 0\nCentre = (−g, −f)  |  Radius r = √(g² + f² − c)",
             "explanation": "Valid real circle requires g² + f² − c ≥ 0.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Standard: (x − h)^2 + (y − k)^2 = r^2 \\\\ General: x^2 + y^2 + 2gx + 2fy + c = 0 \\\\ Centre = (−g, −f)  |  Radius r = \\sqrt{g^2 + f^2 − c} \\end{aligned}"
+            "latex": "\\begin{aligned} Standard: (x − h)^2 + (y − k)^2 = r^2 \\\\ General: x^2 + y^2 + 2gx + 2fy + c = 0 \\\\ Centre = (−g, −f)  |  Radius r = \\sqrt{g^2 + f^2 − c} \\end{aligned}",
+            "table": {
+              "headers": [
+                "Circle Property",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Standard Equation",
+                  "value": "(x - h)^2 + (y - k)^2 = r^2",
+                  "latex": "(x - h)^2 + (y - k)^2 = r^2"
+                },
+                {
+                  "feature": "Standard Centre & Radius",
+                  "value": "Centre (h, k), Radius r",
+                  "latex": "\\text{Centre } (h, k), \\quad \\text{Radius } r"
+                },
+                {
+                  "feature": "General Equation",
+                  "value": "x^2 + y^2 + 2gx + 2fy + c = 0",
+                  "latex": "x^2 + y^2 + 2gx + 2fy + c = 0"
+                },
+                {
+                  "feature": "General Centre",
+                  "value": "(-g, -f)",
+                  "latex": "(-g, -f)"
+                },
+                {
+                  "feature": "General Radius",
+                  "value": "r = √(g^2 + f^2 - c)",
+                  "latex": "r = \\sqrt{g^2 + f^2 - c}"
+                },
+                {
+                  "feature": "Real Circle Condition",
+                  "value": "g^2 + f^2 - c > 0",
+                  "latex": "g^2 + f^2 - c > 0"
+                },
+                {
+                  "feature": "Point Circle Condition",
+                  "value": "g^2 + f^2 - c = 0",
+                  "latex": "g^2 + f^2 - c = 0"
+                },
+                {
+                  "feature": "Intercept on x-axis",
+                  "value": "2√(g^2 - c)",
+                  "latex": "2\\sqrt{g^2 - c}"
+                },
+                {
+                  "feature": "Intercept on y-axis",
+                  "value": "2√(f^2 - c)",
+                  "latex": "2\\sqrt{f^2 - c}"
+                }
+              ]
+            }
           },
           {
             "id": "circle-tangent-slope",
@@ -1196,7 +2992,60 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Focus: (a, 0)  |  Directrix: x = −a  |  Axis: y = 0\nLatus Rectum: 4a  |  Parametric: (at², 2at)",
             "explanation": "Symmetric about x-axis with vertex at origin (0, 0).",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Focus: (a, 0)  |  Directrix: x = −a  |  Axis: y = 0 \\\\ Latus Rectum: 4a  |  Parametric: (at^2, 2at) \\end{aligned}"
+            "latex": "\\begin{aligned} Focus: (a, 0)  |  Directrix: x = −a  |  Axis: y = 0 \\\\ Latus Rectum: 4a  |  Parametric: (at^2, 2at) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Feature",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Standard Equation",
+                  "value": "y^2 = 4ax",
+                  "latex": "y^2 = 4ax"
+                },
+                {
+                  "feature": "Vertex",
+                  "value": "(0, 0)",
+                  "latex": "(0, 0)"
+                },
+                {
+                  "feature": "Focus",
+                  "value": "(a, 0)",
+                  "latex": "(a, 0)"
+                },
+                {
+                  "feature": "Directrix",
+                  "value": "x = -a",
+                  "latex": "x = -a"
+                },
+                {
+                  "feature": "Axis of Symmetry",
+                  "value": "y = 0",
+                  "latex": "y = 0"
+                },
+                {
+                  "feature": "Length of Latus Rectum",
+                  "value": "4a",
+                  "latex": "4a"
+                },
+                {
+                  "feature": "Parametric Coordinates",
+                  "value": "(at^2, 2at)",
+                  "latex": "(at^2, 2at)"
+                },
+                {
+                  "feature": "Symmetry",
+                  "value": "About the x-axis",
+                  "latex": "\\text{About the } x\\text{-axis}"
+                },
+                {
+                  "feature": "Focal Distance of (x, y)",
+                  "value": "x + a",
+                  "latex": "x + a"
+                }
+              ]
+            }
           },
           {
             "id": "parabola-tangent",
@@ -1219,7 +3068,75 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Eccentricity: e = √(1 − b²/a²)  ⇒  b² = a²(1 − e²)\nFoci: (±ae, 0)  |  Directrices: x = ±a/e\nLatus Rectum = 2b²/a  |  Director Circle: x² + y² = a² + b²",
             "explanation": "Sum of focal distances to any point P on ellipse: SP + S'P = 2a (major axis).",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Eccentricity: e = \\sqrt{1 − b^2/a^2}   \\implies   b^2 = a^2(1 − e^2) \\\\ Foci: ( \\pm ae, 0)  |  Directrices: x =  \\pm a/e \\\\ Latus Rectum = 2b^2/a  |  Director Circle: x^2 + y^2 = a^2 + b^2 \\end{aligned}"
+            "latex": "\\begin{aligned} Eccentricity: e = \\sqrt{1 − b^2/a^2}   \\implies   b^2 = a^2(1 − e^2) \\\\ Foci: ( \\pm ae, 0)  |  Directrices: x =  \\pm a/e \\\\ Latus Rectum = 2b^2/a  |  Director Circle: x^2 + y^2 = a^2 + b^2 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Feature",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Standard Equation",
+                  "value": "x^2/a^2 + y^2/b^2 = 1",
+                  "latex": "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1 \\quad (a > b)"
+                },
+                {
+                  "feature": "Centre",
+                  "value": "(0, 0)",
+                  "latex": "(0, 0)"
+                },
+                {
+                  "feature": "Vertices",
+                  "value": "(±a, 0)",
+                  "latex": "(\\pm a, 0)"
+                },
+                {
+                  "feature": "Foci",
+                  "value": "(±ae, 0)",
+                  "latex": "(\\pm ae, 0)"
+                },
+                {
+                  "feature": "Directrices",
+                  "value": "x = ±a/e",
+                  "latex": "x = \\pm \\frac{a}{e}"
+                },
+                {
+                  "feature": "Eccentricity (e)",
+                  "value": "e = √(1 - b^2/a^2)",
+                  "latex": "e = \\sqrt{1 - \\frac{b^2}{a^2}}"
+                },
+                {
+                  "feature": "Relation between Axes",
+                  "value": "b^2 = a^2(1 - e^2)",
+                  "latex": "b^2 = a^2(1 - e^2)"
+                },
+                {
+                  "feature": "Length of Major Axis",
+                  "value": "2a",
+                  "latex": "2a"
+                },
+                {
+                  "feature": "Length of Minor Axis",
+                  "value": "2b",
+                  "latex": "2b"
+                },
+                {
+                  "feature": "Length of Latus Rectum",
+                  "value": "2b^2/a",
+                  "latex": "\\frac{2b^2}{a}"
+                },
+                {
+                  "feature": "Director Circle",
+                  "value": "x^2 + y^2 = a^2 + b^2",
+                  "latex": "x^2 + y^2 = a^2 + b^2"
+                },
+                {
+                  "feature": "Focal Distance Property",
+                  "value": "SP + S'P = 2a",
+                  "latex": "SP + S'P = 2a"
+                }
+              ]
+            }
           },
           {
             "id": "ellipse-tangent",
@@ -1241,7 +3158,75 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Eccentricity: e = √(1 + b²/a²)  ⇒  b² = a²(e² − 1)\nFoci: (±ae, 0)  |  Directrices: x = ±a/e\nLatus Rectum = 2b²/a  |  Director Circle: x² + y² = a² − b²",
             "explanation": "Difference of focal distances: |SP − S'P| = 2a (transverse axis).",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Eccentricity: e = \\sqrt{1 + b^2/a^2}   \\implies   b^2 = a^2(e^2 − 1) \\\\ Foci: ( \\pm ae, 0)  |  Directrices: x =  \\pm a/e \\\\ Latus Rectum = 2b^2/a  |  Director Circle: x^2 + y^2 = a^2 − b^2 \\end{aligned}"
+            "latex": "\\begin{aligned} Eccentricity: e = \\sqrt{1 + b^2/a^2}   \\implies   b^2 = a^2(e^2 − 1) \\\\ Foci: ( \\pm ae, 0)  |  Directrices: x =  \\pm a/e \\\\ Latus Rectum = 2b^2/a  |  Director Circle: x^2 + y^2 = a^2 − b^2 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Feature",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Standard Equation",
+                  "value": "x^2/a^2 - y^2/b^2 = 1",
+                  "latex": "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1"
+                },
+                {
+                  "feature": "Centre",
+                  "value": "(0, 0)",
+                  "latex": "(0, 0)"
+                },
+                {
+                  "feature": "Vertices",
+                  "value": "(±a, 0)",
+                  "latex": "(\\pm a, 0)"
+                },
+                {
+                  "feature": "Foci",
+                  "value": "(±ae, 0)",
+                  "latex": "(\\pm ae, 0)"
+                },
+                {
+                  "feature": "Directrices",
+                  "value": "x = ±a/e",
+                  "latex": "x = \\pm \\frac{a}{e}"
+                },
+                {
+                  "feature": "Eccentricity (e)",
+                  "value": "e = √(1 + b^2/a^2)",
+                  "latex": "e = \\sqrt{1 + \\frac{b^2}{a^2}}"
+                },
+                {
+                  "feature": "Relation between Axes",
+                  "value": "b^2 = a^2(e^2 - 1)",
+                  "latex": "b^2 = a^2(e^2 - 1)"
+                },
+                {
+                  "feature": "Transverse Axis Length",
+                  "value": "2a",
+                  "latex": "2a"
+                },
+                {
+                  "feature": "Conjugate Axis Length",
+                  "value": "2b",
+                  "latex": "2b"
+                },
+                {
+                  "feature": "Length of Latus Rectum",
+                  "value": "2b^2/a",
+                  "latex": "\\frac{2b^2}{a}"
+                },
+                {
+                  "feature": "Director Circle",
+                  "value": "x^2 + y^2 = a^2 - b^2 (a > b)",
+                  "latex": "x^2 + y^2 = a^2 - b^2 \\quad (a > b)"
+                },
+                {
+                  "feature": "Focal Distance Property",
+                  "value": "|SP - S'P| = 2a",
+                  "latex": "|SP - S'P| = 2a"
+                }
+              ]
+            }
           },
           {
             "id": "hyperbola-rect-asymp",
@@ -1250,7 +3235,55 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Rectangular hyperbola has perpendicular asymptotes and fixed eccentricity e = √2.",
             "mustKnow": true,
             "shortcut": "🎯 Key fact: Eccentricity of every rectangular hyperbola is always √2.",
-            "latex": "\\begin{aligned} Asymptotes of x^2/a^2 − y^2/b^2 = 1:  y =  \\pm  \\frac{b}{a} x \\\\ Rectangular hyperbola: a = b  \\implies  e = \\sqrt{2} \\\\ Rotated form: xy = c^2  (Asymptotes are coordinate axes, e = \\sqrt{2}) \\end{aligned}"
+            "latex": "\\begin{aligned} Asymptotes of x^2/a^2 − y^2/b^2 = 1:  y =  \\pm  \\frac{b}{a} x \\\\ Rectangular hyperbola: a = b  \\implies  e = \\sqrt{2} \\\\ Rotated form: xy = c^2  (Asymptotes are coordinate axes, e = \\sqrt{2}) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Feature / Property",
+                "Formula / Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Standard Asymptotes",
+                  "value": "y = ±(b/a)x",
+                  "latex": "y = \\pm \\frac{b}{a}x"
+                },
+                {
+                  "feature": "Angle between Asymptotes",
+                  "value": "2 tan^-1(b/a)",
+                  "latex": "2\\tan^{-1}\\left(\\frac{b}{a}\\right)"
+                },
+                {
+                  "feature": "Rectangular Hyperbola Condition",
+                  "value": "a = b  ⇒  x^2 - y^2 = a^2",
+                  "latex": "a = b \\implies x^2 - y^2 = a^2"
+                },
+                {
+                  "feature": "Rectangular Eccentricity",
+                  "value": "e = √2",
+                  "latex": "e = \\sqrt{2}"
+                },
+                {
+                  "feature": "Asymptotes Angle (Rectangular)",
+                  "value": "90° (Perpendicular)",
+                  "latex": "90^\\circ \\quad (\\text{Perpendicular})"
+                },
+                {
+                  "feature": "Rotated Form",
+                  "value": "xy = c^2",
+                  "latex": "xy = c^2"
+                },
+                {
+                  "feature": "Rotated Form Asymptotes",
+                  "value": "Coordinate axes (x = 0, y = 0)",
+                  "latex": "x = 0, \\quad y = 0"
+                },
+                {
+                  "feature": "Rotated Form Vertices",
+                  "value": "(c, c) and (-c, -c)",
+                  "latex": "(c, c), \\quad (-c, -c)"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1306,7 +3339,40 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Reflexive: (a, a) ∈ R for all a ∈ A\nSymmetric: (a, b) ∈ R ⇒ (b, a) ∈ R\nTransitive: (a, b) ∈ R and (b, c) ∈ R ⇒ (a, c) ∈ R\nEquivalence: Reflexive + Symmetric + Transitive",
             "explanation": "Fundamental properties determining relationship structure.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Reflexive: (a, a)  \\in  R for all a  \\in  A \\\\ Symmetric: (a, b)  \\in  R  \\implies  (b, a)  \\in  R \\\\ Transitive: (a, b)  \\in  R and (b, c)  \\in  R  \\implies  (a, c)  \\in  R \\\\ Equivalence: Reflexive + Symmetric + Transitive \\end{aligned}"
+            "latex": "\\begin{aligned} Reflexive: (a, a)  \\in  R for all a  \\in  A \\\\ Symmetric: (a, b)  \\in  R  \\implies  (b, a)  \\in  R \\\\ Transitive: (a, b)  \\in  R and (b, c)  \\in  R  \\implies  (a, c)  \\in  R \\\\ Equivalence: Reflexive + Symmetric + Transitive \\end{aligned}",
+            "table": {
+              "headers": [
+                "Relation Type on Set A",
+                "Formal Definition"
+              ],
+              "rows": [
+                {
+                  "feature": "Reflexive",
+                  "value": "(a, a) ∈ R for all a ∈ A",
+                  "latex": "\\forall a \\in A, \\quad (a, a) \\in R"
+                },
+                {
+                  "feature": "Symmetric",
+                  "value": "(a, b) ∈ R ⇒ (b, a) ∈ R",
+                  "latex": "(a, b) \\in R \\implies (b, a) \\in R"
+                },
+                {
+                  "feature": "Transitive",
+                  "value": "(a, b) ∈ R and (b, c) ∈ R ⇒ (a, c) ∈ R",
+                  "latex": "(a, b) \\in R \\land (b, c) \\in R \\implies (a, c) \\in R"
+                },
+                {
+                  "feature": "Anti-Symmetric",
+                  "value": "(a, b) ∈ R and (b, a) ∈ R ⇒ a = b",
+                  "latex": "(a, b) \\in R \\land (b, a) \\in R \\implies a = b"
+                },
+                {
+                  "feature": "Equivalence Relation",
+                  "value": "Simultaneously Reflexive, Symmetric, and Transitive",
+                  "latex": "\\text{Reflexive} + \\text{Symmetric} + \\text{Transitive}"
+                }
+              ]
+            }
           },
           {
             "id": "rel-counting-formulas",
@@ -1315,7 +3381,40 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Extremely popular direct counting formulas in MCA and computer science math.",
             "mustKnow": true,
             "shortcut": "🎯 Direct formula question: For n=3 elements, Reflexive = 2^(9-3) = 2⁶ = 64.",
-            "latex": "\\begin{aligned} Total relations: 2^(n^2) \\\\ Reflexive relations: 2^(n^2 − n) \\\\ Symmetric relations: 2^[n(n + 1) / 2] \\\\ Reflexive & Symmetric: 2^[n(n − 1) / 2] \\end{aligned}"
+            "latex": "\\begin{aligned} Total relations: 2^(n^2) \\\\ Reflexive relations: 2^(n^2 − n) \\\\ Symmetric relations: 2^[n(n + 1) / 2] \\\\ Reflexive & Symmetric: 2^[n(n − 1) / 2] \\end{aligned}",
+            "table": {
+              "headers": [
+                "Type of Relation on Set with n Elements",
+                "Total Count Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Total Binary Relations",
+                  "value": "2^(n²)",
+                  "latex": "2^{n^2}"
+                },
+                {
+                  "feature": "Reflexive Relations",
+                  "value": "2^(n² - n) = 2^[n(n - 1)]",
+                  "latex": "2^{n(n - 1)} = 2^{n^2 - n}"
+                },
+                {
+                  "feature": "Symmetric Relations",
+                  "value": "2^[n(n + 1) / 2]",
+                  "latex": "2^{\\frac{n(n + 1)}{2}}"
+                },
+                {
+                  "feature": "Reflexive & Symmetric Relations",
+                  "value": "2^[n(n - 1) / 2]",
+                  "latex": "2^{\\frac{n(n - 1)}{2}}"
+                },
+                {
+                  "feature": "Anti-Symmetric Relations",
+                  "value": "2ⁿ · 3^[n(n - 1) / 2]",
+                  "latex": "2^n \\cdot 3^{\\frac{n(n - 1)}{2}}"
+                }
+              ]
+            }
           }
         ]
       },
@@ -1329,7 +3428,50 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Idempotent: A + A = A,  A · A = A\nAbsorption: A + A·B = A,  A · (A + B) = A\nDistributive: A + B·C = (A + B)(A + C)\nInvolution: (A')' = A  |  A + A' = 1,  A · A' = 0",
             "explanation": "Logical equivalence rules for simplifying circuits and Boolean equations.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Idempotent: A + A = A,  A  \\cdot  A = A \\\\ Absorption: A + A \\cdot B = A,  A  \\cdot  (A + B) = A \\\\ Distributive: A + B \\cdot C = (A + B)(A + C) \\\\ Involution: (A')' = A  |  A + A' = 1,  A  \\cdot  A' = 0 \\end{aligned}"
+            "latex": "\\begin{aligned} Idempotent: A + A = A,  A  \\cdot  A = A \\\\ Absorption: A + A \\cdot B = A,  A  \\cdot  (A + B) = A \\\\ Distributive: A + B \\cdot C = (A + B)(A + C) \\\\ Involution: (A')' = A  |  A + A' = 1,  A  \\cdot  A' = 0 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Boolean Law Name",
+                "Algebraic Identities"
+              ],
+              "rows": [
+                {
+                  "feature": "Idempotent Laws",
+                  "value": "A + A = A,  A · A = A",
+                  "latex": "A + A = A, \\quad A \\cdot A = A"
+                },
+                {
+                  "feature": "Identity Laws",
+                  "value": "A + 0 = A,  A · 1 = A",
+                  "latex": "A + 0 = A, \\quad A \\cdot 1 = A"
+                },
+                {
+                  "feature": "Dominance / Boundedness",
+                  "value": "A + 1 = 1,  A · 0 = 0",
+                  "latex": "A + 1 = 1, \\quad A \\cdot 0 = 0"
+                },
+                {
+                  "feature": "Complement Laws",
+                  "value": "A + A' = 1,  A · A' = 0",
+                  "latex": "A + A' = 1, \\quad A \\cdot A' = 0"
+                },
+                {
+                  "feature": "Involution (Double Negation)",
+                  "value": "(A')' = A",
+                  "latex": "(A')' = A"
+                },
+                {
+                  "feature": "Absorption Laws",
+                  "value": "A + A · B = A,  A · (A + B) = A",
+                  "latex": "A + A \\cdot B = A, \\quad A \\cdot (A + B) = A"
+                },
+                {
+                  "feature": "De Morgan's Laws",
+                  "value": "(A + B)' = A' · B',  (A · B)' = A' + B'",
+                  "latex": "(A + B)' = A' \\cdot B', \\quad (A \\cdot B)' = A' + B'"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1372,7 +3514,35 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Standard combinatorics of function spaces.",
             "mustKnow": true,
             "shortcut": "🎯 If m > n, number of one-one functions is strictly 0 (Pigeonhole principle).",
-            "latex": "\\begin{aligned} Total functions: nᵐ \\\\ One-One functions: ^nPₘ (if m  \\le  n, else 0) \\\\ Bijective functions (m = n): n! \\end{aligned}"
+            "latex": "\\begin{aligned} Total functions: nᵐ \\\\ One-One functions: ^nPₘ (if m  \\le  n, else 0) \\\\ Bijective functions (m = n): n! \\end{aligned}",
+            "table": {
+              "headers": [
+                "Function Mapping Type (|A|=m to |B|=n)",
+                "Number of Possible Functions"
+              ],
+              "rows": [
+                {
+                  "feature": "Total Functions",
+                  "value": "nᵐ",
+                  "latex": "n^m"
+                },
+                {
+                  "feature": "One-to-One (Injective) Functions",
+                  "value": "ⁿPₘ if m ≤ n; 0 if m > n",
+                  "latex": "\\begin{cases} {}^nP_m = \\frac{n!}{(n-m)!} & (m \\le n) \\\\ 0 & (m > n) \\end{cases}"
+                },
+                {
+                  "feature": "Bijective (One-One & Onto, m = n)",
+                  "value": "n!",
+                  "latex": "n!"
+                },
+                {
+                  "feature": "Constant Functions",
+                  "value": "n",
+                  "latex": "n"
+                }
+              ]
+            }
           }
         ]
       },
@@ -1394,7 +3564,45 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "If f(x) has period T, then f(ax + b) has period T / |a|\nsin(x), cos(x), sec(x), cosec(x) have period 2π\ntan(x), cot(x) have period π\n|sin x|, |cos x| have period π",
             "explanation": "Fundamental period of composite arguments.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} If f(x) has period T, then f(ax + b) has period T / |a| \\\\ \\sin (x), \\cos (x), \\sec (x), \\csc (x) have period 2 \\pi  \\\\ \\tan (x), \\cot (x) have period  \\pi  \\\\ |\\sin  x|, |\\cos  x| have period  \\pi  \\end{aligned}"
+            "latex": "\\begin{aligned} If f(x) has period T, then f(ax + b) has period T / |a| \\\\ \\sin (x), \\cos (x), \\sec (x), \\csc (x) have period 2 \\pi  \\\\ \\tan (x), \\cot (x) have period  \\pi  \\\\ |\\sin  x|, |\\cos  x| have period  \\pi  \\end{aligned}",
+            "table": {
+              "headers": [
+                "Trigonometric / Compound Function",
+                "Fundamental Period (T)"
+              ],
+              "rows": [
+                {
+                  "feature": "sin x, cos x, sec x, csc x",
+                  "value": "2π",
+                  "latex": "2\\pi"
+                },
+                {
+                  "feature": "tan x, cot x",
+                  "value": "π",
+                  "latex": "\\pi"
+                },
+                {
+                  "feature": "|sin x|, |cos x|, |tan x|",
+                  "value": "π",
+                  "latex": "\\pi"
+                },
+                {
+                  "feature": "f(ax + b) where f(x) has period T",
+                  "value": "T / |a|",
+                  "latex": "\\frac{T}{|a|}"
+                },
+                {
+                  "feature": "sinⁿ x, cosⁿ x (n is even integer)",
+                  "value": "π",
+                  "latex": "\\pi"
+                },
+                {
+                  "feature": "sinⁿ x, cosⁿ x (n is odd integer)",
+                  "value": "2π",
+                  "latex": "2\\pi"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1428,7 +3636,45 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Cartesian: z = x + i y\nPolar: z = r(cosθ + i sinθ),   where r = |z| = √(x² + y²)\nEuler: z = r e^(iθ)",
             "explanation": "Euler form turns multiplication and powers into simple angle arithmetic.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Cartesian: z = x + i y \\\\ Polar: z = r(\\cos  \\theta  + i \\sin  \\theta ),   where r = |z| = \\sqrt{x^2 + y^2} \\\\ Euler: z = r e^(i \\theta ) \\end{aligned}"
+            "latex": "\\begin{aligned} Cartesian: z = x + i y \\\\ Polar: z = r(\\cos  \\theta  + i \\sin  \\theta ),   where r = |z| = \\sqrt{x^2 + y^2} \\\\ Euler: z = r e^(i \\theta ) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Representation Form",
+                "Formula / Coordinate Expression"
+              ],
+              "rows": [
+                {
+                  "feature": "Cartesian / Algebraic Form",
+                  "value": "z = x + i y",
+                  "latex": "z = x + iy"
+                },
+                {
+                  "feature": "Modulus |z| (Distance from origin)",
+                  "value": "r = √(x² + y²)",
+                  "latex": "r = |z| = \\sqrt{x^2 + y^2}"
+                },
+                {
+                  "feature": "Argument θ (Principal value)",
+                  "value": "θ = Arg(z) = tan⁻¹(y / x)",
+                  "latex": "\\theta = \\operatorname{Arg}(z) = \\tan^{-1}\\left(\\frac{y}{x}\\right)"
+                },
+                {
+                  "feature": "Polar / Trigonometric Form",
+                  "value": "z = r(cos θ + i sin θ)",
+                  "latex": "z = r(\\cos\\theta + i\\sin\\theta)"
+                },
+                {
+                  "feature": "Euler's Exponential Form",
+                  "value": "z = r · e^(iθ)",
+                  "latex": "z = r e^{i\\theta}"
+                },
+                {
+                  "feature": "Complex Conjugate z̄",
+                  "value": "z̄ = x - i y = r · e^(-iθ)",
+                  "latex": "\\bar{z} = x - iy = r e^{-i\\theta}"
+                }
+              ]
+            }
           },
           {
             "id": "complex-conjugate-modulus",
@@ -1460,7 +3706,45 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Crucial for factoring: a³ + b³ = (a+b)(a+bω)(a+bω²), a³+b³+c³−3abc = (a+b+c)(a+bω+cω²)(a+bω²+cω).",
             "mustKnow": true,
             "shortcut": "🎯 High-yield algebra simplification: 1 + ωⁿ + ω²ⁿ = 3 (if n multiple of 3), else 0.",
-            "latex": "\\begin{aligned} \\omega &= \\frac{-1 + i\\sqrt{3}}{2}, \\quad \\omega^2 = \\frac{-1 - i\\sqrt{3}}{2} \\\\ 1 + \\omega + \\omega^2 &= 0, \\quad \\omega^3 = 1 \\\\ \\omega^{3k} &= 1, \\quad \\omega^{3k+1} = \\omega, \\quad \\omega^{3k+2} = \\omega^2 \\end{aligned}"
+            "latex": "\\begin{aligned} \\omega &= \\frac{-1 + i\\sqrt{3}}{2}, \\quad \\omega^2 = \\frac{-1 - i\\sqrt{3}}{2} \\\\ 1 + \\omega + \\omega^2 &= 0, \\quad \\omega^3 = 1 \\\\ \\omega^{3k} &= 1, \\quad \\omega^{3k+1} = \\omega, \\quad \\omega^{3k+2} = \\omega^2 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Property / Feature",
+                "Exact Mathematical Value"
+              ],
+              "rows": [
+                {
+                  "feature": "Definition of Complex Root ω",
+                  "value": "(-1 + i√3) / 2",
+                  "latex": "\\omega = \\frac{-1 + i\\sqrt{3}}{2}"
+                },
+                {
+                  "feature": "Square Root of Root ω²",
+                  "value": "(-1 - i√3) / 2",
+                  "latex": "\\omega^2 = \\frac{-1 - i\\sqrt{3}}{2}"
+                },
+                {
+                  "feature": "Sum of Roots Property",
+                  "value": "1 + ω + ω² = 0",
+                  "latex": "1 + \\omega + \\omega^2 = 0"
+                },
+                {
+                  "feature": "Product & Power Periodicity",
+                  "value": "ω³ = 1  ⇒  ω³ᵏ = 1, ω³ᵏ⁺¹ = ω, ω³ᵏ⁺² = ω²",
+                  "latex": "\\omega^3 = 1 \\implies \\omega^{3k} = 1, \\; \\omega^{3k+1} = \\omega, \\; \\omega^{3k+2} = \\omega^2"
+                },
+                {
+                  "feature": "Reciprocal Relation",
+                  "value": "1 / ω = ω²,  1 / ω² = ω",
+                  "latex": "\\frac{1}{\\omega} = \\omega^2, \\quad \\frac{1}{\\omega^2} = \\omega"
+                },
+                {
+                  "feature": "Conjugate Property",
+                  "value": "ω̄ = ω²,  (ω²)̄ = ω",
+                  "latex": "\\bar{\\omega} = \\omega^2, \\quad \\overline{\\omega^2} = \\omega"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1576,7 +3860,45 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Adding b has ZERO effect on dispersion; only multiplier a impacts variance as a².",
             "mustKnow": true,
             "commonMistake": "⚠️ Common trap: If 5 is subtracted from each observation, variance remains 100% UNCHANGED!",
-            "latex": "\\begin{aligned} If y_i = a x_i + b: \\\\ Mean ȳ = a x̄ + b \\\\ SD σ_y = |a|  \\cdot  σ_x \\\\ Variance σ_y^2 = a^2  \\cdot  σ_x^2 \\end{aligned}"
+            "latex": "\\begin{aligned} If y_i = a x_i + b: \\\\ Mean ȳ = a x̄ + b \\\\ SD σ_y = |a|  \\cdot  σ_x \\\\ Variance σ_y^2 = a^2  \\cdot  σ_x^2 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Statistical Measure under yᵢ = axᵢ + b",
+                "Transformation Formula / Effect"
+              ],
+              "rows": [
+                {
+                  "feature": "Mean (ȳ)",
+                  "value": "a · x̄ + b (Affected by both origin b and scale a)",
+                  "latex": "\\bar{y} = a\\bar{x} + b"
+                },
+                {
+                  "feature": "Median",
+                  "value": "a · Median(x) + b",
+                  "latex": "\\text{Median}(y) = a \\cdot \\text{Median}(x) + b"
+                },
+                {
+                  "feature": "Mode",
+                  "value": "a · Mode(x) + b",
+                  "latex": "\\text{Mode}(y) = a \\cdot \\text{Mode}(x) + b"
+                },
+                {
+                  "feature": "Standard Deviation (σ_y)",
+                  "value": "|a| · σ_x (Affected ONLY by scale |a|, INDEPENDENT of b)",
+                  "latex": "\\sigma_y = |a| \\cdot \\sigma_x"
+                },
+                {
+                  "feature": "Variance (σ_y²)",
+                  "value": "a² · σ_x² (Affected ONLY by scale a², INDEPENDENT of b)",
+                  "latex": "\\sigma_y^2 = a^2 \\cdot \\sigma_x^2"
+                },
+                {
+                  "feature": "Range / Mean Deviation",
+                  "value": "|a| · Range(x) / |a| · MD(x)",
+                  "latex": "\\text{Dispersion}_y = |a| \\cdot \\text{Dispersion}_x"
+                }
+              ]
+            }
           },
           {
             "id": "stats-cv",
@@ -1700,7 +4022,40 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Fundamental limits (x in radians).",
             "mustKnow": true,
             "shortcut": "🎯 Extremely fast: Replace 1 − cos x with x²/2 when x → 0!",
-            "latex": "\\begin{aligned} lim_{x→0} (\\sin  x / x) = 1  |  lim_{x→0} (\\tan  x / x) = 1 \\\\ lim_{x→0} (1 − \\cos  x) / x^2 = ½ \\end{aligned}"
+            "latex": "\\begin{aligned} lim_{x→0} (\\sin  x / x) = 1  |  lim_{x→0} (\\tan  x / x) = 1 \\\\ lim_{x→0} (1 − \\cos  x) / x^2 = ½ \\end{aligned}",
+            "table": {
+              "headers": [
+                "Limit Expression (as x → 0)",
+                "Evaluation Result"
+              ],
+              "rows": [
+                {
+                  "feature": "lim_{x→0} (sin x / x)",
+                  "value": "1",
+                  "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1"
+                },
+                {
+                  "feature": "lim_{x→0} (tan x / x)",
+                  "value": "1",
+                  "latex": "\\lim_{x \\to 0} \\frac{\\tan x}{x} = 1"
+                },
+                {
+                  "feature": "lim_{x→0} (sin⁻¹ x / x)",
+                  "value": "1",
+                  "latex": "\\lim_{x \\to 0} \\frac{\\sin^{-1} x}{x} = 1"
+                },
+                {
+                  "feature": "lim_{x→0} (tan⁻¹ x / x)",
+                  "value": "1",
+                  "latex": "\\lim_{x \\to 0} \\frac{\\tan^{-1} x}{x} = 1"
+                },
+                {
+                  "feature": "lim_{x→0} (1 - cos x) / x²",
+                  "value": "1 / 2",
+                  "latex": "\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}"
+                }
+              ]
+            }
           },
           {
             "id": "limit-exp-log",
@@ -1731,7 +4086,35 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "Product: (u · v)' = u' v + u v'\nQuotient: (u / v)' = (u' v − u v') / v²\nChain: d/dx [f(g(x))] = f'(g(x)) · g'(x)",
             "explanation": "Foundational operational calculus theorems.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Product: (u  \\cdot  v)' = u' v + u v' \\\\ Quotient: \\frac{u}{v}' = (u' v − u v') / v^2 \\\\ Chain: d/dx [f(g(x))] = f'(g(x))  \\cdot  g'(x) \\end{aligned}"
+            "latex": "\\begin{aligned} Product: (u  \\cdot  v)' = u' v + u v' \\\\ Quotient: \\frac{u}{v}' = (u' v − u v') / v^2 \\\\ Chain: d/dx [f(g(x))] = f'(g(x))  \\cdot  g'(x) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Differentiation Rule",
+                "Derivative Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Product Rule",
+                  "value": "d/dx [u · v] = u' · v + u · v'",
+                  "latex": "\\frac{d}{dx}(u \\cdot v) = u'v + uv'"
+                },
+                {
+                  "feature": "Quotient Rule",
+                  "value": "d/dx [u / v] = (u' · v - u · v') / v²",
+                  "latex": "\\frac{d}{dx}\\left(\\frac{u}{v}\\right) = \\frac{u'v - uv'}{v^2}"
+                },
+                {
+                  "feature": "Chain Rule",
+                  "value": "d/dx [f(g(x))] = f'(g(x)) · g'(x)",
+                  "latex": "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)"
+                },
+                {
+                  "feature": "Reciprocal Rule",
+                  "value": "d/dx [1 / v] = -v' / v²",
+                  "latex": "\\frac{d}{dx}\\left(\\frac{1}{v}\\right) = -\\frac{v'}{v^2}"
+                }
+              ]
+            }
           },
           {
             "id": "deriv-inverse-trig",
@@ -1739,7 +4122,45 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "d/dx(sin⁻¹x) = 1 / √(1 − x²)\nd/dx(cos⁻¹x) = −1 / √(1 − x²)\nd/dx(tan⁻¹x) = 1 / (1 + x²)\nd/dx(sec⁻¹x) = 1 / [|x| √(x² − 1)]",
             "explanation": "Standard derivative formulas used in integration reversibility.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} d/dx(\\sin ⁻¹x) = 1 / \\sqrt{1 − x^2} \\\\ d/dx(\\cos ⁻¹x) = −1 / \\sqrt{1 − x^2} \\\\ d/dx(\\tan ⁻¹x) = 1 / (1 + x^2) \\\\ d/dx(\\sec ⁻¹x) = 1 / [|x| \\sqrt{x^2 − 1}] \\end{aligned}"
+            "latex": "\\begin{aligned} d/dx(\\sin ⁻¹x) = 1 / \\sqrt{1 − x^2} \\\\ d/dx(\\cos ⁻¹x) = −1 / \\sqrt{1 − x^2} \\\\ d/dx(\\tan ⁻¹x) = 1 / (1 + x^2) \\\\ d/dx(\\sec ⁻¹x) = 1 / [|x| \\sqrt{x^2 − 1}] \\end{aligned}",
+            "table": {
+              "headers": [
+                "Inverse Trig Function",
+                "Derivative d/dx with Domain Restriction"
+              ],
+              "rows": [
+                {
+                  "feature": "sin⁻¹ x",
+                  "value": "1 / √(1 - x²)",
+                  "latex": "\\frac{d}{dx}(\\sin^{-1}x) = \\frac{1}{\\sqrt{1 - x^2}} \\quad (|x| < 1)"
+                },
+                {
+                  "feature": "cos⁻¹ x",
+                  "value": "-1 / √(1 - x²)",
+                  "latex": "\\frac{d}{dx}(\\cos^{-1}x) = -\\frac{1}{\\sqrt{1 - x^2}} \\quad (|x| < 1)"
+                },
+                {
+                  "feature": "tan⁻¹ x",
+                  "value": "1 / (1 + x²)",
+                  "latex": "\\frac{d}{dx}(\\tan^{-1}x) = \\frac{1}{1 + x^2} \\quad (x \\in \\mathbb{R})"
+                },
+                {
+                  "feature": "cot⁻¹ x",
+                  "value": "-1 / (1 + x²)",
+                  "latex": "\\frac{d}{dx}(\\cot^{-1}x) = -\\frac{1}{1 + x^2} \\quad (x \\in \\mathbb{R})"
+                },
+                {
+                  "feature": "sec⁻¹ x",
+                  "value": "1 / [|x| √(x² - 1)]",
+                  "latex": "\\frac{d}{dx}(\\sec^{-1}x) = \\frac{1}{|x|\\sqrt{x^2 - 1}} \\quad (|x| > 1)"
+                },
+                {
+                  "feature": "csc⁻¹ x",
+                  "value": "-1 / [|x| √(x² - 1)]",
+                  "latex": "\\frac{d}{dx}(\\csc^{-1}x) = -\\frac{1}{|x|\\sqrt{x^2 - 1}} \\quad (|x| > 1)"
+                }
+              ]
+            }
           }
         ]
       },
@@ -1811,7 +4232,40 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "∫ dx / (x² + a²) = (1/a) tan⁻¹(x/a) + C\n∫ dx / (x² − a²) = [1 / (2a)] ln|(x − a)/(x + a)| + C\n∫ dx / √(a² − x²) = sin⁻¹(x/a) + C\n∫ dx / √(x² ± a²) = ln|x + √(x² ± a²)| + C",
             "explanation": "Crucial denominator square forms.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} \\int \\frac{dx}{x^2 + a^2} &= \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + C \\\\ \\int \\frac{dx}{x^2 - a^2} &= \\frac{1}{2a}\\ln\\left|\\frac{x - a}{x + a}\\right| + C \\\\ \\int \\frac{dx}{\\sqrt{a^2 - x^2}} &= \\sin^{-1}\\left(\\frac{x}{a}\\right) + C \\\\ \\int \\frac{dx}{\\sqrt{x^2 \\pm a^2}} &= \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C \\end{aligned}"
+            "latex": "\\begin{aligned} \\int \\frac{dx}{x^2 + a^2} &= \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + C \\\\ \\int \\frac{dx}{x^2 - a^2} &= \\frac{1}{2a}\\ln\\left|\\frac{x - a}{x + a}\\right| + C \\\\ \\int \\frac{dx}{\\sqrt{a^2 - x^2}} &= \\sin^{-1}\\left(\\frac{x}{a}\\right) + C \\\\ \\int \\frac{dx}{\\sqrt{x^2 \\pm a^2}} &= \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C \\end{aligned}",
+            "table": {
+              "headers": [
+                "Integrand Form ∫ f(x) dx",
+                "Standard Anti-Derivative Result"
+              ],
+              "rows": [
+                {
+                  "feature": "∫ dx / (x² + a²)",
+                  "value": "(1/a) tan⁻¹(x/a) + C",
+                  "latex": "\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + C"
+                },
+                {
+                  "feature": "∫ dx / (x² - a²)",
+                  "value": "[1 / (2a)] ln|(x - a) / (x + a)| + C",
+                  "latex": "\\int \\frac{dx}{x^2 - a^2} = \\frac{1}{2a}\\ln\\left|\\frac{x - a}{x + a}\\right| + C"
+                },
+                {
+                  "feature": "∫ dx / (a² - x²)",
+                  "value": "[1 / (2a)] ln|(a + x) / (a - x)| + C",
+                  "latex": "\\int \\frac{dx}{a^2 - x^2} = \\frac{1}{2a}\\ln\\left|\\frac{a + x}{a - x}\\right| + C"
+                },
+                {
+                  "feature": "∫ dx / √(a² - x²)",
+                  "value": "sin⁻¹(x/a) + C",
+                  "latex": "\\int \\frac{dx}{\\sqrt{a^2 - x^2}} = \\sin^{-1}\\left(\\frac{x}{a}\\right) + C"
+                },
+                {
+                  "feature": "∫ dx / √(x² ± a²)",
+                  "value": "ln|x + √(x² ± a²)| + C",
+                  "latex": "\\int \\frac{dx}{\\sqrt{x^2 \\pm a^2}} = \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C"
+                }
+              ]
+            }
           }
         ]
       },
@@ -1866,7 +4320,35 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Bypasses lengthy double integrations in competitive exams.",
             "mustKnow": true,
             "shortcut": "🎯 Direct formula: Area between y² = 4x and x² = 4y has a=1, b=1 ⇒ Area = 16(1)(1)/3 = 16/3.",
-            "latex": "\\begin{aligned} \\text{Area between } y^2 = 4ax \\text{ and } x^2 = 4by &= \\frac{16ab}{3} \\\\ \\text{Area between } y^2 = 4ax \\text{ and } y = mx &= \\frac{8a^2}{3m^3} \\\\ \\text{Area of Ellipse } \\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1 &= \\pi a b \\end{aligned}"
+            "latex": "\\begin{aligned} \\text{Area between } y^2 = 4ax \\text{ and } x^2 = 4by &= \\frac{16ab}{3} \\\\ \\text{Area between } y^2 = 4ax \\text{ and } y = mx &= \\frac{8a^2}{3m^3} \\\\ \\text{Area of Ellipse } \\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1 &= \\pi a b \\end{aligned}",
+            "table": {
+              "headers": [
+                "Intersecting Curves / Enclosed Region",
+                "Bounded Area Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Between y² = 4ax and x² = 4by",
+                  "value": "16ab / 3",
+                  "latex": "\\text{Area} = \\frac{16ab}{3}"
+                },
+                {
+                  "feature": "Between parabola y² = 4ax and line y = mx",
+                  "value": "8a² / (3m³)",
+                  "latex": "\\text{Area} = \\frac{8a^2}{3m^3}"
+                },
+                {
+                  "feature": "Ellipse x²/a² + y²/b² = 1",
+                  "value": "π · a · b",
+                  "latex": "\\text{Area} = \\pi a b"
+                },
+                {
+                  "feature": "Between y² = 4ax and its Latus Rectum x = a",
+                  "value": "8a² / 3",
+                  "latex": "\\text{Area} = \\frac{8a^2}{3}"
+                }
+              ]
+            }
           }
         ]
       }
@@ -1951,7 +4433,30 @@ export const TOPICS_DATA: TopicData[] = [
             "formula": "a · b = GCD(a, b) · LCM(a, b)\nFor fractions: GCD(a/b, c/d) = GCD(a, c) / LCM(b, d)\nLCM(a/b, c/d) = LCM(a, c) / GCD(b, d)",
             "explanation": "LCM of fractions is LCM of numerators divided by GCD of denominators.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} a  \\cdot  b = GCD(a, b)  \\cdot  LCM(a, b) \\\\ For fractions: GCD(a/b, c/d) = GCD(a, c) / LCM(b, d) \\\\ LCM(a/b, c/d) = LCM(a, c) / GCD(b, d) \\end{aligned}"
+            "latex": "\\begin{aligned} a  \\cdot  b = GCD(a, b)  \\cdot  LCM(a, b) \\\\ For fractions: GCD(a/b, c/d) = GCD(a, c) / LCM(b, d) \\\\ LCM(a/b, c/d) = LCM(a, c) / GCD(b, d) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Number / Fraction Operation",
+                "Exact Mathematical Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Product of Two Numbers",
+                  "value": "a · b = GCD(a, b) · LCM(a, b)",
+                  "latex": "a \\cdot b = \\gcd(a, b) \\cdot \\operatorname{lcm}(a, b)"
+                },
+                {
+                  "feature": "GCD (HCF) of Fractions",
+                  "value": "GCD(numerators) / LCM(denominators)",
+                  "latex": "\\gcd\\left(\\frac{a}{b}, \\frac{c}{d}\\right) = \\frac{\\gcd(a, c)}{\\operatorname{lcm}(b, d)}"
+                },
+                {
+                  "feature": "LCM of Fractions",
+                  "value": "LCM(numerators) / GCD(denominators)",
+                  "latex": "\\operatorname{lcm}\\left(\\frac{a}{b}, \\frac{c}{d}\\right) = \\frac{\\operatorname{lcm}(a, c)}{\\gcd(b, d)}"
+                }
+              ]
+            }
           },
           {
             "id": "num-divisibility-7-11-13",
@@ -1974,7 +4479,50 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Solves unit digit of large powers aᵇ instantly.",
             "mustKnow": true,
             "shortcut": "🎯 Example: Unit digit of 7⁹⁵ = 7^{4×23 + 3} = unit digit of 7³ = 343 ⇒ 3.",
-            "latex": "\\begin{aligned} Cycle of 4 for {2, 3, 7, 8}: Divide power by 4, remainder gives index. \\\\ If power divisible by 4 (remainder 0): \\\\ 2^4 → 6,  3^4 → 1,  7^4 → 1,  8^4 → 6 \\end{aligned}"
+            "latex": "\\begin{aligned} Cycle of 4 for {2, 3, 7, 8}: Divide power by 4, remainder gives index. \\\\ If power divisible by 4 (remainder 0): \\\\ 2^4 → 6,  3^4 → 1,  7^4 → 1,  8^4 → 6 \\end{aligned}",
+            "table": {
+              "headers": [
+                "Base Last Digit",
+                "Power Cyclicity Pattern (Unit Digit of aⁿ)"
+              ],
+              "rows": [
+                {
+                  "feature": "0, 1, 5, 6",
+                  "value": "Cyclicity 1: Always constant (ends in 0, 1, 5, 6)",
+                  "latex": "\\text{Always ends in same digit: } 0, 1, 5, 6"
+                },
+                {
+                  "feature": "4",
+                  "value": "Cyclicity 2: 4 (odd power) or 6 (even power)",
+                  "latex": "4^1 = 4, \\; 4^2 = 6 \\implies \\begin{cases} 4 & (n \\text{ odd}) \\\\ 6 & (n \\text{ even}) \\end{cases}"
+                },
+                {
+                  "feature": "9",
+                  "value": "Cyclicity 2: 9 (odd power) or 1 (even power)",
+                  "latex": "9^1 = 9, \\; 9^2 = 1 \\implies \\begin{cases} 9 & (n \\text{ odd}) \\\\ 1 & (n \\text{ even}) \\end{cases}"
+                },
+                {
+                  "feature": "2",
+                  "value": "Cyclicity 4: Sequence 2, 4, 8, 6",
+                  "latex": "2^1=2, \\; 2^2=4, \\; 2^3=8, \\; 2^4=6"
+                },
+                {
+                  "feature": "3",
+                  "value": "Cyclicity 4: Sequence 3, 9, 7, 1",
+                  "latex": "3^1=3, \\; 3^2=9, \\; 3^3=7, \\; 3^4=1"
+                },
+                {
+                  "feature": "7",
+                  "value": "Cyclicity 4: Sequence 7, 9, 3, 1",
+                  "latex": "7^1=7, \\; 7^2=9, \\; 7^3=3, \\; 7^4=1"
+                },
+                {
+                  "feature": "8",
+                  "value": "Cyclicity 4: Sequence 8, 4, 2, 6",
+                  "latex": "8^1=8, \\; 8^2=4, \\; 8^3=2, \\; 8^4=6"
+                }
+              ]
+            }
           },
           {
             "id": "num-fermat-euler",

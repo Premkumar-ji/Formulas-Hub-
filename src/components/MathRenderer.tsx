@@ -51,8 +51,8 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
 
   return (
     <div
-      className={`katex-container overflow-x-auto py-1.5 select-all text-center sm:text-left ${
-        displayMode ? 'my-1 text-base sm:text-lg min-h-[2.5rem] flex items-center' : 'inline-block text-sm'
+      className={`katex-container overflow-x-auto max-w-full py-1.5 select-all text-center sm:text-left ${
+        displayMode ? 'my-1 text-base sm:text-lg min-h-[2.5rem] block w-full' : 'inline-block text-sm max-w-full align-middle'
       } ${className}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
@@ -70,7 +70,7 @@ export const FormattedText: React.FC<{ text: string; className?: string }> = ({
   }, [text]);
 
   return (
-    <span className={className}>
+    <span className={`inline max-w-full ${className}`}>
       {parts.map((part, index) => {
         if (part.startsWith('$$') && part.endsWith('$$')) {
           const expr = part.slice(2, -2);

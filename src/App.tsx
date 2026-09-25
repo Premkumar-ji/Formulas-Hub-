@@ -184,7 +184,7 @@ export default function App() {
   const activeTopic = TOPICS_DATA.find(t => t.id === activeTopicId) || TOPICS_DATA[0];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--ink)] selection:bg-purple-500/20 selection:text-purple-700">
+    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--ink)] selection:bg-purple-500/20 selection:text-purple-700 w-full max-w-full overflow-x-hidden">
       {/* Top Navigation Bar */}
       <Navbar
         currentView={currentView}
@@ -200,7 +200,7 @@ export default function App() {
       />
 
       {/* Main View Router */}
-      <div className="flex-1">
+      <div className="flex-1 w-full max-w-full min-w-0">
         {currentView === 'index' && (
           <IndexView
             topics={TOPICS_DATA}
@@ -258,14 +258,14 @@ export default function App() {
       />
 
       {/* Clean quiet footer */}
-      <footer className="mt-auto py-6 border-t border-[var(--border)] bg-[var(--card)]/50 text-center text-xs text-[var(--ink-muted)] no-print">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+      <footer className="mt-auto py-6 border-t border-[var(--border)] bg-[var(--card)]/50 text-center text-xs text-[var(--ink-muted)] no-print w-full max-w-full">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 w-full max-w-full">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 text-center sm:text-left">
             <span className="font-heading font-bold text-[var(--ink)]">Formula Universe</span>
             <span>·</span>
             <span>Comprehensive Math Revision for NIMCET, MCA & JEE Prep</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 shrink-0">
             <button onClick={handleNavigateHome} className="hover:text-purple-600 transition-colors">
               Topics Index
             </button>

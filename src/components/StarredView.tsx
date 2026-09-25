@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TopicData, FormulaItem } from '../types/formula';
 import { MathRenderer, FormattedText } from './MathRenderer';
+import { FormulaTable } from './FormulaTable';
 import { Star, ArrowLeft, Copy, Check, Trash2, ExternalLink } from 'lucide-react';
 
 interface StarredViewProps {
@@ -48,7 +49,13 @@ export const StarredView: React.FC<StarredViewProps> = ({
   }
 
   const handleCopy = (formula: FormulaItem) => {
-    const text = `${formula.title}:\n${formula.formula}\n\n${formula.explanation}`;
+    let text = '';
+    if (formula.table) {
+      const rows = formula.table.rows.map(r => `• ${r.feature}: ${r.value}`).join('\n');
+      text = `${formula.title}:\n${rows}\n\n${formula.explanation}`;
+    } else {
+      text = `${formula.title}:\n${formula.formula}\n\n${formula.explanation}`;
+    }
     navigator.clipboard.writeText(text).then(() => {
       setCopiedId(formula.id);
       setTimeout(() => setCopiedId(null), 1500);
@@ -56,23 +63,23 @@ export const StarredView: React.FC<StarredViewProps> = ({
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div className="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-8 w-full max-w-full min-w-0">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[var(--border)]">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[var(--border)]">
+        <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onBackToIndex}
-            className="p-2 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--ink)] hover:text-purple-600 transition-colors"
+            className="p-2 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--ink)] hover:text-purple-600 transition-colors shrink-0"
             title="Back to Topics Index"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
-          <div>
-            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[var(--ink)] flex items-center gap-2">
-              <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
+          <div className="min-w-0">
+            <h1 className="font-heading font-extrabold text-xl sm:text-3xl text-[var(--ink)] flex items-center gap-2 truncate">
+              <Star className="w-5 h-5 sm:w-6 sm:h-6 fill-amber-400 text-amber-400 shrink-0" />
               <span>Starred Formulas</span>
             </h1>
-            <p className="text-xs sm:text-sm text-[var(--ink-muted)]">
+            <p className="text-xs sm:text-sm text-[var(--ink-muted)] truncate">
               Your personalized list of high-priority formulas for rapid pre-exam revision.
             </p>
           </div>
@@ -81,7 +88,7 @@ export const StarredView: React.FC<StarredViewProps> = ({
         {starredList.length > 0 && (
           <button
             onClick={onClearAllStarred}
-            className="text-xs text-rose-600 hover:text-rose-700 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors"
+            className="text-xs text-rose-600 hover:text-rose-700 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors shrink-0"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span>Clear All Starred</span>
@@ -91,7 +98,7 @@ export const StarredView: React.FC<StarredViewProps> = ({
 
       {/* Formulas List */}
       {starredList.length === 0 ? (
-        <div className="text-center py-20 bg-[var(--card)] rounded-3xl border border-[var(--border)] p-8 max-w-lg mx-auto">
+        <div className="text-center py-16 sm:py-20 bg-[var(--card)] rounded-3xl border border-[var(--border)] p-6 sm:p-8 max-w-lg mx-auto">
           <div className="w-16 h-16 rounded-full bg-amber-400/10 text-amber-400 flex items-center justify-center mx-auto mb-4">
             <Star className="w-8 h-8" />
           </div>
@@ -109,73 +116,77 @@ export const StarredView: React.FC<StarredViewProps> = ({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0">
           {starredList.map(({ topicId, topicName, topicIcon, categoryName, formula }) => {
             const isCopied = copiedId === formula.id;
 
             return (
               <div
                 key={formula.id}
-                className="rounded-2xl p-5 bg-[var(--card)] border border-[var(--border)] shadow-sm hover:border-purple-300 transition-all flex flex-col justify-between"
+                className="rounded-2xl p-4 sm:p-5 bg-[var(--card)] border border-[var(--border)] shadow-sm hover:border-purple-300 transition-all flex flex-col justify-between w-full min-w-0 max-w-full overflow-hidden"
               >
-                <div>
+                <div className="min-w-0">
                   {/* Topic badge + Unstar */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
                     <button
                       onClick={() => onSelectFormulaDirectly(topicId, formula.id)}
-                      className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1.5"
+                      className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1.5 min-w-0 flex-1 truncate text-left"
                       title="Open in topic view"
                     >
-                      <span>{topicIcon}</span>
-                      <span>{topicName}</span>
-                      <span className="text-[var(--ink-muted)] font-normal">· {categoryName}</span>
-                      <ExternalLink className="w-3 h-3 opacity-60" />
+                      <span className="shrink-0">{topicIcon}</span>
+                      <span className="truncate">{topicName}</span>
+                      <span className="text-[var(--ink-muted)] font-normal truncate">· {categoryName}</span>
+                      <ExternalLink className="w-3 h-3 opacity-60 shrink-0" />
                     </button>
 
                     <button
                       onClick={() => onToggleStarFormula(formula.id)}
-                      className="p-1 text-amber-400 hover:text-amber-500 rounded"
+                      className="p-1 text-amber-400 hover:text-amber-500 rounded shrink-0"
                       title="Remove from starred"
                     >
                       <Star className="w-4 h-4 fill-amber-400" />
                     </button>
                   </div>
 
-                  <h3 className="font-heading font-bold text-sm sm:text-base text-[var(--ink)] mb-2">
+                  <h3 className="font-heading font-bold text-sm sm:text-base text-[var(--ink)] mb-2 break-words">
                     {formula.title}
                   </h3>
 
                   {/* Formula mathematical notation */}
-                  <div
-                    className="rounded-xl p-3 mb-2.5 overflow-x-auto select-all"
-                    style={{
-                      backgroundColor: 'var(--math-bg)',
-                      border: '1px solid var(--math-border)',
-                    }}
-                  >
-                    <MathRenderer
-                      latex={formula.latex}
-                      math={formula.formula}
-                      displayMode={true}
-                    />
-                  </div>
+                  {formula.table ? (
+                    <FormulaTable table={formula.table} />
+                  ) : (
+                    <div
+                      className="rounded-xl p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0"
+                      style={{
+                        backgroundColor: 'var(--math-bg)',
+                        border: '1px solid var(--math-border)',
+                      }}
+                    >
+                      <MathRenderer
+                        latex={formula.latex}
+                        math={formula.formula}
+                        displayMode={true}
+                      />
+                    </div>
+                  )}
 
-                  <div className="text-xs text-[var(--ink-muted)] mb-2 leading-relaxed">
+                  <div className="text-xs text-[var(--ink-muted)] mb-2 leading-relaxed break-words">
                     <FormattedText text={formula.explanation} />
                   </div>
 
                   {formula.shortcut && (
-                    <div className="mb-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-800 dark:text-amber-300 font-medium">
+                    <div className="mb-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-800 dark:text-amber-300 font-medium break-words">
                       <FormattedText text={formula.shortcut} />
                     </div>
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs mt-2">
-                  <span className="text-[10px] text-[var(--ink-muted)]">Saved for revision</span>
+                <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs mt-2 min-w-0">
+                  <span className="text-[10px] text-[var(--ink-muted)] truncate mr-2">Saved for revision</span>
                   <button
                     onClick={() => handleCopy(formula)}
-                    className="px-2.5 py-1 rounded-md text-xs font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 flex items-center gap-1"
+                    className="px-2.5 py-1 rounded-md text-xs font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 flex items-center gap-1 shrink-0"
                   >
                     {isCopied ? (
                       <>

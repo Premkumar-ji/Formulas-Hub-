@@ -1,3 +1,14 @@
+export interface FormulaTableRow {
+  feature: string;
+  value: string;
+  latex?: string;
+}
+
+export interface FormulaTable {
+  headers?: [string, string];
+  rows: FormulaTableRow[];
+}
+
 export interface FormulaItem {
   id: string;
   title: string;
@@ -9,6 +20,7 @@ export interface FormulaItem {
   commonMistake?: string;
   remember?: string;
   tags?: string[];
+  table?: FormulaTable;
 }
 
 export interface FormulaCategory {

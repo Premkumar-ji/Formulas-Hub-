@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { TopicData, FormulaItem } from '../types/formula';
 import { MathRenderer, FormattedText } from './MathRenderer';
+import { FormulaTable } from './FormulaTable';
 import { 
   X, 
   Sparkles, 
@@ -94,29 +95,29 @@ export const FlashcardModal: React.FC<FlashcardModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[var(--card)] border border-[var(--border)] rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto transition-all animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-2 sm:p-4 overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-[var(--card)] border border-[var(--border)] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto transition-all animate-in fade-in zoom-in-95 duration-200 min-w-0">
         
         {/* Header */}
-        <div className="p-4 sm:p-5 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-amber-300" />
-            <h2 className="font-heading font-bold text-base sm:text-lg">
+        <div className="p-3.5 sm:p-5 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white flex items-center justify-between">
+          <div className="flex items-center gap-2 min-w-0">
+            <Sparkles className="w-5 h-5 text-amber-300 shrink-0" />
+            <h2 className="font-heading font-bold text-sm sm:text-lg truncate">
               Rapid Flashcards Recall Drill
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
+            className="p-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors shrink-0 ml-2"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Filter Controls */}
-        <div className="p-4 border-b border-[var(--border)] bg-[var(--bg)] flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 flex-wrap">
-            <label className="text-[var(--ink-muted)] font-medium">Filter Topic:</label>
+        <div className="p-3 sm:p-4 border-b border-[var(--border)] bg-[var(--bg)] flex flex-wrap items-center justify-between gap-2.5 text-xs min-w-0">
+          <div className="flex items-center gap-2 flex-wrap min-w-0">
+            <label className="text-[var(--ink-muted)] font-medium">Topic:</label>
             <select
               value={selectedTopicFilter}
               onChange={(e) => {
@@ -124,7 +125,7 @@ export const FlashcardModal: React.FC<FlashcardModalProps> = ({
                 setCurrentIndex(0);
                 setIsRevealed(false);
               }}
-              className="px-2.5 py-1 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--ink)] font-semibold text-xs focus:outline-none"
+              className="px-2 py-1 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--ink)] font-semibold text-xs focus:outline-none max-w-[150px] xs:max-w-[200px] truncate"
             >
               <option value="all">All Topics (Comprehensive)</option>
               {topics.map(t => (
@@ -140,19 +141,19 @@ export const FlashcardModal: React.FC<FlashcardModalProps> = ({
                 setCurrentIndex(0);
                 setIsRevealed(false);
               }}
-              className={`px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1 transition-colors ${
+              className={`px-2 py-1 rounded-lg font-semibold flex items-center gap-1 transition-colors shrink-0 ${
                 onlyMustKnow
                   ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                   : 'bg-[var(--card)] text-[var(--ink-muted)] border border-[var(--border)]'
               }`}
             >
-              <Flame className="w-3 h-3 text-rose-500" />
-              <span>Must-Know Only</span>
+              <Flame className="w-3 h-3 text-rose-500 shrink-0" />
+              <span>Must-Know</span>
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[var(--ink-muted)]">
+          <div className="flex items-center gap-2 ml-auto">
+            <span className="font-mono text-[var(--ink-muted)] text-xs">
               {flashcards.length > 0 ? currentIndex + 1 : 0} / {flashcards.length}
             </span>
             <button
@@ -166,24 +167,24 @@ export const FlashcardModal: React.FC<FlashcardModalProps> = ({
         </div>
 
         {/* Card Body */}
-        <div className="p-6 sm:p-8 flex-1 flex flex-col justify-center min-h-[300px]">
+        <div className="p-4 sm:p-8 flex-1 flex flex-col justify-center min-h-[260px] sm:min-h-[300px] min-w-0 max-w-full">
           {flashcards.length === 0 ? (
             <div className="text-center py-12 text-[var(--ink-muted)] text-sm">
               No flashcards match this filter. Try selecting "All Topics" or turning off "Must-Know Only".
             </div>
           ) : (
-            <div className="w-full">
+            <div className="w-full min-w-0">
               {/* Context Tag */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 flex items-center gap-1.5">
-                  <span>{currentCard.topicIcon}</span>
-                  <span>{currentCard.topicName}</span>
-                  <span className="text-[var(--ink-muted)] font-normal">· {currentCard.categoryName}</span>
+              <div className="flex items-center justify-between mb-3 min-w-0">
+                <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 flex items-center gap-1.5 truncate mr-2">
+                  <span className="shrink-0">{currentCard.topicIcon}</span>
+                  <span className="truncate">{currentCard.topicName}</span>
+                  <span className="text-[var(--ink-muted)] font-normal truncate">· {currentCard.categoryName}</span>
                 </span>
 
                 <button
                   onClick={() => onToggleStarFormula(currentCard.formula.id)}
-                  className={`p-1.5 rounded-lg transition-colors ${
+                  className={`p-1.5 rounded-lg transition-colors shrink-0 ${
                     isStarred ? 'text-amber-400' : 'text-[var(--ink-muted)] hover:text-amber-400'
                   }`}
                   title={isStarred ? 'Starred' : 'Star this formula'}
@@ -193,33 +194,37 @@ export const FlashcardModal: React.FC<FlashcardModalProps> = ({
               </div>
 
               {/* Prompt Question */}
-              <div className="mb-6">
+              <div className="mb-5 sm:mb-6 min-w-0">
                 <span className="text-[11px] uppercase tracking-wider font-bold text-[var(--ink-muted)] block mb-1">
                   Recall this formula:
                 </span>
-                <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-[var(--ink)] leading-snug">
+                <h3 className="font-heading font-extrabold text-lg sm:text-2xl text-[var(--ink)] leading-snug break-words">
                   {currentCard.formula.title}
                 </h3>
               </div>
 
               {/* Formula Reveal Area */}
               {isRevealed ? (
-                <div className="space-y-4 animate-in fade-in duration-200">
-                  <div
-                    className="p-4 rounded-2xl overflow-x-auto select-all"
-                    style={{
-                      backgroundColor: 'var(--math-bg)',
-                      border: '1px solid var(--math-border)',
-                    }}
-                  >
-                    <MathRenderer
-                      latex={currentCard.formula.latex}
-                      math={currentCard.formula.formula}
-                      displayMode={true}
-                    />
-                  </div>
+                <div className="space-y-4 animate-in fade-in duration-200 min-w-0 max-w-full">
+                  {currentCard.formula.table ? (
+                    <FormulaTable table={currentCard.formula.table} />
+                  ) : (
+                    <div
+                      className="p-3 sm:p-4 rounded-xl sm:rounded-2xl overflow-x-auto select-all w-full max-w-full min-w-0"
+                      style={{
+                        backgroundColor: 'var(--math-bg)',
+                        border: '1px solid var(--math-border)',
+                      }}
+                    >
+                      <MathRenderer
+                        latex={currentCard.formula.latex}
+                        math={currentCard.formula.formula}
+                        displayMode={true}
+                      />
+                    </div>
+                  )}
 
-                  <div className="text-xs sm:text-sm text-[var(--ink-muted)] leading-relaxed">
+                  <div className="text-xs sm:text-sm text-[var(--ink-muted)] leading-relaxed break-words">
                     <FormattedText text={currentCard.formula.explanation} />
                   </div>
 
