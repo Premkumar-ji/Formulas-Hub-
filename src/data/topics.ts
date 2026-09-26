@@ -1644,28 +1644,80 @@ export const TOPICS_DATA: TopicData[] = [
         "formulas": [
           {
             "id": "pnc-npr-ncr",
-            "title": "ⁿPᵣ and ⁿCᵣ Formulas",
-            "formula": "ⁿPᵣ = n! / (n − r)!  |  ⁿCᵣ = n! / [r!(n − r)!]\nⁿCᵣ = ⁿC_{n−r}  |  ⁿC₀ = ⁿCₙ = 1",
-            "explanation": "Core mathematical combinatorial operations.",
+            "title": "1. ⁿPᵣ and ⁿCᵣ Fundamental Definitions",
+            "formula": "Order matters → Permutation (ⁿPᵣ)\nOrder does NOT matter → Combination (ⁿCᵣ)\n\nⁿPᵣ = n! / (n − r)!\nⁿCᵣ = n! / [r!(n − r)!]\nⁿPᵣ = r! × ⁿCᵣ\nⁿCᵣ = ⁿC_{n−r}\nⁿC₀ = ⁿCₙ = 1",
+            "explanation": "Core principles of counting: permutations arrange objects in order; combinations select subsets without regard to order.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} ^nP_r = n! / (n − r)!  |  ^nC_r = n! / [r!(n − r)!] \\\\ ^nC_r = ^nC_{n−r}  |  ^nC_0 = ^nC_n = 1 \\end{aligned}"
+            "remember": "🎯 Memory: ⁿPᵣ = r! · ⁿCᵣ (permutations are combinations multiplied by arrangements of chosen r items).",
+            "shortcut": "🎯 Quick Calculation: ⁿCᵣ = ⁿCₙ₋ᵣ implies ¹⁰C₈ = ¹⁰C₂ = (10 × 9)/2 = 45.",
+            "latex": "\\begin{aligned} &\\textbf{Order matters} \\implies \\text{Permutation } (^nP_r) \\\\[4pt] &\\textbf{Order does NOT matter} \\implies \\text{Combination } (^nC_r) \\\\[8pt] &^nP_r = \\frac{n!}{(n-r)!}, \\quad ^nC_r = \\frac{n!}{r!(n-r)!} = \\binom{n}{r} \\\\[8pt] &^nP_r = r! \\times {}^nC_r, \\quad ^nC_r = {}^nC_{n-r}, \\quad ^nC_0 = {}^nC_n = 1 \\end{aligned}"
           },
           {
-            "id": "pnc-identical",
-            "title": "Permutations of Objects Not All Distinct",
-            "formula": "Total ways = n! / (p! · q! · r!)",
-            "explanation": "Arranging n objects where p are of one type, q of second, r of third.",
+            "id": "pnc-properties",
+            "title": "2. Essential Combinatorial Identities (NIMCET High-Yield)",
+            "formula": "ⁿCᵣ = ⁿC_{n−r}\nⁿCᵣ + ⁿC_{r−1} = ⁿ⁺¹Cᵣ (Pascal's Identity)\nⁿC₀ + ⁿC₁ + ... + ⁿCₙ = 2ⁿ\nⁿC₀ − ⁿC₁ + ⁿC₂ − ... + (−1)ⁿ ⁿCₙ = 0\nr · ⁿCᵣ = n · ⁿ⁻¹C_{r−1}\nⁿPᵣ = ⁿCᵣ · r!",
+            "explanation": "Fundamental binomial and combinatorial identities essential for rapid equation simplification in NIMCET.",
             "mustKnow": true,
-            "shortcut": "🎯 Example: Arrangements of word \"MATHEMATICS\" = 11! / (2! 2! 2!).",
-            "latex": "Total ways = n! / (p!  \\cdot  q!  \\cdot  r!)"
+            "remember": "🎯 Memory: Pascal's rule combines adjacent terms at level n into level n+1 (ⁿCᵣ + ⁿC_{r-1} = ⁿ⁺¹Cᵣ).",
+            "shortcut": "🎯 Quick Identity: The sum of all binomial coefficients for set of size n is 2ⁿ (total number of subsets).",
+            "latex": "\\begin{aligned} &^nC_r = {}^nC_{n-r} \\\\[6pt] &^nC_r + {}^nC_{r-1} = {}^{n+1}C_r \\quad (\\text{Pascal's Identity}) \\\\[6pt] &^nC_0 + {}^nC_1 + {}^nC_2 + \\dots + {}^nC_n = 2^n \\\\[6pt] &^nC_0 - {}^nC_1 + {}^nC_2 - \\dots + (-1)^n {}^nC_n = 0 \\\\[6pt] &r \\cdot {}^nC_r = n \\cdot {}^{n-1}C_{r-1}, \\quad ^nP_r = r! \\cdot {}^nC_r \\end{aligned}",
+            "table": {
+              "headers": [
+                "Combinatorial Identity",
+                "Formula & Property"
+              ],
+              "rows": [
+                {
+                  "feature": "Symmetry Property",
+                  "value": "ⁿCᵣ = ⁿC_{n−r}",
+                  "latex": "^nC_r = {}^nC_{n-r}"
+                },
+                {
+                  "feature": "Pascal's Addition",
+                  "value": "ⁿCᵣ + ⁿC_{r−1} = ⁿ⁺¹Cᵣ",
+                  "latex": "^nC_r + {}^nC_{r-1} = {}^{n+1}C_r"
+                },
+                {
+                  "feature": "Total Subsets Sum",
+                  "value": "∑_{r=0}^n ⁿCᵣ = 2ⁿ",
+                  "latex": "\\sum_{r=0}^n {}^nC_r = 2^n"
+                },
+                {
+                  "feature": "Alternating Sum",
+                  "value": "∑_{r=0}^n (−1)ʳ ⁿCᵣ = 0",
+                  "latex": "\\sum_{r=0}^n (-1)^r {}^nC_r = 0"
+                },
+                {
+                  "feature": "Index Reduction",
+                  "value": "r · ⁿCᵣ = n · ⁿ⁻¹C_{r−1}",
+                  "latex": "r \\cdot {}^nC_r = n \\cdot {}^{n-1}C_{r-1}"
+                },
+                {
+                  "feature": "Permutation & Combination",
+                  "value": "ⁿPᵣ = r! · ⁿCᵣ",
+                  "latex": "^nP_r = r! \\cdot {}^nC_r"
+                }
+              ]
+            }
           },
           {
             "id": "pnc-circular",
-            "title": "Circular Permutations",
-            "formula": "Around a circular table: (n − 1)!\nBeads in necklace / flowers in garland: ½ (n − 1)!",
-            "explanation": "Fixing one reference item removes n rotational symmetries.",
+            "title": "3. Circular Permutation (Distinct vs. Flippable)",
+            "formula": "n distinct objects around a circle:\n(n − 1)!\n\nIf clockwise and anticlockwise arrangements are considered identical (necklaces / garlands):\n(n − 1)! / 2",
+            "explanation": "Fixing one item in a circle removes n-fold rotational degeneracy. The /2 division applies only when the circle can be flipped over in 3D space (garlands, necklaces, keyrings).",
             "mustKnow": true,
-            "latex": "(n - 1)! \\quad (\\text{beads/garland: } \\frac{(n - 1)!}{2})"
+            "remember": "🎯 Important Distinction: The /2 factor applies ONLY to necklaces/garlands where reflection/flipping gives identical visual arrangements. It is NOT the ordinary circular formula.",
+            "shortcut": "🎯 Example: 6 people at round dinner table = (6-1)! = 5! = 120 ways. 6 beads in a necklace = (6-1)!/2 = 60 ways.",
+            "latex": "\\begin{aligned} &\\textbf{Circular Permutations of } n \\text{ distinct items:} \\\\[4pt] &\\quad P_{\\text{circ}} = (n - 1)! \\\\[8pt] &\\textbf{Necklaces / Garlands (flipping/reflection identical):} \\\\[4pt] &\\quad P_{\\text{flip}} = \\frac{(n - 1)!}{2} \\\\[6pt] &\\text{*The } /2 \\text{ rule applies ONLY when clockwise = anticlockwise by flipping.} \\end{aligned}"
+          },
+          {
+            "id": "pnc-identical",
+            "title": "4. Repeated / Identical Objects (Multiset Permutations)",
+            "formula": "If there are n objects where:\n• p are identical of one type\n• q are identical of another type\n• r are identical of another type\n\nNumber of arrangements = n! / (p! · q! · r!)\n\nExample (MATHEMATICS):\nM = 2, A = 2, T = 2, H = 1, E = 1, I = 1, C = 1, S = 1  (Total letters = 11)\nNumber of arrangements = 11! / (2! · 2! · 2!) = 4,989,600",
+            "explanation": "Permutations of multiset where repeating items are indistinguishable. Dividing by factorial of multiplicities eliminates identical duplicate sequences.",
+            "mustKnow": true,
+            "shortcut": "🎯 Word Count Drill: \"MATHEMATICS\" (11 letters: 2M, 2A, 2T) = 11!/(2!·2!·2!) = 39,916,800/8 = 4,989,600.",
+            "latex": "\\begin{aligned} &\\text{Number of arrangements of } n \\text{ objects} = \\frac{n!}{p! \\, q! \\, r!} \\\\[8pt] &\\textbf{Example (MATHEMATICS):} \\\\[2pt] &M=2, A=2, T=2, H=1, E=1, I=1, C=1, S=1 \\implies n=11 \\\\[4pt] &\\text{Number of arrangements} = \\frac{11!}{2! \\, 2! \\, 2!} = \\frac{39{,}916{,}800}{8} = 4{,}989{,}600 \\end{aligned}"
           }
         ]
       },
@@ -1675,21 +1727,46 @@ export const TOPICS_DATA: TopicData[] = [
         "formulas": [
           {
             "id": "pnc-stars-bars",
-            "title": "Distribution of Identical Items (Stars & Bars)",
-            "formula": "Ways to distribute n identical items into r distinct boxes:\n(1) Non-negative (xᵢ ≥ 0): ⁿ⁺ʳ⁻¹C_{r−1}\n(2) Positive integers (xᵢ ≥ 1): ⁿ⁻¹C_{r−1}",
-            "explanation": "Solves number of solutions to x₁ + x₂ + ... + xᵣ = n.",
+            "title": "5. Stars & Bars (Distribution of Identical Items)",
+            "formula": "Equation: x₁ + x₂ + ... + xᵣ = n\n\n(1) Non-negative integer solutions (xᵢ ≥ 0):\nNumber of solutions = ⁿ⁺ʳ⁻¹C_{r−1}\n\n(2) Positive integer solutions (xᵢ ≥ 1):\nNumber of solutions = ⁿ⁻¹C_{r−1}\n\nClean Memory Trick:\n≥ 0 → n + r − 1\n≥ 1 → n − 1\nBoth choose (r − 1)",
+            "explanation": "Counts number of ways to distribute n identical objects into r distinct bins, equivalent to integer compositions.",
             "mustKnow": true,
-            "shortcut": "🎯 High frequency question in MCA entrance exams.",
-            "latex": "\\begin{aligned} Ways to distribute n identical items into r distinct boxes: \\\\ (1) Non-negative (x_i  \\ge  0): ^n⁺ʳ⁻¹C_{r−1} \\\\ (2) Positive integers (x_i  \\ge  1): ^n⁻¹C_{r−1} \\end{aligned}"
+            "remember": "🎯 Clean Memory Trick: ≥ 0 uses (n + r − 1), ≥ 1 uses (n − 1). Both choose (r − 1).",
+            "shortcut": "🎯 Example: Distribute 10 identical coins among 3 children with each getting ≥ 1: ¹⁰⁻¹C₃₋₁ = ⁹C₂ = 36 ways.",
+            "latex": "\\begin{aligned} &x_1 + x_2 + \\dots + x_r = n \\\\[8pt] &\\textbf{Non-negative integer solutions } (x_i \\ge 0): \\\\[4pt] &\\quad \\text{Number of solutions} = {}^{n+r-1}C_{r-1} = \\binom{n+r-1}{r-1} \\\\[8pt] &\\textbf{Positive integer solutions } (x_i \\ge 1): \\\\[4pt] &\\quad \\text{Number of solutions} = {}^{n-1}C_{r-1} = \\binom{n-1}{r-1} \\\\[8pt] &\\textbf{Memory Trick:} \\quad x_i \\ge 0 \\implies n+r-1, \\quad x_i \\ge 1 \\implies n-1 \\quad (\\text{both choose } r-1) \\end{aligned}",
+            "table": {
+              "headers": [
+                "Restriction Condition",
+                "Number of Integer Solutions"
+              ],
+              "rows": [
+                {
+                  "feature": "Non-negative integers (xᵢ ≥ 0)",
+                  "value": "ⁿ⁺ʳ⁻¹C_{r−1}",
+                  "latex": "^{n+r-1}C_{r-1} = \\binom{n+r-1}{r-1}"
+                },
+                {
+                  "feature": "Positive integers (xᵢ ≥ 1)",
+                  "value": "ⁿ⁻¹C_{r−1}",
+                  "latex": "^{n-1}C_{r-1} = \\binom{n-1}{r-1}"
+                },
+                {
+                  "feature": "Memory Trick Rule",
+                  "value": "≥ 0 → n + r − 1 | ≥ 1 → n − 1",
+                  "latex": "\\text{Both choose } (r - 1)"
+                }
+              ]
+            }
           },
           {
             "id": "pnc-derangement",
-            "title": "Derangements Dₙ (No item in its own spot)",
-            "formula": "Dₙ = n! · [1 − 1/1! + 1/2! − 1/3! + ... + (−1)ⁿ/n!]\nD₁ = 0, D₂ = 1, D₃ = 2, D₄ = 9, D₅ = 44",
-            "explanation": "Letters going into wrong envelopes formula.",
+            "title": "6. Derangements Dₙ (No Item in Its Own Spot)",
+            "formula": "General Formula:\nDₙ = n! · [1 − 1/1! + 1/2! − 1/3! + ... + (−1)ⁿ/n!] = n! · ∑_{k=0}^n [(−1)ᵏ / k!]\n\nRecurrence Relation:\nDₙ = (n − 1)(D_{n−1} + D_{n−2})\n\nStandard Exam Values:\nD₁ = 0\nD₂ = 1\nD₃ = 2\nD₄ = 9\nD₅ = 44\nD₆ = 265",
+            "explanation": "Number of permutations of n elements such that none of the elements appears in its original natural position.",
             "mustKnow": true,
-            "shortcut": "🎯 Memorize: D₃ = 2, D₄ = 9, D₅ = 44 saves 2 full minutes in exam.",
-            "latex": "D_n = n! \\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right]",
+            "remember": "🎯 Rapid Values: D₁=0, D₂=1, D₃=2, D₄=9, D₅=44, D₆=265. Memorizing these saves 2 full minutes in NIMCET.",
+            "shortcut": "🎯 Recurrence: D₅ = 4 × (D₄ + D₃) = 4 × (9 + 2) = 4 × 11 = 44.",
+            "latex": "\\begin{aligned} &D_n = n! \\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right] = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!} \\\\[8pt] &\\textbf{Recurrence Relation:} \\quad D_n = (n - 1)(D_{n-1} + D_{n-2}) \\\\[8pt] &D_1 = 0, \\quad D_2 = 1, \\quad D_3 = 2, \\quad D_4 = 9, \\quad D_5 = 44, \\quad D_6 = 265 \\end{aligned}",
             "table": {
               "headers": [
                 "Items Count (n)",
@@ -1697,58 +1774,66 @@ export const TOPICS_DATA: TopicData[] = [
               ],
               "rows": [
                 {
-                  "feature": "n = 1",
+                  "feature": "D₁ (n = 1)",
                   "value": "0",
                   "latex": "D_1 = 0"
                 },
                 {
-                  "feature": "n = 2",
+                  "feature": "D₂ (n = 2)",
                   "value": "1",
                   "latex": "D_2 = 1"
                 },
                 {
-                  "feature": "n = 3",
+                  "feature": "D₃ (n = 3)",
                   "value": "2",
                   "latex": "D_3 = 2"
                 },
                 {
-                  "feature": "n = 4",
+                  "feature": "D₄ (n = 4)",
                   "value": "9",
                   "latex": "D_4 = 9"
                 },
                 {
-                  "feature": "n = 5",
+                  "feature": "D₅ (n = 5)",
                   "value": "44",
                   "latex": "D_5 = 44"
                 },
                 {
-                  "feature": "General Formula for Dₙ",
-                  "value": "n! · [1 - 1/1! + 1/2! - 1/3! + ... + (-1)ⁿ/n!]",
-                  "latex": "D_n = n!\\left[1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots + \\frac{(-1)^n}{n!}\\right]"
+                  "feature": "D₆ (n = 6)",
+                  "value": "265",
+                  "latex": "D_6 = 265"
+                },
+                {
+                  "feature": "General Formula",
+                  "value": "n! [1 − 1/1! + 1/2! − 1/3! + ... + (−1)ⁿ/n!]",
+                  "latex": "D_n = n!\\sum_{k=0}^{n}\\frac{(-1)^k}{k!}"
                 },
                 {
                   "feature": "Recurrence Relation",
-                  "value": "Dₙ = (n - 1)(Dₙ₋₁ + Dₙ₋₂)",
-                  "latex": "D_n = (n - 1)(D_{n-1} + D_{n-2})"
+                  "value": "Dₙ = (n − 1)(D_{n−1} + D_{n−2})",
+                  "latex": "D_n = (n-1)(D_{n-1} + D_{n-2})"
                 }
               ]
             }
           },
           {
             "id": "pnc-sum-of-digits",
-            "title": "Sum of All Numbers Formed by Digits",
-            "formula": "Sum = (Sum of given digits) · (n − 1)! · (111... n times)",
-            "explanation": "For n distinct non-zero digits taken all at a time.",
+            "title": "7. Sum of All Numbers Formed Using Digits",
+            "formula": "For n distinct digits, all taken at a time:\nSum of all numbers = (Sum of digits) × (n − 1)! × 111...111 (n digits of 1)\n\nExample with digits 1, 2, 3:\nSum = (1 + 2 + 3) × 2! × 111 = 6 × 2 × 111 = 1332\n\nCondition & Treatment when 0 is present:\nIf 0 is among the digits, valid numbers cannot start with 0:\nSum = [Total sum treating 0 as normal] − [Sum of numbers with 0 in the leading place]",
+            "explanation": "Calculates sum across all place values (units, tens, hundreds...) by symmetry where each digit appears (n-1)! times in every column.",
             "mustKnow": true,
-            "latex": "Sum = (Sum of given digits)  \\cdot  (n − 1)!  \\cdot  (111... n times)"
+            "remember": "🎯 Notice: In 111...111 there are exactly n ones. Multiply by (n−1)! because fixing one digit leaves (n−1)! permutations for other positions.",
+            "shortcut": "🎯 Quick Calculation: For digits {1, 2, 3, 4}, Sum = (1+2+3+4) × 3! × 1111 = 10 × 6 × 1111 = 66,660.",
+            "latex": "\\begin{aligned} &\\textbf{For } n \\text{ distinct non-zero digits taken all at a time:} \\\\[4pt] &\\text{Sum} = (\\text{Sum of digits}) \\times (n - 1)! \\times \\underbrace{111\\dots1}_{n \\text{ ones}} \\\\[8pt] &\\textbf{Example with digits } \\{1, 2, 3\\}: \\\\[2pt] &\\text{Sum} = (1 + 2 + 3) \\times 2! \\times 111 = 6 \\times 2 \\times 111 = 1332 \\\\[8pt] &\\textbf{Condition (When } 0 \\text{ is present):} \\\\[2pt] &\\text{Sum} = \\text{Total sum (treating } 0 \\text{ normally)} - \\text{Sum of numbers with leading } 0 \\end{aligned}"
           },
           {
             "id": "pnc-handshakes-diagonals",
-            "title": "Diagonals in Polygon & Handshakes",
-            "formula": "Number of diagonals in n-sided polygon = [n(n − 3)] / 2\nNumber of handshakes among n people = ⁿC₂ = [n(n − 1)] / 2",
-            "explanation": "Direct geometry shortcuts.",
+            "title": "8. Polygon Diagonals & Handshakes",
+            "formula": "Diagonals of an n-sided polygon:\nⁿC₂ − n = n(n − 3) / 2\n\nHandshakes among n people (each with each other):\nⁿC₂ = n(n − 1) / 2",
+            "explanation": "From n vertices, total segments = ⁿC₂. Subtracting n sides yields polygon diagonals. For handshakes, choosing 2 individuals out of n gives ⁿC₂.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Number of diagonals in n-sided polygon = [n(n − 3)] / 2 \\\\ Number of handshakes among n people = ^nC_2 = [n(n − 1)] / 2 \\end{aligned}"
+            "shortcut": "🎯 Quick Check: Triangle (n=3) → 3(0)/2 = 0 diagonals. Pentagon (n=5) → 5(2)/2 = 5 diagonals. Octagon (n=8) → 8(5)/2 = 20 diagonals.",
+            "latex": "\\begin{aligned} &\\textbf{Diagonals of an } n\\text{-sided polygon:} \\\\[4pt] &\\quad \\text{Diagonals} = {}^nC_2 - n = \\frac{n(n - 3)}{2} \\\\[8pt] &\\textbf{Handshakes among } n \\text{ people:} \\\\[4pt] &\\quad \\text{Handshakes} = {}^nC_2 = \\frac{n(n - 1)}{2} \\end{aligned}"
           }
         ]
       }
