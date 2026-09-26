@@ -154,6 +154,20 @@
 
 .formula {
   border-radius: 1rem;
+  text-align: left !important;
+}
+
+.formula,
+.formula *,
+.formula span,
+.formula .katex,
+.formula .katex-display,
+.formula .katex-display > .katex,
+.formula .katex-display > .katex > .katex-html,
+.formula .katex-container,
+.formula .base {
+  text-align: left !important;
+  justify-content: flex-start !important;
 }
 
 .katex-container {

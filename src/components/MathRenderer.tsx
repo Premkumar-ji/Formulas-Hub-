@@ -56,11 +56,12 @@ export const MathRenderer: React.FC<MathRendererProps> = ({
 
   return (
     <div
-      className={`katex-container font-rounded overflow-x-auto max-w-full py-1 select-all text-center sm:text-left ${
+      className={`katex-container font-rounded overflow-x-auto max-w-full py-1 select-all text-left ${
         displayMode
-          ? 'my-0.5 text-xs sm:text-sm md:text-base min-h-[2rem] block w-full'
+          ? 'my-0.5 text-xs sm:text-sm md:text-base min-h-[2rem] block w-full text-left'
           : `inline-block max-w-full align-middle ${className && className.includes('text-') ? '' : 'text-xs sm:text-sm'}`
       } ${className}`}
+      style={{ textAlign: 'left' }}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );

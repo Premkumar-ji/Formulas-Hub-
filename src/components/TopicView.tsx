@@ -56,9 +56,28 @@ export const TopicView: React.FC<TopicViewProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
+  const [hiddenDefinitions, setHiddenDefinitions] = useState<Set<string>>(new Set());
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showTopicSwitcher, setShowTopicSwitcher] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const toggleDefinition = (formulaId: string) => {
+    setHiddenDefinitions(prev => {
+      const next = new Set(prev);
+      if (next.has(formulaId)) next.delete(formulaId);
+      else next.add(formulaId);
+      return next;
+    });
+  };
+
+  const toggleAllDefinitions = () => {
+    const allFormulaIds = topic.categories.flatMap(c => c.formulas.map(f => f.id));
+    if (hiddenDefinitions.size === allFormulaIds.length) {
+      setHiddenDefinitions(new Set());
+    } else {
+      setHiddenDefinitions(new Set(allFormulaIds));
+    }
+  };
 
   const currentIndex = allTopics.findIndex(t => t.id === topic.id);
   const prevTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
@@ -92,6 +111,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
     setSearchQuery('');
     setFilterMode('all');
     setCollapsedCategories(new Set());
+    setHiddenDefinitions(new Set());
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [topic.id]);
 
@@ -361,6 +381,15 @@ export const TopicView: React.FC<TopicViewProps> = ({
             >
               Collapse
             </button>
+            <span className="text-[var(--border)]">|</span>
+            <button
+              onClick={toggleAllDefinitions}
+              className="text-[11px] text-[var(--ink-muted)] hover:text-purple-600 transition-colors font-medium whitespace-nowrap flex items-center gap-1"
+              title="Toggle definitions and details on all formula cards"
+            >
+              <BookOpen className="w-3 h-3" />
+              <span>{hiddenDefinitions.size > 0 ? 'Show All Notes' : 'Hide All Notes'}</span>
+            </button>
           </div>
         </div>
       </section>
@@ -442,6 +471,8 @@ export const TopicView: React.FC<TopicViewProps> = ({
                     {category.formulas.map(formula => {
                       const isStarred = starredFormulaIds.has(formula.id);
                       const isCopied = copiedId === formula.id;
+                      const hasTextPart = Boolean(formula.explanation || formula.shortcut || formula.commonMistake || formula.remember);
+                      const isTextHidden = hiddenDefinitions.has(formula.id);
 
                       return (
                         <div
@@ -468,18 +499,31 @@ export const TopicView: React.FC<TopicViewProps> = ({
                                 )}
                               </div>
 
-                              {/* Star / Favorite Button */}
-                              <button
-                                onClick={() => onToggleStarFormula(formula.id)}
-                                className={`p-1.5 rounded-lg transition-colors shrink-0 ${
-                                  isStarred
-                                    ? 'text-amber-400 hover:text-amber-500'
-                                    : 'text-[var(--ink-muted)] hover:text-amber-400'
-                                }`}
-                                title={isStarred ? 'Remove from starred' : 'Star this formula'}
-                              >
-                                <Star className={`w-4 h-4 ${isStarred ? 'fill-amber-400' : ''}`} />
-                              </button>
+                              <div className="flex items-center gap-1 shrink-0">
+                                {hasTextPart && (
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleDefinition(formula.id)}
+                                    className="p-1 sm:px-2 py-1 rounded-lg text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 transition-colors flex items-center gap-1 text-[11px] font-semibold"
+                                    title={isTextHidden ? 'Click arrow to show definition' : 'Click arrow to hide definition'}
+                                  >
+                                    <span className="hidden sm:inline text-[10px]">{isTextHidden ? 'Definition' : 'Hide'}</span>
+                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isTextHidden ? '-rotate-90' : 'rotate-0'}`} />
+                                  </button>
+                                )}
+                                {/* Star / Favorite Button */}
+                                <button
+                                  onClick={() => onToggleStarFormula(formula.id)}
+                                  className={`p-1.5 rounded-lg transition-colors shrink-0 ${
+                                    isStarred
+                                      ? 'text-amber-400 hover:text-amber-500'
+                                      : 'text-[var(--ink-muted)] hover:text-amber-400'
+                                  }`}
+                                  title={isStarred ? 'Remove from starred' : 'Star this formula'}
+                                >
+                                  <Star className={`w-4 h-4 ${isStarred ? 'fill-amber-400' : ''}`} />
+                                </button>
+                              </div>
                             </div>
 
                             {/* Professional Mathematical Notation (KaTeX or Structured HTML Table) */}
@@ -487,43 +531,70 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               <FormulaTable table={formula.table} />
                             ) : (
                               <div
-                                className="formula rounded-2xl p-2.5 sm:p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0 font-rounded"
+                                className="formula rounded-2xl p-2.5 sm:p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0 font-rounded text-left"
                                 style={{
                                   backgroundColor: 'var(--math-bg)',
                                   border: '1px solid var(--math-border)',
+                                  textAlign: 'left',
                                 }}
                               >
                                 <MathRenderer
                                   latex={formula.latex}
                                   math={formula.formula}
                                   displayMode={true}
+                                  className="text-left"
                                 />
                               </div>
                             )}
 
-                            {/* Explanation */}
-                            <div className="exp text-xs text-[var(--ink-muted)] leading-relaxed mb-2.5 break-words">
-                              <FormattedText text={formula.explanation} />
-                            </div>
-
-                            {/* Shortcut / Trick Note */}
-                            {formula.shortcut && (
-                              <div className="trick mb-2 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-800 dark:text-amber-300 font-medium leading-normal break-words">
-                                <FormattedText text={formula.shortcut} />
-                              </div>
+                            {/* Arrow to hide and unhide definition and text part */}
+                            {hasTextPart && (
+                              <button
+                                type="button"
+                                onClick={() => toggleDefinition(formula.id)}
+                                className="w-full flex items-center justify-between py-1.5 px-3 rounded-xl bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/20 text-[11px] font-semibold text-purple-700 dark:text-purple-300 transition-colors my-2 select-none"
+                                title={isTextHidden ? 'Click arrow to unhide definition & text' : 'Click arrow to hide definition & text'}
+                              >
+                                <span className="flex items-center gap-1.5">
+                                  <BookOpen className="w-3.5 h-3.5" />
+                                  <span>{isTextHidden ? 'Show Definition & Details' : 'Hide Definition & Details'}</span>
+                                </span>
+                                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isTextHidden ? '' : 'rotate-180'}`} />
+                              </button>
                             )}
 
-                            {/* Common Mistake Note */}
-                            {formula.commonMistake && (
-                              <div className="common-mistake mb-2 p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[11px] text-rose-800 dark:text-rose-300 font-medium leading-normal break-words">
-                                <FormattedText text={formula.commonMistake} />
-                              </div>
-                            )}
+                            {!isTextHidden && hasTextPart && (
+                              <div className="definition-content space-y-2 mb-2.5">
+                                {/* Explanation / Definition */}
+                                {formula.explanation && (
+                                  <div className="exp text-xs text-[var(--ink-muted)] leading-relaxed break-words bg-slate-500/[0.03] p-2.5 rounded-xl border border-[var(--border)]">
+                                    <span className="font-semibold text-purple-700 dark:text-purple-300 block mb-0.5 text-[11px]">
+                                      📖 Definition & Theory:
+                                    </span>
+                                    <FormattedText text={formula.explanation} />
+                                  </div>
+                                )}
 
-                            {/* Remember Note */}
-                            {formula.remember && (
-                              <div className="remember mb-2 p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-[11px] text-cyan-800 dark:text-cyan-300 font-medium leading-normal break-words">
-                                💡 <FormattedText text={formula.remember} />
+                                {/* Shortcut / Trick Note */}
+                                {formula.shortcut && (
+                                  <div className="trick p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-800 dark:text-amber-300 font-medium leading-normal break-words">
+                                    <FormattedText text={formula.shortcut} />
+                                  </div>
+                                )}
+
+                                {/* Common Mistake Note */}
+                                {formula.commonMistake && (
+                                  <div className="common-mistake p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[11px] text-rose-800 dark:text-rose-300 font-medium leading-normal break-words">
+                                    <FormattedText text={formula.commonMistake} />
+                                  </div>
+                                )}
+
+                                {/* Remember Note */}
+                                {formula.remember && (
+                                  <div className="remember p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-[11px] text-cyan-800 dark:text-cyan-300 font-medium leading-normal break-words">
+                                    💡 <FormattedText text={formula.remember} />
+                                  </div>
+                                )}
                               </div>
                             )}
                           </div>

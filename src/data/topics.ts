@@ -4702,123 +4702,498 @@ export const TOPICS_DATA: TopicData[] = [
     "gradient": "from-amber-600 to-yellow-600",
     "accentColor": "border-amber-600 text-amber-600",
     "bgTint": "bg-amber-600/10 text-amber-600",
-    "description": "Divisibility rules, GCD/LCM, unit digits cyclicity, Euler’s totient φ(n), Fermat’s theorem & remainder rules.",
-    "examWeightage": "Medium-High (NIMCET ~3-5 Qs)",
+    "description": "Divisibility Rules & 1001, Unit Digit & Cyclicity, HCF & LCM Models, Divisors d(N) & Totient φ(N), Remainder Theorems, Fermat & Euler, Trailing Zeros & Base Conversions.",
+    "examWeightage": "High Priority (NIMCET ~4-6 Qs)",
     "quickTips": [
-      "Product of two numbers = LCM × GCD (HCF).",
-      "Cyclicity of powers: 2, 3, 7, 8 have cyclicity 4. 4 and 9 have cyclicity 2. 0, 1, 5, 6 have cyclicity 1.",
-      "Fermat's Little Theorem: If p is prime and gcd(a, p) = 1, then a^{p−1} ≡ 1 (mod p)."
+      "Divisibility by 11: |Sum(odd places) - Sum(even places)| is a multiple of 11.",
+      "Rule of 1001: 3-digit alternating sum checks 7, 11, and 13 simultaneously.",
+      "Cyclicity: {0,1,5,6} → 1 | {4,9} → 2 | {2,3,7,8} → 4. Find (power mod 4); if remainder 0, use power 4.",
+      "Product Rule: a × b = gcd(a,b) × lcm(a,b) holds ONLY for two numbers.",
+      "Fermat's Little Theorem: If p is prime and gcd(a,p)=1, then a^(p-1) ≡ 1 (mod p).",
+      "Trailing zeros of n! = ⌊n/5⌋ + ⌊n/25⌋ + ⌊n/125⌋ + ..."
     ],
     "categories": [
       {
-        "id": "num-divisibility-gcd",
-        "name": "Divisibility Rules & GCD/LCM",
+        "id": "num-divisibility",
+        "name": "1. Divisibility Rules & Rule of 1001 (Foundational)",
+        "description": "Fast diagnostic tests for divisibility without long division.",
         "formulas": [
           {
-            "id": "num-gcd-lcm-relation",
-            "title": "Product Formula for GCD and LCM",
-            "formula": "a · b = GCD(a, b) · LCM(a, b)\nFor fractions: GCD(a/b, c/d) = GCD(a, c) / LCM(b, d)\nLCM(a/b, c/d) = LCM(a, c) / GCD(b, d)",
-            "explanation": "LCM of fractions is LCM of numerators divided by GCD of denominators.",
+            "id": "num-divisibility-all",
+            "title": "1. Complete Divisibility Rules (2 to 25)",
+            "formula": "Divisibility Rules Summary:\n• 2: Last digit is even (0, 2, 4, 6, 8)\n• 3: Sum of digits is divisible by 3\n• 4: Last two digits form a number divisible by 4\n• 5: Last digit is 0 or 5\n• 6: Divisible by both 2 and 3\n• 8: Last three digits form a number divisible by 8\n• 9: Sum of digits is divisible by 9\n• 10: Last digit is 0\n• 11: |Sum(odd places) - Sum(even places)| = multiple of 11 (including 0)\n• 12: Divisible by both 3 and 4\n• 25: Last two digits are 00, 25, 50, or 75",
+            "latex": "\\boxed{|S_{\\text{odd}} - S_{\\text{even}}| = 11k} \\qquad \\boxed{\\sum d_i \\equiv 0 \\pmod{3 \\text{ or } 9}}",
+            "explanation": "Divisibility rules allow instant verification of whether an integer is divisible by a given divisor without division. For any composite divisor m = a × b where gcd(a,b) = 1, test divisibility by both a and b (e.g. 6 = 2×3, 12 = 3×4, 72 = 8×9, 88 = 8×11).",
             "mustKnow": true,
-            "latex": "\\begin{aligned} a  \\cdot  b = GCD(a, b)  \\cdot  LCM(a, b) \\\\ For fractions: GCD(a/b, c/d) = GCD(a, c) / LCM(b, d) \\\\ LCM(a/b, c/d) = LCM(a, c) / GCD(b, d) \\end{aligned}",
+            "remember": "🎯 Composite Test: gcd(a,b) MUST be 1. For example, to check divisibility by 12, check 3 and 4 (not 2 and 6, since gcd(2,6)=2≠1).",
+            "shortcut": "🎯 11 Rule Trick: Alternate signs (+ - + -) across digits from right to left. Example for 28182: 2 - 8 + 1 - 8 + 2 = -11, which is divisible by 11!",
             "table": {
               "headers": [
-                "Number / Fraction Operation",
-                "Exact Mathematical Formula"
+                "Divisor",
+                "Diagnostic Rule"
               ],
               "rows": [
                 {
-                  "feature": "Product of Two Numbers",
-                  "value": "a · b = GCD(a, b) · LCM(a, b)",
-                  "latex": "a \\cdot b = \\gcd(a, b) \\cdot \\operatorname{lcm}(a, b)"
+                  "feature": "2",
+                  "value": "Last digit is even (0, 2, 4, 6, 8)",
+                  "latex": "d_0 \\in \\{0, 2, 4, 6, 8\\}"
                 },
                 {
-                  "feature": "GCD (HCF) of Fractions",
-                  "value": "GCD(numerators) / LCM(denominators)",
-                  "latex": "\\gcd\\left(\\frac{a}{b}, \\frac{c}{d}\\right) = \\frac{\\gcd(a, c)}{\\operatorname{lcm}(b, d)}"
+                  "feature": "3",
+                  "value": "Sum of digits is divisible by 3",
+                  "latex": "\\sum d_i \\equiv 0 \\pmod 3"
                 },
                 {
-                  "feature": "LCM of Fractions",
-                  "value": "LCM(numerators) / GCD(denominators)",
-                  "latex": "\\operatorname{lcm}\\left(\\frac{a}{b}, \\frac{c}{d}\\right) = \\frac{\\operatorname{lcm}(a, c)}{\\gcd(b, d)}"
+                  "feature": "4",
+                  "value": "Last 2 digits form a multiple of 4",
+                  "latex": "\\overline{d_1 d_0} \\equiv 0 \\pmod 4"
+                },
+                {
+                  "feature": "5",
+                  "value": "Last digit is 0 or 5",
+                  "latex": "d_0 \\in \\{0, 5\\}"
+                },
+                {
+                  "feature": "6",
+                  "value": "Divisible by both 2 and 3",
+                  "latex": "2 \\mid N \\quad \\text{and} \\quad 3 \\mid N"
+                },
+                {
+                  "feature": "8",
+                  "value": "Last 3 digits form a multiple of 8",
+                  "latex": "\\overline{d_2 d_1 d_0} \\equiv 0 \\pmod 8"
+                },
+                {
+                  "feature": "9",
+                  "value": "Sum of digits is divisible by 9",
+                  "latex": "\\sum d_i \\equiv 0 \\pmod 9"
+                },
+                {
+                  "feature": "11",
+                  "value": "|Sum(odd positions) - Sum(even positions)| is multiple of 11",
+                  "latex": "|S_{\\text{odd}} - S_{\\text{even}}| = 11k"
+                },
+                {
+                  "feature": "12",
+                  "value": "Divisible by both 3 and 4",
+                  "latex": "3 \\mid N \\quad \\text{and} \\quad 4 \\mid N"
+                },
+                {
+                  "feature": "25",
+                  "value": "Last 2 digits are 00, 25, 50, or 75",
+                  "latex": "\\overline{d_1 d_0} \\in \\{00, 25, 50, 75\\}"
+                },
+                {
+                  "feature": "72",
+                  "value": "Divisible by both 8 and 9",
+                  "latex": "8 \\mid N \\quad \\text{and} \\quad 9 \\mid N"
+                },
+                {
+                  "feature": "88",
+                  "value": "Divisible by both 8 and 11",
+                  "latex": "8 \\mid N \\quad \\text{and} \\quad 11 \\mid N"
                 }
               ]
             }
           },
           {
-            "id": "num-divisibility-7-11-13",
-            "title": "Divisibility Rules for 7, 11, and 13",
-            "formula": "Rule of 1001: Group number into blocks of 3 digits from right; alternating sum of blocks must be divisible by 7, 11, or 13.\nRule of 11: (Sum of digits at odd places) − (Sum of digits at even places) is multiple of 11.",
-            "explanation": "Rapid competitive test for large numbers.",
+            "id": "num-rule-of-1001",
+            "title": "2. ⭐ The Rule of 1001 (Joint Test for 7, 11, and 13)",
+            "formula": "1001 = 7 × 11 × 13\nGroup number into 3-digit blocks from the right: [Block 1], [Block 2], [Block 3]...\nTake Alternating Sum: S = [Block 1] - [Block 2] + [Block 3] - ...\n• If S is divisible by 7 → N is divisible by 7\n• If S is divisible by 11 → N is divisible by 11\n• If S is divisible by 13 → N is divisible by 13",
+            "latex": "\\boxed{1001 = 7 \\times 11 \\times 13} \\implies S = B_1 - B_2 + B_3 - \\dots \\pmod{1001}",
+            "explanation": "Because 1000 ≡ -1 (mod 1001), expressing any number in base 1000 produces alternating blocks of 3 digits. This single calculation tests divisibility by 7, 11, and 13 simultaneously.",
             "mustKnow": true,
-            "latex": "\\begin{aligned} Rule of 1001: Group number into blocks of 3 digits from right; alternating sum of blocks must be divisible by 7, 11, or 13. \\\\ Rule of 11: (Sum of digits at odd places) − (Sum of digits at even places) is multiple of 11. \\end{aligned}"
+            "shortcut": "🎯 Worked Example: Test 3,08,715.\nBlocks from right: 715 and 308.\nAlternating sum: 715 - 308 = 407.\n407 ÷ 11 = 37 → Divisible by 11!\n407 ÷ 7 ≈ 58.14 → Not divisible by 7.\n407 ÷ 13 ≈ 31.3 → Not divisible by 13.",
+            "remember": "💡 Repeating 6-digit trick: Any 6-digit number of the form xyzxyz = xyz × 1001. Therefore, xyzxyz is ALWAYS divisible by 7, 11, 13, and 1001!"
           }
         ]
       },
       {
-        "id": "num-mod-theorems",
-        "name": "Remainders & Cyclicity Shortcuts",
+        "id": "num-unit-digit",
+        "name": "2. Unit Digit & Cyclicity (Most Tested in NIMCET)",
+        "description": "Rules and cycles to find unit digits and last two digits of huge powers.",
         "formulas": [
           {
-            "id": "num-cyclicity",
-            "title": "Unit Digit Cyclicity Rule",
-            "formula": "Cycle of 4 for {2, 3, 7, 8}: Divide power by 4, remainder gives index.\nIf power divisible by 4 (remainder 0):\n2⁴ → 6,  3⁴ → 1,  7⁴ → 1,  8⁴ → 6",
-            "explanation": "Solves unit digit of large powers aᵇ instantly.",
+            "id": "num-unit-digit-cyclicity",
+            "title": "3. Unit Digit & Power Cyclicity Rules",
+            "formula": "Unit Digit of N^p depends only on (Last Digit of N)^(p mod cyclicity):\n\nGroup 1 (Cycle 1): {0, 1, 5, 6}\n• (...0)^p ends in 0\n• (...1)^p ends in 1\n• (...5)^p ends in 5\n• (...6)^p ends in 6\n\nGroup 2 (Cycle 2): {4, 9}\n• 4^odd ends in 4, 4^even ends in 6\n• 9^odd ends in 9, 9^even ends in 1\n\nGroup 3 (Cycle 4): {2, 3, 7, 8}\n• Find remainder r = p mod 4\n• If r > 0, unit digit = (last digit)^r mod 10\n• If r = 0, USE POWER 4: unit digit = (last digit)^4 mod 10",
+            "latex": "\\boxed{\\text{Unit Digit of } N^p = (d_0)^{p \\bmod \\text{cycle}}} \\quad \\begin{cases} \\{0, 1, 5, 6\\} & \\text{cycle } 1 \\\\ \\{4, 9\\} & \\text{cycle } 2 \\\\ \\{2, 3, 7, 8\\} & \\text{cycle } 4 \\end{cases}",
+            "explanation": "The powers of any single digit repeat in a periodic cycle of lengths 1, 2, or 4. To find the unit digit of any large power, reduce the base to its last digit and the exponent modulo the cycle length.",
             "mustKnow": true,
-            "shortcut": "🎯 Example: Unit digit of 7⁹⁵ = 7^{4×23 + 3} = unit digit of 7³ = 343 ⇒ 3.",
-            "latex": "\\begin{aligned} Cycle of 4 for {2, 3, 7, 8}: Divide power by 4, remainder gives index. \\\\ If power divisible by 4 (remainder 0): \\\\ 2^4 → 6,  3^4 → 1,  7^4 → 1,  8^4 → 6 \\end{aligned}",
+            "commonMistake": "⚠️ Critical Trap: When p mod 4 = 0, do NOT use power 0! Use power 4. For example, unit digit of 2^8 has 8 mod 4 = 0, so use 2^4 = 16 → unit digit is 6 (not 2^0 = 1).",
+            "shortcut": "🎯 NIMCET Classic: Unit digit of (13647)^3265.\nLast digit is 7 (cycle 4). Exponent is 3265.\n3265 mod 4 = 65 mod 4 = 1.\nUnit digit = 7^1 = 7. Answer in 5 seconds!",
             "table": {
               "headers": [
                 "Base Last Digit",
-                "Power Cyclicity Pattern (Unit Digit of aⁿ)"
+                "Cycle & Powers Pattern"
               ],
               "rows": [
                 {
                   "feature": "0, 1, 5, 6",
-                  "value": "Cyclicity 1: Always constant (ends in 0, 1, 5, 6)",
-                  "latex": "\\text{Always ends in same digit: } 0, 1, 5, 6"
+                  "value": "Always 0, 1, 5, 6 respectively (cycle 1)",
+                  "latex": "d^p \\equiv d \\pmod{10}"
                 },
                 {
                   "feature": "4",
-                  "value": "Cyclicity 2: 4 (odd power) or 6 (even power)",
-                  "latex": "4^1 = 4, \\; 4^2 = 6 \\implies \\begin{cases} 4 & (n \\text{ odd}) \\\\ 6 & (n \\text{ even}) \\end{cases}"
+                  "value": "4^odd = 4, 4^even = 6 (cycle 2)",
+                  "latex": "4^1 = 4, \\ 4^2 = 6"
                 },
                 {
                   "feature": "9",
-                  "value": "Cyclicity 2: 9 (odd power) or 1 (even power)",
-                  "latex": "9^1 = 9, \\; 9^2 = 1 \\implies \\begin{cases} 9 & (n \\text{ odd}) \\\\ 1 & (n \\text{ even}) \\end{cases}"
+                  "value": "9^odd = 9, 9^even = 1 (cycle 2)",
+                  "latex": "9^1 = 9, \\ 9^2 = 1"
                 },
                 {
                   "feature": "2",
-                  "value": "Cyclicity 4: Sequence 2, 4, 8, 6",
-                  "latex": "2^1=2, \\; 2^2=4, \\; 2^3=8, \\; 2^4=6"
+                  "value": "2, 4, 8, 6 (cycle 4)",
+                  "latex": "2^1=2, 2^2=4, 2^3=8, 2^4=6"
                 },
                 {
                   "feature": "3",
-                  "value": "Cyclicity 4: Sequence 3, 9, 7, 1",
-                  "latex": "3^1=3, \\; 3^2=9, \\; 3^3=7, \\; 3^4=1"
+                  "value": "3, 9, 7, 1 (cycle 4)",
+                  "latex": "3^1=3, 3^2=9, 3^3=7, 3^4=1"
                 },
                 {
                   "feature": "7",
-                  "value": "Cyclicity 4: Sequence 7, 9, 3, 1",
-                  "latex": "7^1=7, \\; 7^2=9, \\; 7^3=3, \\; 7^4=1"
+                  "value": "7, 9, 3, 1 (cycle 4)",
+                  "latex": "7^1=7, 7^2=9, 7^3=3, 7^4=1"
                 },
                 {
                   "feature": "8",
-                  "value": "Cyclicity 4: Sequence 8, 4, 2, 6",
-                  "latex": "8^1=8, \\; 8^2=4, \\; 8^3=2, \\; 8^4=6"
+                  "value": "8, 4, 2, 6 (cycle 4)",
+                  "latex": "8^1=8, 8^2=4, 8^3=2, 8^4=6"
                 }
               ]
             }
           },
           {
-            "id": "num-fermat-euler",
-            "title": "Fermat's Little Theorem & Euler's Totient",
-            "formula": "Fermat: a^{p−1} ≡ 1 (mod p)   where p is prime, gcd(a, p) = 1\nEuler: a^{φ(n)} ≡ 1 (mod n)   where gcd(a, n) = 1\nTotient: φ(n) = n · ∏ (1 − 1/pᵢ)",
-            "explanation": "Solves massive remainder problems like (2¹⁰² mod 101) = 2^{100}·2² ≡ 1·4 = 4.",
+            "id": "num-last-two-digits",
+            "title": "4. Last Two Digits Shortcuts",
+            "formula": "Techniques for Last Two Digits:\n• Numbers ending in 1: (...a1)^(...b) → Last two digits = [(a × b) mod 10] followed by 1.\n• Numbers ending in 5: (...a5)^2 ends in 25 with leading digits a(a+1).\n• Powers of 2: 2^10 = 1024 (ends in 24). 24^even ends in 76, 24^odd ends in 24.\n• 76 property: 76^n ALWAYS ends in 76 for all n ≥ 1.",
+            "latex": "\\boxed{(\\dots a1)^{\\dots b} \\implies \\text{Last 2 digits } = \\overline{[(a \\times b) \\bmod 10] \\ 1}}",
+            "explanation": "Finding the remainder when divided by 100 gives the last two digits. Standard shortcuts bypass heavy binomial expansions.",
             "mustKnow": true,
-            "shortcut": "🎯 When divisor is prime p, power can be reduced modulo (p − 1)!",
-            "latex": "\\begin{aligned} Fermat: a^{p−1} ≡ 1 (mod p)   where p is prime, gcd(a, p) = 1 \\\\ Euler: a^{φ(n)} ≡ 1 (mod n)   where gcd(a, n) = 1 \\\\ Totient: φ(n) = n  \\cdot  ∏ (1 − 1/p_i) \\end{aligned}"
+            "shortcut": "🎯 Quick Example: Last two digits of 41^68.\nHere a = 4, b = 8.\nLast digit is 1. Tens digit = (4 × 8) mod 10 = 32 mod 10 = 2.\nLast two digits = 21!",
+            "remember": "💡 76 Magic: 76 raised to any positive integer power always ends in 76: 76^k ≡ 76 (mod 100)."
+          }
+        ]
+      },
+      {
+        "id": "num-gcd-lcm",
+        "name": "3. GCD (HCF) & LCM — Full Theory & Word Problems",
+        "description": "Product rule, fraction formulas, and the 4 standard exam word models.",
+        "formulas": [
+          {
+            "id": "num-gcd-lcm-product",
+            "title": "5. Core Product Rule & Fractions Formulas",
+            "formula": "Core Product Rule (Valid ONLY for TWO numbers):\na × b = gcd(a, b) × lcm(a, b)\n\nHCF and LCM of Fractions:\ngcd(a/b, c/d) = gcd(a, c) / lcm(b, d)\nlcm(a/b, c/d) = lcm(a, c) / gcd(b, d)\n\nCore Properties:\n• HCF always divides LCM: lcm(a, b) mod gcd(a, b) = 0.\n• If gcd(a, b) = 1 (co-prime), then lcm(a, b) = a × b.\n• gcd(ka, kb) = k × gcd(a, b) and lcm(ka, kb) = k × lcm(a, b).",
+            "latex": "\\boxed{a \\times b = \\gcd(a, b) \\times \\operatorname{lcm}(a, b)} \\qquad \\gcd\\left(\\frac{a}{b}, \\frac{c}{d}\\right) = \\frac{\\gcd(a, c)}{\\operatorname{lcm}(b, d)}",
+            "explanation": "The product of two positive integers equals the product of their HCF and LCM. Always simplify fractions to lowest terms before applying fraction HCF/LCM formulas.",
+            "mustKnow": true,
+            "commonMistake": "⚠️ Non-associativity Trap: a × b × c ≠ gcd(a,b,c) × lcm(a,b,c). The product rule holds ONLY for exactly two numbers!",
+            "shortcut": "🎯 Fractions Memory Rule: To find HCF of fractions, take HCF on top and LCM on bottom. To find LCM of fractions, take LCM on top and HCF on bottom.",
+            "table": {
+              "headers": [
+                "Concept / Operation",
+                "Exact Formula"
+              ],
+              "rows": [
+                {
+                  "feature": "Product Rule (2 numbers)",
+                  "value": "a × b = gcd(a, b) × lcm(a, b)",
+                  "latex": "a \\cdot b = \\gcd(a,b) \\cdot \\operatorname{lcm}(a,b)"
+                },
+                {
+                  "feature": "HCF of Fractions",
+                  "value": "gcd(numerators) / lcm(denominators)",
+                  "latex": "\\gcd\\left(\\frac{a}{b},\\frac{c}{d}\\right) = \\frac{\\gcd(a,c)}{\\operatorname{lcm}(b,d)}"
+                },
+                {
+                  "feature": "LCM of Fractions",
+                  "value": "lcm(numerators) / gcd(denominators)",
+                  "latex": "\\operatorname{lcm}\\left(\\frac{a}{b},\\frac{c}{d}\\right) = \\frac{\\operatorname{lcm}(a,c)}{\\gcd(b,d)}"
+                },
+                {
+                  "feature": "Co-prime Numbers",
+                  "value": "gcd = 1  ⇒  lcm = a × b",
+                  "latex": "\\gcd(a,b)=1 \\implies \\operatorname{lcm}(a,b)=ab"
+                }
+              ]
+            }
+          },
+          {
+            "id": "num-gcd-lcm-word-patterns",
+            "title": "6. The 4 Classic HCF & LCM Exam Word Models",
+            "formula": "Standard Exam Problem Formats:\n\nModel 1 (Smallest number leaving same remainder r):\n• N = lcm(x, y, z) × k + r\n\nModel 2 (Smallest number leaving different remainders with constant difference):\n• When divided by x, y, z leaves remainders a, b, c such that (x-a) = (y-b) = (z-c) = d:\n• N = lcm(x, y, z) × k - d\n\nModel 3 (Greatest number dividing x, y, z leaving same remainder r):\n• Divisor = gcd(|x - y|, |y - z|, |z - x|)\n\nModel 4 (Greatest number dividing x, y, z leaving remainders a, b, c):\n• Divisor = gcd(x - a, y - b, z - c)",
+            "latex": "\\text{Model 1: } \\operatorname{lcm}(x,y,z)k + r \\qquad \\text{Model 2: } \\operatorname{lcm}(x,y,z)k - d",
+            "explanation": "Word problems in NIMCET always match one of these 4 algebraic forms. Keywords like 'least', 'smallest', 'simultaneous lights/bells' indicate LCM; 'largest', 'greatest', 'equal partitions' indicate HCF.",
+            "mustKnow": true,
+            "shortcut": "🎯 Keyword Diagnosis: 'Smallest / Least' → LCM. 'Greatest / Maximum / Largest' → HCF.",
+            "remember": "💡 Constant Difference Shortcut: If divisors are 12, 15, 20 and remainders are 8, 11, 16, note that 12-8 = 15-11 = 20-16 = 4. The answer is LCM(12,15,20) - 4 = 60 - 4 = 56."
+          }
+        ]
+      },
+      {
+        "id": "num-factors-divisors",
+        "name": "4. Number Sets & Factors / Divisors Profile",
+        "description": "Prime factorization, total factors d(N), sum σ(N), and Totient φ(N).",
+        "formulas": [
+          {
+            "id": "num-types-fta",
+            "title": "7. Number Sets & Fundamental Theorem of Arithmetic",
+            "formula": "Fundamental Theorem of Arithmetic:\nEvery integer N > 1 can be uniquely expressed as a product of prime powers:\nN = p₁^(a₁) · p₂^(a₂) ··· pₖ^(aₖ)   (pᵢ distinct primes, aᵢ ≥ 1)\n\nStandard Sets:\n• Natural (ℕ): 1, 2, 3, ...\n• Whole (𝕎): 0, 1, 2, 3, ...\n• Integers (ℤ): ..., -2, -1, 0, 1, 2, ...\n• Rational: p/q (q ≠ 0) | Irrational: √2, π, e\n• Prime: Exactly 2 factors (2, 3, 5, 7, 11, ...). 1 is NEITHER prime nor composite.\n• Co-prime: gcd(a, b) = 1.",
+            "latex": "\\boxed{N = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}} \\quad (p_i \\text{ distinct primes}, \\ a_i \\ge 1)",
+            "explanation": "Every composite number decomposes uniquely into prime factors. This prime factorization is the foundational bedrock for computing divisors, totient, and remainders.",
+            "mustKnow": true,
+            "remember": "🎯 Crucial Fact: 1 is NEITHER prime NOR composite. 2 is the ONLY even prime number.",
+            "shortcut": "🎯 Consecutive Integers: Any two consecutive integers n and (n+1) are ALWAYS co-prime: gcd(n, n+1) = 1."
+          },
+          {
+            "id": "num-divisors-count-sum-prod",
+            "title": "8. Total Divisors d(N), Sum σ(N) & Product P(N)",
+            "formula": "For N = p₁^(a₁) · p₂^(a₂) ··· pₖ^(aₖ):\n\nTotal Divisors:\nd(N) = (a₁ + 1)(a₂ + 1) ··· (aₖ + 1)\n\nSum of Divisors:\nσ(N) = [(p₁^(a₁+1) - 1)/(p₁ - 1)] · [(p₂^(a₂+1) - 1)/(p₂ - 1)] ···\n\nProduct of Divisors:\nP(N) = N^[d(N) / 2]\n\nWays to express N as product of two factors:\n• d(N) / 2  (when N is not a square)\n• [d(N) + 1] / 2  (when N is a perfect square)",
+            "latex": "\\boxed{d(N) = \\prod_{i=1}^k (a_i + 1)} \\qquad \\boxed{\\sigma(N) = \\prod_{i=1}^k \\frac{p_i^{a_i+1}-1}{p_i-1}} \\qquad \\boxed{P(N) = N^{\\frac{d(N)}{2}}}",
+            "explanation": "Gives the full factor profile of any integer directly from its prime exponents without listing factors individually.",
+            "mustKnow": true,
+            "remember": "💡 Odd Number of Factors: An integer has an ODD number of divisors if and only if it is a PERFECT SQUARE.",
+            "shortcut": "🎯 Worked Example: For 36 = 2² × 3²:\n• d(36) = (2+1)(2+1) = 9 (odd, since 36 = 6²)\n• σ(36) = [(2³-1)/(2-1)] × [(3³-1)/(3-1)] = 7 × 13 = 91\n• P(36) = 36^(9/2) = (6²)^(9/2) = 6⁹\n• Ways as 2 factors = (9+1)/2 = 5 ways: (1×36, 2×18, 3×12, 4×9, 6×6)."
+          },
+          {
+            "id": "num-even-odd-square-divisors",
+            "title": "9. Even, Odd & Perfect Square Divisors",
+            "formula": "For N = 2^a · p₂^(a₂) ··· pₖ^(aₖ) (where pᵢ are odd primes):\n\n• Number of Odd Divisors: Drop the factor 2 completely!\nd_odd(N) = (a₂ + 1)(a₃ + 1) ··· (aₖ + 1)\n\n• Number of Even Divisors: Take exponent 'a' without adding 1:\nd_even(N) = a × (a₂ + 1)(a₃ + 1) ··· (aₖ + 1)\nNote: d_even + d_odd = d(N).\n\n• Number of Perfect Square Divisors: Consider only even exponents!\nd_square(N) = [⌊a/2⌋ + 1] × [⌊a₂/2⌋ + 1] ··· [⌊aₖ/2⌋ + 1]",
+            "latex": "\\boxed{d_{\\text{odd}} = \\prod_{i=2}^k (a_i + 1)} \\qquad \\boxed{d_{\\text{even}} = a \\cdot d_{\\text{odd}}} \\qquad \\boxed{d_{\\text{sq}} = \\prod_{i=1}^k \\left(\\left\\lfloor \\frac{a_i}{2} \\right\\rfloor + 1\\right)}",
+            "explanation": "NIMCET frequently tests subsets of divisors, such as odd divisors or perfect square divisors.",
+            "mustKnow": true,
+            "shortcut": "🎯 NIMCET Past Paper Question: Find number of square divisors of 360,000.\n360,000 = 36 × 10,000 = (2² × 3²) × (2⁴ × 5⁴) = 2⁶ × 3² × 5⁴.\n• Powers of 2 can be: 0, 2, 4, 6 (4 choices = ⌊6/2⌋+1)\n• Powers of 3 can be: 0, 2 (2 choices = ⌊2/2⌋+1)\n• Powers of 5 can be: 0, 2, 4 (3 choices = ⌊4/2⌋+1)\nTotal square divisors = 4 × 2 × 3 = 24! Solved in seconds."
+          },
+          {
+            "id": "num-euler-totient-phi",
+            "title": "10. Euler's Totient Function φ(N)",
+            "formula": "Count of positive integers ≤ N that are co-prime to N:\nφ(N) = N · (1 - 1/p₁) · (1 - 1/p₂) ··· (1 - 1/pₖ)\n\nKey Properties:\n• φ(p) = p - 1  (for any prime p)\n• φ(p^k) = p^k - p^(k-1) = p^(k-1)(p - 1)\n• φ(m · n) = φ(m) · φ(n)  (if gcd(m, n) = 1)",
+            "latex": "\\boxed{\\varphi(N) = N \\left(1 - \\frac{1}{p_1}\\right) \\left(1 - \\frac{1}{p_2}\\right) \\cdots \\left(1 - \\frac{1}{p_k}\\right)}",
+            "explanation": "Euler's phi function counts how many numbers up to N share no common factor with N other than 1. It is the core exponent reducer in Euler's Theorem.",
+            "mustKnow": true,
+            "shortcut": "🎯 Quick Calculation: φ(12) = 12 × (1 - 1/2) × (1 - 1/3) = 12 × 1/2 × 2/3 = 4 (these are 1, 5, 7, 11).",
+            "remember": "💡 Prime Power Formula: φ(p^k) = p^k(1 - 1/p). For example, φ(8) = 8(1 - 1/2) = 4."
+          }
+        ]
+      },
+      {
+        "id": "num-remainders",
+        "name": "5. Remainder Theorems & Algebraic Divisibility",
+        "description": "Modular arithmetic rules, negative remainders, and aⁿ ± bⁿ factors.",
+        "formulas": [
+          {
+            "id": "num-algebraic-divisibility",
+            "title": "11. Algebraic Divisibility of aⁿ ± bⁿ",
+            "formula": "Core Algebraic Factorizations:\n• aⁿ - bⁿ is ALWAYS divisible by (a - b) for all n ∈ ℕ.\n• aⁿ - bⁿ is divisible by (a + b) ONLY when n is EVEN.\n• aⁿ + bⁿ is divisible by (a + b) ONLY when n is ODD.\n• aⁿ + bⁿ is NEVER divisible by (a - b).\n\nGCD of Power Expressions:\ngcd(aⁿ - 1, aᵐ - 1) = a^gcd(n, m) - 1",
+            "latex": "(a - b) \\mid (a^n - b^n) \\ \\forall n, \\quad (a + b) \\mid (a^n - b^n) \\iff n \\text{ even}, \\quad (a + b) \\mid (a^n + b^n) \\iff n \\text{ odd}",
+            "explanation": "Used to determine divisibility of huge polynomial expressions and powers without computing actual values.",
+            "mustKnow": true,
+            "shortcut": "🎯 Exam Drill: Is 29^37 + 31^37 divisible by 60?\nHere n = 37 is ODD, so aⁿ + bⁿ is divisible by (a + b) = 29 + 31 = 60. Yes, exactly divisible, remainder = 0!",
+            "table": {
+              "headers": [
+                "Expression",
+                "Divisible By Condition"
+              ],
+              "rows": [
+                {
+                  "feature": "aⁿ - bⁿ",
+                  "value": "Always divisible by (a - b) for all n",
+                  "latex": "(a - b) \\mid (a^n - b^n) \\quad \\forall n"
+                },
+                {
+                  "feature": "aⁿ - bⁿ",
+                  "value": "Divisible by (a + b) if and only if n is even",
+                  "latex": "(a + b) \\mid (a^n - b^n) \\iff n \\text{ even}"
+                },
+                {
+                  "feature": "aⁿ + bⁿ",
+                  "value": "Divisible by (a + b) if and only if n is odd",
+                  "latex": "(a + b) \\mid (a^n + b^n) \\iff n \\text{ odd}"
+                },
+                {
+                  "feature": "gcd(aⁿ-1, aᵐ-1)",
+                  "value": "a^gcd(n,m) - 1",
+                  "latex": "\\gcd(a^n-1, a^m-1) = a^{\\gcd(n,m)} - 1"
+                }
+              ]
+            }
+          },
+          {
+            "id": "num-modular-remainder-rules",
+            "title": "12. Modular Remainder Arithmetic & Negative Remainder",
+            "formula": "Modular Operations:\n• (a + b) mod m = [(a mod m) + (b mod m)] mod m\n• (a × b) mod m = [(a mod m) × (b mod m)] mod m\n• a^n mod m = (a mod m)^n mod m\n\nNegative Remainder Concept:\nIf division leaves a remainder of (m - 1), we can write it as -1 mod m.\nIf final remainder is negative (-r), convert to positive remainder: (m - r).",
+            "latex": "\\boxed{(a \\times b) \\bmod m = [(a \\bmod m) \\times (b \\bmod m)] \\bmod m} \\qquad \\boxed{-r \\equiv (m - r) \\pmod m}",
+            "explanation": "Splitting products and sums modulo m simplifies enormous calculations into single-digit operations.",
+            "mustKnow": true,
+            "shortcut": "🎯 NIMCET Classic: Find remainder when 2^31 is divided by 5.\n2^31 = 2 × (2²)^15 = 2 × 4^15.\nSince 4 ≡ -1 (mod 5):\n2 × (-1)^15 = 2 × (-1) = -2 (mod 5).\nConvert negative to positive: 5 - 2 = 3. Remainder is 3!",
+            "remember": "💡 Remainder Range: For divisor m, the remainder r is strictly 0 ≤ r < m."
+          }
+        ]
+      },
+      {
+        "id": "num-modular-theorems",
+        "name": "6. Advanced Modular Theorems (Fermat, Euler & Wilson)",
+        "description": "Power reduction tools for prime and composite moduli.",
+        "formulas": [
+          {
+            "id": "num-fermat-little-theorem",
+            "title": "13. Fermat's Little Theorem",
+            "formula": "If p is a prime number and gcd(a, p) = 1:\na^(p-1) ≡ 1 (mod p)\n\nPower Reduction Shortcut:\na^n ≡ a^(n mod (p-1)) (mod p)",
+            "latex": "\\boxed{a^{p-1} \\equiv 1 \\pmod p} \\implies a^n \\equiv a^{n \\bmod (p-1)} \\pmod p \\quad (\\gcd(a, p) = 1)",
+            "explanation": "Reduces huge powers modulo a prime number by replacing the exponent with its remainder modulo (p - 1).",
+            "mustKnow": true,
+            "shortcut": "🎯 Example: Find remainder of 3^102 divided by 11.\nHere divisor p = 11 (prime), gcd(3, 11) = 1.\np - 1 = 10.\n102 mod 10 = 2.\n3^102 ≡ 3^2 = 9 (mod 11). Remainder is 9!",
+            "remember": "💡 Condition: Fermat's Little Theorem requires the modulus p to be PRIME and gcd(a, p) = 1."
+          },
+          {
+            "id": "num-euler-theorem",
+            "title": "14. Euler's Totient Theorem (Generalization)",
+            "formula": "If gcd(a, m) = 1 (m can be prime OR composite):\na^φ(m) ≡ 1 (mod m)\n\nGeneral Power Reduction:\na^n ≡ a^(n mod φ(m)) (mod m)",
+            "latex": "\\boxed{a^{\\varphi(m)} \\equiv 1 \\pmod m} \\implies a^n \\equiv a^{n \\bmod \\varphi(m)} \\pmod m \\quad (\\gcd(a, m) = 1)",
+            "explanation": "Euler's theorem extends Fermat's theorem to ANY modulus m (composite or prime), using Euler's Totient function φ(m).",
+            "mustKnow": true,
+            "shortcut": "🎯 Example: Remainder of 7^102 divided by 10.\ngcd(7, 10) = 1. φ(10) = 10(1 - 1/2)(1 - 1/5) = 4.\nReduce exponent mod 4: 102 mod 4 = 2.\n7^102 ≡ 7^2 = 49 ≡ 9 (mod 10). Remainder is 9 (same as unit digit)!"
+          },
+          {
+            "id": "num-wilson-crt",
+            "title": "15. Wilson's Theorem & Chinese Remainder Theorem",
+            "formula": "Wilson's Theorem (p is prime):\n• (p - 1)! ≡ -1 ≡ (p - 1) (mod p)\n• (p - 2)! ≡ 1 (mod p)\n\nChinese Remainder Theorem (CRT):\nIf moduli m₁, m₂ are co-prime (gcd = 1), the system:\nx ≡ r₁ (mod m₁) and x ≡ r₂ (mod m₂)\nhas a UNIQUE solution modulo (m₁ × m₂).",
+            "latex": "\\boxed{(p - 1)! \\equiv -1 \\pmod p} \\qquad \\boxed{(p - 2)! \\equiv 1 \\pmod p}",
+            "explanation": "Wilson's theorem yields immediate factorials modulo primes. CRT solves systems of modular congruences.",
+            "mustKnow": true,
+            "shortcut": "🎯 Direct NIMCET Question: Remainder when 28! is divided by 29.\nSince 29 is prime, by Wilson's Theorem: (29 - 1)! = 28! ≡ -1 ≡ 28 (mod 29). Answer is 28!"
+          }
+        ]
+      },
+      {
+        "id": "num-trailing-zeros",
+        "name": "7. Trailing Zeros & Legendre's Formula in Factorials",
+        "description": "Counting trailing zeros and highest prime powers in n!.",
+        "formulas": [
+          {
+            "id": "num-legendre-formula",
+            "title": "16. Highest Power of Prime in n! (Legendre's Formula)",
+            "formula": "Highest exponent of prime p that divides n!:\nE_p(n!) = ⌊n/p⌋ + ⌊n/p²⌋ + ⌊n/p³⌋ + ···\n(sum continues until p^k > n)",
+            "latex": "\\boxed{E_p(n!) = \\left\\lfloor \\frac{n}{p} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^2} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^3} \\right\\rfloor + \\cdots}",
+            "explanation": "Finds the exact multiplicity of any prime p in the prime factorization of n! using successive floor divisions.",
+            "mustKnow": true,
+            "shortcut": "🎯 Example: Highest power of 3 dividing 100!\n⌊100/3⌋ = 33\n⌊100/9⌋ = 11\n⌊100/27⌋ = 3\n⌊100/81⌋ = 1\nSum = 33 + 11 + 3 + 1 = 48. So 3^48 divides 100! exactly.",
+            "remember": "💡 Composite Divisors: For composite number m = p^k, first find E_p(n!), then divide by k: ⌊E_p(n!) / k⌋."
+          },
+          {
+            "id": "num-trailing-zeros-count",
+            "title": "17. Number of Trailing Zeros in n! & Products",
+            "formula": "Trailing Zeros in n!:\nZeros = E₅(n!) = ⌊n/5⌋ + ⌊n/25⌋ + ⌊n/125⌋ + ···\n(Since powers of 2 are always more abundant than 5, trailing zeros are governed strictly by the number of 5s)\n\nTrailing Zeros in a Product:\nZeros = min(total powers of 2, total powers of 5)",
+            "latex": "\\boxed{\\text{Trailing Zeros in } n! = \\left\\lfloor \\frac{n}{5} \\right\\rfloor + \\left\\lfloor \\frac{n}{25} \\right\\rfloor + \\left\\lfloor \\frac{n}{125} \\right\\rfloor + \\cdots}",
+            "explanation": "Each trailing zero is created by a factor of 10 = 2 × 5. In any factorial, the prime 5 appears fewer times than 2, so counting 5s gives the exact number of zeros.",
+            "mustKnow": true,
+            "shortcut": "🎯 NIMCET Classic: Trailing zeros in 100!:\n⌊100/5⌋ = 20\n⌊100/25⌋ = 4\nTotal zeros = 20 + 4 = 24 zeros!\n\nTrailing zeros in 60!:\n⌊60/5⌋ = 12\n⌊60/25⌋ = 2\nTotal zeros = 12 + 2 = 14 zeros!",
+            "commonMistake": "⚠️ Non-Factorial Products Trap: In arbitrary products like 25 × 32 × 15, count both 2s and 5s: 25(5²) × 32(2⁵) × 15(3×5) = 2⁵ × 5³ → min(5, 3) = 3 trailing zeros."
+          }
+        ]
+      },
+      {
+        "id": "num-bases",
+        "name": "8. Number Base Conversions (Math & Computer Awareness)",
+        "description": "Binary, Octal, Decimal, and Hexadecimal conversions.",
+        "formulas": [
+          {
+            "id": "num-base-conversions",
+            "title": "18. Positional Weight Conversions (Base b ↔ Decimal)",
+            "formula": "Conversion Rules:\n• Base b to Decimal:\nN_10 = d_(n-1)·b^(n-1) + ··· + d_1·b^1 + d_0·b^0\n\n• Decimal to Base b:\nDivide repeatedly by b and collect remainders from bottom to top (LSB to MSB).",
+            "latex": "\\boxed{N_{10} = \\sum_{i=0}^{n-1} d_i \\cdot b^i = d_{n-1} b^{n-1} + \\dots + d_1 b^1 + d_0 b^0}",
+            "explanation": "Positional number systems express any value as a weighted sum of powers of the base. Essential for both NIMCET Mathematics and Computer Awareness sections.",
+            "mustKnow": true,
+            "shortcut": "🎯 Example: Convert (1101)₂ to Decimal:\n1·2³ + 1·2² + 0·2¹ + 1·2⁰ = 8 + 4 + 0 + 1 = 13₁₀."
+          },
+          {
+            "id": "num-binary-octal-hex",
+            "title": "19. Binary ↔ Octal (Base 8) & Hexadecimal (Base 16)",
+            "formula": "Bit-Grouping Shortcuts:\n• Binary to Octal: Group into blocks of 3 bits from right (since 2³ = 8).\n• Binary to Hexadecimal: Group into blocks of 4 bits from right (since 2⁴ = 16).\n• Hex Digits: A = 10, B = 11, C = 12, D = 13, E = 14, F = 15.",
+            "latex": "\\text{Octal: Group } 3 \\text{ bits } (2^3 = 8) \\qquad \\text{Hex: Group } 4 \\text{ bits } (2^4 = 16)",
+            "explanation": "Direct bit-grouping skips intermediate decimal conversions, allowing 5-second conversions between binary, octal, and hexadecimal.",
+            "mustKnow": true,
+            "shortcut": "🎯 Example: Convert (111011)₂ to Octal and Hex:\n• Octal: (111)(011)₂ = 73₈\n• Hex: (0011)(1011)₂ = 3B₁₆.",
+            "table": {
+              "headers": [
+                "Base System",
+                "Radix & Grouping"
+              ],
+              "rows": [
+                {
+                  "feature": "Binary (Base 2)",
+                  "value": "Digits 0, 1",
+                  "latex": "\\{0, 1\\}"
+                },
+                {
+                  "feature": "Octal (Base 8)",
+                  "value": "Digits 0-7 (Group 3 bits)",
+                  "latex": "2^3 = 8 \\implies 3 \\text{ bits}"
+                },
+                {
+                  "feature": "Hexadecimal (Base 16)",
+                  "value": "Digits 0-9, A-F (Group 4 bits)",
+                  "latex": "2^4 = 16 \\implies 4 \\text{ bits}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "num-nimcet-summary",
+        "name": "9. NIMCET Exam Rapid Recall Cheat Sheet",
+        "description": "10-second mental checklist to diagnose and solve exam problems.",
+        "formulas": [
+          {
+            "id": "num-exam-cheat-sheet",
+            "title": "20. NIMCET Rapid Diagnostic Checklist",
+            "formula": "Exam Strategy Checklist:\n1. Product Rule: a × b = HCF × LCM (strictly 2 numbers!).\n2. Cyclicity: {0,1,5,6}→1, {4,9}→2, {2,3,7,8}→4. If remainder 0, use power 4.\n3. Fermat: Prime modulus p → reduce exponent mod (p - 1).\n4. Euler: Composite modulus m → reduce exponent mod φ(m).\n5. Negative Remainder: Simplify (m - 1) to -1.\n6. Divisors: d(N) = (a₁+1)(a₂+1)... | Squares have odd number of divisors.\n7. Trailing Zeros in n!: Sum ⌊n/5ᵏ⌋ quotients (100! has 24 zeros).\n8. Rule of 1001: 3-digit alternating sum tests 7, 11, 13 together.\n9. Wilson's: (p - 1)! ≡ -1 (mod p) for prime p.\n10. Word Clues: 'Smallest/Least' → LCM; 'Greatest/Largest' → HCF.",
+            "latex": "\\boxed{a \\cdot b = \\gcd \\cdot \\operatorname{lcm}} \\qquad \\boxed{a^{p-1} \\equiv 1 \\pmod p} \\qquad \\boxed{Z(n!) = \\sum \\left\\lfloor \\frac{n}{5^k} \\right\\rfloor}",
+            "explanation": "High-yield mental checklist to diagnose the exact theorem or shortcut required for any NIMCET number system problem in under 10 seconds.",
+            "mustKnow": true,
+            "shortcut": "🎯 10-Second Diagnosis: Check if divisor is prime (use Fermat) or composite (use Euler or coprime factor test).",
+            "table": {
+              "headers": [
+                "Exam Question Type",
+                "Instant Solution Strategy"
+              ],
+              "rows": [
+                {
+                  "feature": "Unit Digit of a^b",
+                  "value": "Last digit of a raised to (b mod cyclicity)",
+                  "latex": "(d_0)^{b \\bmod c}"
+                },
+                {
+                  "feature": "Remainder mod prime p",
+                  "value": "Reduce exponent modulo (p - 1)",
+                  "latex": "b \\bmod (p - 1)"
+                },
+                {
+                  "feature": "Trailing zeros in n!",
+                  "value": "Sum quotients ⌊n/5⌋ + ⌊n/25⌋ + ...",
+                  "latex": "\\sum \\lfloor n/5^k \\rfloor"
+                },
+                {
+                  "feature": "Product of 2 numbers",
+                  "value": "HCF × LCM",
+                  "latex": "\\gcd \\times \\operatorname{lcm}"
+                },
+                {
+                  "feature": "Bells / Lights together",
+                  "value": "LCM of interval times",
+                  "latex": "\\operatorname{lcm}(\\text{intervals})"
+                },
+                {
+                  "feature": "Dividing with same remainder",
+                  "value": "HCF of pairwise differences",
+                  "latex": "\\gcd(|x-y|, |y-z|, |z-x|)"
+                }
+              ]
+            }
           }
         ]
       }
