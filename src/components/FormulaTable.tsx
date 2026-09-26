@@ -24,20 +24,22 @@ export const FormulaTable: React.FC<FormulaTableProps> = ({
     >
       <table className="w-full text-left border-collapse min-w-full">
         <thead>
-          <tr className="bg-gradient-to-r from-purple-500/10 via-indigo-500/5 to-purple-500/10 dark:from-purple-950/40 dark:via-indigo-950/20 dark:to-purple-950/40 border-b border-[var(--border)]">
+          <tr className="border-b border-purple-300/80 dark:border-purple-400/30">
             <th
               scope="col"
-              className={`font-heading font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300 border-r border-[var(--border)] ${
-                compact ? 'px-2.5 sm:px-3 py-1.5 sm:py-2 text-[10px] w-2/5 min-w-[75px]' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[11px] w-1/3 min-w-[85px] sm:min-w-[130px]'
+              className={`font-heading font-bold uppercase tracking-wider border-r border-purple-300/80 dark:border-purple-400/30 ${
+                compact ? 'px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs w-2/5 min-w-[75px]' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[13px] w-1/3 min-w-[85px] sm:min-w-[130px]'
               }`}
+              style={{ backgroundColor: '#c3b1fb', color: '#9700fd' }}
             >
               {featureHeader}
             </th>
             <th
               scope="col"
-              className={`font-heading font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300 ${
-                compact ? 'px-2.5 sm:px-3 py-1.5 sm:py-2 text-[10px]' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[11px]'
+              className={`font-heading font-bold uppercase tracking-wider ${
+                compact ? 'px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[13px]'
               }`}
+              style={{ backgroundColor: '#c3b1fb', color: '#9700fd' }}
             >
               {valueHeader}
             </th>
@@ -52,31 +54,33 @@ export const FormulaTable: React.FC<FormulaTableProps> = ({
               >
                 {/* Feature Column */}
                 <td
-                  className={`font-medium text-[var(--ink)] bg-slate-500/[0.02] border-r border-[var(--border)] align-middle leading-snug break-words ${
-                    compact ? 'px-2.5 sm:px-3 py-1.5 text-[11px]' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-[13px]'
+                  className={`font-normal text-[var(--ink)] bg-slate-500/[0.02] border-r border-[var(--border)] align-middle leading-snug break-words ${
+                    compact ? 'px-2.5 sm:px-3 py-2' : 'px-2.5 sm:px-3.5 py-2.5 sm:py-3'
                   }`}
+                  style={{ fontSize: '16px', fontWeight: 'normal' }}
                 >
-                  <FormattedText text={row.feature} />
+                  <FormattedText text={row.feature} className="text-[16px] font-normal" />
                 </td>
 
                 {/* Formula / Value Column */}
                 <td
                   className={`text-[var(--ink)] align-middle select-all leading-normal break-words ${
-                    compact ? 'px-2.5 sm:px-3 py-1.5 text-xs' : 'px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm'
+                    compact ? 'px-2.5 sm:px-3 py-1.5 text-base' : 'px-2.5 sm:px-3.5 py-2.5 sm:py-3 text-[21px]'
                   }`}
+                  style={{ fontSize: '21px' }}
                 >
                   {row.latex ? (
-                    <div className="overflow-x-auto py-0.5 max-w-full min-w-0">
+                    <div className="overflow-x-auto py-0.5 max-w-full min-w-0" style={{ fontSize: '21px' }}>
                       <MathRenderer
                         latex={row.latex}
                         math={row.value}
                         displayMode={false}
-                        className="inline-block text-left"
+                        className="inline-block text-left text-[21px]"
                       />
                     </div>
                   ) : (
-                    <div className="overflow-x-auto py-0.5 max-w-full min-w-0 font-mono text-xs">
-                      <FormattedText text={row.value} />
+                    <div className="overflow-x-auto py-0.5 max-w-full min-w-0 font-mono text-[16px]" style={{ fontSize: '16px' }}>
+                      <FormattedText text={row.value} className="text-[16px]" />
                     </div>
                   )}
                 </td>
