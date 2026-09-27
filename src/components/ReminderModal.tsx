@@ -4,22 +4,22 @@ import {
   Clock,
   Check,
   X,
-  Play,
-  Pause,
   Send,
   Sparkles,
   Flame,
   Info,
-  BookOpen,
   CheckCircle2,
   AlertTriangle,
-  RotateCcw,
   Zap,
+  Activity,
+  Smartphone,
+  ChevronDown,
+  RefreshCw,
+  Timer,
 } from 'lucide-react';
 import { TOPICS_DATA } from '../data/topics';
 import { ReminderSettings, SpacedRepetitionStats } from '../types/reminder';
 import {
-  DEFAULT_REMINDER_SETTINGS,
   getNextFormulasForReminder,
   getNextScheduledSlot,
   getSpacedRepetitionStats,
@@ -30,9 +30,12 @@ import {
   getNotificationPermission,
   requestNotificationPermission,
   sendTestNotificationNow,
+  scheduleBackgroundPushTest,
+  syncSettingsWithServer,
+  subscribeToPushNotifications,
+  getNotificationDiagnostics,
   NotificationPermissionState,
 } from '../utils/notificationService';
-import { MathRenderer } from './MathRenderer';
 
 interface ReminderModalProps {
   isOpen: boolean;
@@ -50,9 +53,21 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
   const [settings, setSettings] = useState<ReminderSettings>(loadReminderSettings);
   const [permission, setPermission] = useState<NotificationPermissionState>(getNotificationPermission);
   const [testSent, setTestSent] = useState(false);
+  const [bgTestScheduled, setBgTestScheduled] = useState<number | null>(null);
+  const [showDiagnostics, setShowDiagnostics] = useState(true);
+  const [diagnosticsData, setDiagnosticsData] = useState<any>(null);
+  const [isLoadingDiagnostics, setIsLoadingDiagnostics] = useState(false);
+  const [nearFutureSet, setNearFutureSet] = useState<string | null>(null);
   const [stats, setStats] = useState<SpacedRepetitionStats>(() =>
     getSpacedRepetitionStats(settings.selectedTopicIds)
   );
+
+  const refreshDiagnostics = async () => {
+    setIsLoadingDiagnostics(true);
+    const data = await getNotificationDiagnostics();
+    setDiagnosticsData(data);
+    setIsLoadingDiagnostics(false);
+  };
 
   // Sync settings and stats whenever modal opens
   useEffect(() => {
@@ -62,8 +77,24 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
       setPermission(getNotificationPermission());
       setStats(getSpacedRepetitionStats(current.selectedTopicIds));
       setTestSent(false);
+      setBgTestScheduled(null);
+      refreshDiagnostics();
+
+      // If permission is already granted, ensure push subscription is active on server
+      if (getNotificationPermission() === 'granted') {
+        subscribeToPushNotifications(current).catch(() => {});
+      }
     }
   }, [isOpen]);
+
+  // Handle countdown timer for background test
+  useEffect(() => {
+    if (bgTestScheduled === null || bgTestScheduled <= 0) return;
+    const timer = setInterval(() => {
+      setBgTestScheduled((prev) => (prev !== null && prev > 1 ? prev - 1 : null));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [bgTestScheduled]);
 
   // Compute next scheduled reminder slot preview
   const nextSlot = useMemo(() => {
@@ -76,37 +107,50 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleToggleEnabled = () => {
+  const handleToggleEnabled = async () => {
     const updated = { ...settings, enabled: !settings.enabled };
     setSettings(updated);
     saveReminderSettings(updated);
+    await syncSettingsWithServer(updated);
+
+    // If enabling and permission not requested yet, prompt permission flow
+    if (updated.enabled && permission === 'default') {
+      const newPerm = await requestNotificationPermission();
+      setPermission(newPerm);
+      if (newPerm === 'granted') {
+        await subscribeToPushNotifications(updated);
+      }
+    }
   };
 
-  const handleUpdateFormulasPerNotification = (count: 1 | 2) => {
+  const handleUpdateFormulasPerNotification = async (count: 1 | 2) => {
     const updated = { ...settings, formulasPerNotification: count };
     setSettings(updated);
     saveReminderSettings(updated);
+    await syncSettingsWithServer(updated);
   };
 
-  const handleUpdateRemindersPerDay = (count: 2 | 3) => {
+  const handleUpdateRemindersPerDay = async (count: 2 | 3) => {
     const times = count === 2 ? ['09:00', '19:00'] : ['09:00', '14:00', '20:00'];
     const updated = { ...settings, remindersPerDay: count, times };
     setSettings(updated);
     saveReminderSettings(updated);
+    await syncSettingsWithServer(updated);
   };
 
-  const handleUpdateTime = (index: number, newTime: string) => {
+  const handleUpdateTime = async (index: number, newTime: string) => {
     const newTimes = [...settings.times];
     newTimes[index] = newTime;
     const updated = { ...settings, times: newTimes };
     setSettings(updated);
     saveReminderSettings(updated);
+    await syncSettingsWithServer(updated);
   };
 
-  const handleToggleTopic = (topicId: string) => {
+  const handleToggleTopic = async (topicId: string) => {
     let newSelected: string[];
     if (settings.selectedTopicIds.includes(topicId)) {
-      newSelected = settings.selectedTopicIds.filter(id => id !== topicId);
+      newSelected = settings.selectedTopicIds.filter((id) => id !== topicId);
     } else {
       newSelected = [...settings.selectedTopicIds, topicId];
     }
@@ -114,17 +158,19 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
     setSettings(updated);
     saveReminderSettings(updated);
     setStats(getSpacedRepetitionStats(newSelected));
+    await syncSettingsWithServer(updated);
   };
 
-  const handleSelectAllTopics = () => {
-    const allIds = TOPICS_DATA.map(t => t.id);
+  const handleSelectAllTopics = async () => {
+    const allIds = TOPICS_DATA.map((t) => t.id);
     const updated = { ...settings, selectedTopicIds: allIds };
     setSettings(updated);
     saveReminderSettings(updated);
     setStats(getSpacedRepetitionStats(allIds));
+    await syncSettingsWithServer(updated);
   };
 
-  const handleSelectHighYieldTopics = () => {
+  const handleSelectHighYieldTopics = async () => {
     const highYieldIds = [
       'trigonometry',
       'matrices-determinants',
@@ -139,24 +185,55 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
     setSettings(updated);
     saveReminderSettings(updated);
     setStats(getSpacedRepetitionStats(highYieldIds));
+    await syncSettingsWithServer(updated);
   };
 
-  const handleClearAllTopics = () => {
+  const handleClearAllTopics = async () => {
     const updated = { ...settings, selectedTopicIds: [] };
     setSettings(updated);
     saveReminderSettings(updated);
     setStats(getSpacedRepetitionStats([]));
+    await syncSettingsWithServer(updated);
   };
 
   const handleRequestPermission = async () => {
     const newPerm = await requestNotificationPermission();
     setPermission(newPerm);
+    if (newPerm === 'granted') {
+      await subscribeToPushNotifications(settings);
+      refreshDiagnostics();
+    }
   };
 
   const handleSendTestNotification = async () => {
     setTestSent(true);
     await sendTestNotificationNow(settings);
     setTimeout(() => setTestSent(false), 3000);
+    refreshDiagnostics();
+  };
+
+  const handleScheduleBackgroundTest = async () => {
+    setBgTestScheduled(15);
+    await scheduleBackgroundPushTest(15);
+    refreshDiagnostics();
+  };
+
+  const handleSetNearFutureTestTime = async () => {
+    const now = new Date();
+    // 2 minutes in the future for scheduled test
+    now.setMinutes(now.getMinutes() + 2);
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const targetTime = `${h}:${m}`;
+    const newTimes = [...settings.times];
+    newTimes[0] = targetTime;
+    const updated = { ...settings, times: newTimes };
+    setSettings(updated);
+    saveReminderSettings(updated);
+    await syncSettingsWithServer(updated);
+    setNearFutureSet(targetTime);
+    refreshDiagnostics();
+    setTimeout(() => setNearFutureSet(null), 10000);
   };
 
   const formatCountdown = (mins: number) => {
@@ -173,7 +250,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
       aria-modal="true"
       aria-label="Formula Reminder Settings"
       className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
-      onClick={e => {
+      onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
@@ -189,7 +266,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
                 Daily Formula Reminders
               </h2>
               <p className="text-xs text-[var(--ink-muted)]">
-                Spaced repetition & automated micro-revision
+                Native push notifications & spaced micro-revision
               </p>
             </div>
           </div>
@@ -211,10 +288,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
                   <span>Active</span>
                 </>
               ) : (
-                <>
-                  <Pause className="w-3.5 h-3.5" />
-                  <span>Paused</span>
-                </>
+                <span>Paused</span>
               )}
             </button>
 
@@ -272,25 +346,43 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
               </p>
             )}
 
-            {/* Action Buttons */}
+            {/* Action Buttons & Mobile Background Push Test */}
             <div className="flex flex-wrap items-center justify-between gap-2 mt-3 pt-2 border-t border-purple-300/20">
-              <button
-                onClick={handleSendTestNotification}
-                disabled={testSent}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs transition-all shadow-sm active:scale-95 disabled:opacity-50"
-              >
-                {testSent ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>Notification Sent!</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Send Test Reminder Now</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2 flex-wrap">
+                <button
+                  onClick={handleSendTestNotification}
+                  disabled={testSent}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                  title="Sends immediate notification"
+                >
+                  {testSent ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Sent!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Test Push Now</span>
+                    </>
+                  )}
+                </button>
+
+                {/* 15s Background Push Test */}
+                <button
+                  onClick={handleScheduleBackgroundTest}
+                  disabled={bgTestScheduled !== null}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                  title="Schedule test, close the app on your phone, and verify native delivery"
+                >
+                  <Timer className="w-3.5 h-3.5" />
+                  <span>
+                    {bgTestScheduled !== null
+                      ? `Close app now! (${bgTestScheduled}s)`
+                      : 'Test Background Push (15s delay)'}
+                  </span>
+                </button>
+              </div>
 
               <button
                 onClick={() => {
@@ -303,42 +395,84 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
                 <span>Practice Daily Queue</span>
               </button>
             </div>
+
+            {bgTestScheduled !== null && (
+              <div className="mt-2.5 p-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-[11px] text-indigo-900 dark:text-indigo-200 animate-pulse">
+                📲 <strong>Mobile Test Active:</strong> Close or minimize the app now. In{' '}
+                <strong>{bgTestScheduled} seconds</strong>, the server will wake up your phone with a native formula reminder!
+              </div>
+            )}
           </div>
 
-          {/* Section 2: Notification Permission Status Callout */}
-          <div className="rounded-2xl p-3.5 sm:p-4 border text-xs flex items-start gap-3 bg-[var(--card)] border-[var(--border)]">
-            <div className="shrink-0 mt-0.5">
-              {permission === 'granted' ? (
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-              ) : permission === 'denied' ? (
-                <AlertTriangle className="w-5 h-5 text-amber-500" />
-              ) : (
-                <Bell className="w-5 h-5 text-purple-600" />
+          {/* Section 2: Notification Permission Status Callout & Guided Flow */}
+          <div className="rounded-2xl p-3.5 sm:p-4 border text-xs flex flex-col gap-3 bg-[var(--card)] border-[var(--border)]">
+            <div className="flex items-start gap-3">
+              <div className="shrink-0 mt-0.5">
+                {permission === 'granted' ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                ) : permission === 'denied' ? (
+                  <AlertTriangle className="w-5 h-5 text-rose-500" />
+                ) : (
+                  <Bell className="w-5 h-5 text-purple-600" />
+                )}
+              </div>
+              <div className="flex-1">
+                <div className="font-heading font-bold text-sm text-[var(--ink)]">
+                  {permission === 'granted'
+                    ? 'Native Mobile Notifications: Active & Scheduled'
+                    : permission === 'denied'
+                    ? 'Notifications Blocked on Device'
+                    : 'Enable Daily Formula Notifications'}
+                </div>
+                <p className="text-[var(--ink-muted)] text-xs mt-0.5 leading-relaxed">
+                  {permission === 'granted'
+                    ? 'Registered with device push service. Reminders will arrive in your phone notification panel even when the app is completely closed.'
+                    : permission === 'denied'
+                    ? 'Notification permissions are currently denied in your browser or phone settings. Follow the instructions below to enable.'
+                    : 'Receive 1–2 key formulas 2–3 times a day on your device lock screen for spaced repetition and memory retention.'}
+                </p>
+              </div>
+              {permission === 'default' && (
+                <button
+                  onClick={handleRequestPermission}
+                  className="shrink-0 px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition-colors shadow-sm"
+                >
+                  Enable Now
+                </button>
+              )}
+              {permission === 'denied' && (
+                <button
+                  onClick={async () => {
+                    const perm = await requestNotificationPermission();
+                    setPermission(perm);
+                    refreshDiagnostics();
+                  }}
+                  className="shrink-0 px-3 py-1.5 rounded-xl bg-purple-600/10 hover:bg-purple-600/20 text-purple-700 dark:text-purple-300 font-bold text-xs transition-colors border border-purple-400/30"
+                >
+                  Re-check
+                </button>
               )}
             </div>
-            <div className="flex-1">
-              <div className="font-heading font-bold text-sm text-[var(--ink)]">
-                {permission === 'granted'
-                  ? 'System Notifications Enabled'
-                  : permission === 'denied'
-                  ? 'Notifications Blocked in Browser'
-                  : 'Enable Phone & Desktop Notifications'}
+
+            {/* Instructions shown when permission is denied */}
+            {permission === 'denied' && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-[11px] text-[var(--ink)] space-y-1.5">
+                <div className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>How to enable notifications on your mobile device:</span>
+                </div>
+                <ul className="list-disc pl-4 space-y-1 text-[var(--ink-muted)]">
+                  <li>
+                    <strong>Android (Chrome / Samsung Internet):</strong> Tap the 🔒 or ⚙️ icon in the address bar → tap <em>Site Settings</em> or <em>Permissions</em> → set <em>Notifications</em> to <strong>Allow</strong>.
+                  </li>
+                  <li>
+                    <strong>iPhone / iPad (iOS Safari):</strong> First add this app to your Home Screen (Share icon → <em>Add to Home Screen</em>). Then open iOS <em>Settings → FormulaHub → Notifications → Allow Notifications</em>.
+                  </li>
+                  <li>
+                    After allowing, tap the <strong>Re-check</strong> button above.
+                  </li>
+                </ul>
               </div>
-              <p className="text-[var(--ink-muted)] text-xs mt-0.5 leading-relaxed">
-                {permission === 'granted'
-                  ? 'You will receive scheduled formula reminders directly on your device even when the app is minimized.'
-                  : permission === 'denied'
-                  ? 'Your browser is currently blocking notifications. Reminders will still display as interactive in-app banners whenever you open the app.'
-                  : 'Receive 1–2 key formulas 2–3 times a day on your device lock screen for frictionless daily memory retention.'}
-              </p>
-            </div>
-            {permission === 'default' && (
-              <button
-                onClick={handleRequestPermission}
-                className="shrink-0 px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition-colors shadow-sm"
-              >
-                Allow
-              </button>
             )}
           </div>
 
@@ -417,15 +551,38 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
 
             {/* Daily Schedule Slots */}
             <div className="p-3.5 rounded-2xl bg-[var(--bg)] border border-[var(--border)]">
-              <span className="block font-semibold text-xs text-[var(--ink)] mb-2">
-                Preferred Reminder Times:
-              </span>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span className="font-semibold text-xs text-[var(--ink)]">
+                  Preferred Reminder Times (Local Time):
+                </span>
+                <button
+                  onClick={handleSetNearFutureTestTime}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 transition-colors border border-purple-400/20 flex items-center gap-1"
+                  title="Sets Slot 1 to 2 minutes from now so you can close the app and verify native notification delivery!"
+                >
+                  <Timer className="w-3 h-3" />
+                  <span>Set Test Time (+2 mins)</span>
+                </button>
+              </div>
+
+              {nearFutureSet && (
+                <div className="mb-2 p-2 rounded-xl bg-purple-500/15 border border-purple-500/30 text-[11px] text-purple-900 dark:text-purple-200">
+                  ⏱️ <strong>Slot 1 set to {nearFutureSet}!</strong> Now close this app completely on your mobile phone, wait until {nearFutureSet}, and verify the formula appears in your phone notification shade.
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 {settings.times.slice(0, settings.remindersPerDay).map((time, idx) => {
                   const label =
                     settings.remindersPerDay === 2
-                      ? idx === 0 ? '🌅 Morning' : '🌙 Evening'
-                      : idx === 0 ? '🌅 Morning' : idx === 1 ? '☀️ Afternoon' : '🌙 Evening';
+                      ? idx === 0
+                        ? '🌅 Morning'
+                        : '🌙 Evening'
+                      : idx === 0
+                      ? '🌅 Morning'
+                      : idx === 1
+                      ? '☀️ Afternoon'
+                      : '🌙 Evening';
 
                   return (
                     <div key={idx} className="flex flex-col gap-1">
@@ -435,7 +592,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
                       <input
                         type="time"
                         value={time}
-                        onChange={e => handleUpdateTime(idx, e.target.value)}
+                        onChange={(e) => handleUpdateTime(idx, e.target.value)}
                         className="w-full px-3 py-1.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-xs font-mono font-bold text-[var(--ink)] focus:outline-none focus:ring-2 focus:ring-purple-500"
                       />
                     </div>
@@ -535,7 +692,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
 
             {/* Topics Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-              {TOPICS_DATA.map(topic => {
+              {TOPICS_DATA.map((topic) => {
                 const isSelected = settings.selectedTopicIds.includes(topic.id);
                 const formulaCount = topic.categories.reduce((acc, c) => acc + c.formulas.length, 0);
 
@@ -575,13 +732,155 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
               })}
             </div>
           </div>
+
+          {/* Section 6: Notification Diagnostics (Mandated for debugging) */}
+          <div className="border border-[var(--border)] rounded-2xl overflow-hidden">
+            <button
+              onClick={() => {
+                setShowDiagnostics(!showDiagnostics);
+                if (!showDiagnostics) refreshDiagnostics();
+              }}
+              className="w-full flex items-center justify-between p-3.5 bg-slate-500/5 hover:bg-slate-500/10 transition-colors text-left"
+            >
+              <div className="flex items-center gap-2">
+                <Activity className="w-4 h-4 text-purple-600" />
+                <span className="font-heading font-bold text-xs text-[var(--ink)]">
+                  Notification Diagnostics & Mobile PWA Status
+                </span>
+              </div>
+              <ChevronDown
+                className={`w-4 h-4 text-[var(--ink-muted)] transition-transform duration-200 ${
+                  showDiagnostics ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {showDiagnostics && (
+              <div className="p-3.5 bg-[var(--card)] border-t border-[var(--border)] space-y-2 text-[11px] font-mono">
+                <div className="flex items-center justify-between pb-1 border-b border-[var(--border)] font-sans font-semibold text-[var(--ink-muted)]">
+                  <span>Diagnostic Item</span>
+                  <button
+                    onClick={refreshDiagnostics}
+                    className="flex items-center gap-1 text-purple-600 dark:text-purple-400 hover:underline"
+                  >
+                    <RefreshCw className={`w-3 h-3 ${isLoadingDiagnostics ? 'animate-spin' : ''}`} />
+                    <span>Refresh</span>
+                  </button>
+                </div>
+
+                {/* 1. Notification support */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Notification support:</span>
+                  <span className="font-bold text-right text-[var(--ink)]">
+                    {diagnosticsData?.notificationSupported || 'Checking...'}
+                  </span>
+                </div>
+
+                {/* 2. Permission */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Permission:</span>
+                  <span
+                    className={`font-bold text-right ${
+                      diagnosticsData?.permission === 'Granted'
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : diagnosticsData?.permission === 'Denied'
+                        ? 'text-rose-600 dark:text-rose-400'
+                        : 'text-amber-600 dark:text-amber-400'
+                    }`}
+                  >
+                    {diagnosticsData?.permission || 'Checking...'}
+                  </span>
+                </div>
+
+                {/* 3. Service worker */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Service worker:</span>
+                  <span className="font-bold text-right text-[var(--ink)]">
+                    {diagnosticsData?.serviceWorker || 'Checking...'}
+                  </span>
+                </div>
+
+                {/* 4. Service worker state */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Service worker state:</span>
+                  <span className="font-bold text-right text-purple-600 dark:text-purple-400 truncate">
+                    {diagnosticsData?.serviceWorkerState || 'None'}
+                  </span>
+                </div>
+
+                {/* 5. PWA installation status */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">PWA installation status:</span>
+                  <span className="font-bold text-right text-[var(--ink)] truncate">
+                    {diagnosticsData?.pwaInstallationStatus || 'Checking...'}
+                  </span>
+                </div>
+
+                {/* 6. Scheduled reminder count */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Scheduled reminder count:</span>
+                  <span className="font-bold text-right text-[var(--ink)]">
+                    {diagnosticsData?.scheduledReminderCount || `${settings.remindersPerDay} per day`}
+                  </span>
+                </div>
+
+                {/* 7. Next reminder time */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Next reminder time:</span>
+                  <span className="font-bold text-right text-[var(--ink)]">
+                    {diagnosticsData?.nextReminderTime || nextSlot.timeStr}
+                  </span>
+                </div>
+
+                {/* 8. Last notification attempt */}
+                <div className="grid grid-cols-2 gap-1 py-1 border-b border-[var(--border)]/50">
+                  <span className="text-[var(--ink-muted)] font-sans">Last notification attempt:</span>
+                  <span className="font-bold text-right text-[var(--ink)] truncate">
+                    {diagnosticsData?.lastNotificationAttempt || 'None yet'}
+                  </span>
+                </div>
+
+                {/* 9. Any notification/scheduling error */}
+                <div className="grid grid-cols-2 gap-1 py-1">
+                  <span className="text-[var(--ink-muted)] font-sans">Any notification/scheduling error:</span>
+                  <span
+                    className={`font-bold text-right truncate ${
+                      diagnosticsData?.notificationError && diagnosticsData.notificationError !== 'None'
+                        ? 'text-rose-600 dark:text-rose-400'
+                        : 'text-emerald-600 dark:text-emerald-400'
+                    }`}
+                  >
+                    {diagnosticsData?.notificationError || 'None'}
+                  </span>
+                </div>
+
+                {/* Additional Web Push details for verification */}
+                <div className="mt-2 pt-2 border-t border-[var(--border)]/80 text-[10px] text-[var(--ink-muted)] space-y-1">
+                  <div className="flex justify-between">
+                    <span>Web Push Service:</span>
+                    <span className="font-semibold text-[var(--ink)]">{diagnosticsData?.serverVapidStatus}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Device Subscription:</span>
+                    <span className="font-semibold text-[var(--ink)]">
+                      {diagnosticsData?.hasPushSubscription ? 'Active & Synced' : 'Not Subscribed'}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>HTTPS Connection:</span>
+                    <span className="font-semibold text-[var(--ink)]">{diagnosticsData?.isHttps ? 'Yes (Secure)' : 'No'}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Modal Footer */}
         <div className="p-3.5 sm:p-4 border-t border-[var(--border)] bg-[var(--card)] flex items-center justify-between gap-3 shrink-0">
           <div className="text-[11px] text-[var(--ink-muted)] flex items-center gap-1.5">
             <Info className="w-3.5 h-3.5 text-purple-600 shrink-0" />
-            <span>Settings save automatically and persist across app sessions.</span>
+            <span>Reminders schedule on server to deliver even when app is closed.</span>
           </div>
 
           <button
