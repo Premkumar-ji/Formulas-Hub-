@@ -34,6 +34,7 @@ import {
   syncSettingsWithServer,
   subscribeToPushNotifications,
   getNotificationDiagnostics,
+  getApiBaseUrl,
   NotificationPermissionState,
 } from '../utils/notificationService';
 
@@ -861,15 +862,25 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({
                     <span className="font-semibold text-[var(--ink)]">{diagnosticsData?.serverVapidStatus}</span>
                   </div>
                   <div className="flex justify-between">
+                    <span>Push Server Target:</span>
+                    <span className="font-semibold text-purple-600 dark:text-purple-400">
+                      {getApiBaseUrl() ? 'Cloud Run Backend (Remote Push Sync)' : 'Cloud Run Backend (Direct Sync)'}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
                     <span>Device Subscription:</span>
                     <span className="font-semibold text-[var(--ink)]">
-                      {diagnosticsData?.hasPushSubscription ? 'Active & Synced' : 'Not Subscribed'}
+                      {diagnosticsData?.hasPushSubscription ? 'Active & Synced ✅' : 'Not Subscribed'}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>HTTPS Connection:</span>
                     <span className="font-semibold text-[var(--ink)]">{diagnosticsData?.isHttps ? 'Yes (Secure)' : 'No'}</span>
                   </div>
+                </div>
+
+                <div className="mt-2.5 p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[10px] text-amber-900 dark:text-amber-200">
+                  📱 <strong>Mobile Lock-Screen Tip:</strong> Android power-saving can delay lock-screen notifications. For instant delivery while the screen is off, set Battery usage to <em>"Unrestricted"</em> in <em>Settings → Apps → Chrome / FormulaHub → Battery</em>.
                 </div>
               </div>
             )}

@@ -1,4 +1,4 @@
-import { TopicData } from '../types/formula';
+import type { TopicData } from '../types/formula.ts';
 
 export const CATEGORY_GROUPS = [
   'All',

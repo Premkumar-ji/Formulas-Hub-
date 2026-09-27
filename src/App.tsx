@@ -13,7 +13,11 @@ import { ReminderModal } from './components/ReminderModal';
 import { DailyPracticeModal } from './components/DailyPracticeModal';
 import { InAppReminderBanner } from './components/InAppReminderBanner';
 import { loadReminderSettings } from './utils/spacedRepetition';
-import { checkAndTriggerScheduledReminders } from './utils/notificationService';
+import { 
+  checkAndTriggerScheduledReminders, 
+  getNotificationPermission, 
+  subscribeToPushNotifications 
+} from './utils/notificationService';
 import { 
   getInitialTextFont, 
   getInitialNumberFont, 
@@ -112,8 +116,15 @@ export default function App() {
     }
   }, [isDark]);
 
-  // Background reminder scheduler ticker
+  // Background reminder scheduler ticker & push sync
   useEffect(() => {
+    const settings = loadReminderSettings();
+    if (settings.enabled && getNotificationPermission() === 'granted') {
+      subscribeToPushNotifications(settings).catch((err) => {
+        console.warn('Auto-sync push subscription on launch:', err);
+      });
+    }
+
     checkAndTriggerScheduledReminders();
 
     // Check periodically for scheduled notification slots

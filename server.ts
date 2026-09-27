@@ -4,13 +4,24 @@ import fs from 'fs';
 import crypto from 'crypto';
 import webpush from 'web-push';
 import { fileURLToPath } from 'url';
-import { TOPICS_DATA } from './src/data/topics.js';
+import { TOPICS_DATA } from './src/data/topics.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Enable CORS for all origins (supports mobile clients accessing via GitHub Pages)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use(express.json());
 
@@ -20,7 +31,12 @@ if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
-// 1. Persistent VAPID keys management
+// 1. Persistent VAPID keys management (with stable permanent fallback)
+const DEFAULT_VAPID_KEYS = {
+  publicKey: 'BIhc9mRmN9NkjDoiKGAq8JO4XZrGQyB-ZpWcF7ivz4pTxnDiLMR8f1fWciScjcOnAbaNmWM8Uw1mhD-6-IFWisQ',
+  privateKey: 'jiAxK0IGy_g9VHYbPp1vXOqIO3bAsqrlzyzSxhAWDGo',
+};
+
 const VAPID_FILE = path.join(DATA_DIR, 'vapid-keys.json');
 let vapidKeys: { publicKey: string; privateKey: string };
 
@@ -28,11 +44,11 @@ if (fs.existsSync(VAPID_FILE)) {
   try {
     vapidKeys = JSON.parse(fs.readFileSync(VAPID_FILE, 'utf8'));
   } catch {
-    vapidKeys = webpush.generateVAPIDKeys();
+    vapidKeys = DEFAULT_VAPID_KEYS;
     fs.writeFileSync(VAPID_FILE, JSON.stringify(vapidKeys, null, 2), 'utf8');
   }
 } else {
-  vapidKeys = webpush.generateVAPIDKeys();
+  vapidKeys = DEFAULT_VAPID_KEYS;
   fs.writeFileSync(VAPID_FILE, JSON.stringify(vapidKeys, null, 2), 'utf8');
 }
 

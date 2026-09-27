@@ -8,6 +8,25 @@ import {
 
 export type NotificationPermissionState = 'granted' | 'denied' | 'default' | 'unsupported';
 
+/**
+ * Returns the backend API base URL.
+ * When running on GitHub Pages (premkumar-ji.github.io), routes push notifications
+ * to the deployed full-stack server on Cloud Run.
+ */
+export function getApiBaseUrl(): string {
+  if (typeof window === 'undefined') return '';
+  // Support optional environment variable if set
+  if ((import.meta as any).env?.VITE_BACKEND_URL) {
+    return (import.meta as any).env.VITE_BACKEND_URL;
+  }
+  // If hosted on GitHub Pages or custom static host without backend
+  if (window.location.hostname.includes('github.io')) {
+    return 'https://ais-pre-zkyer35ttio5giprjr7hqy-586224172541.asia-southeast1.run.app';
+  }
+  // Local or full-stack deployment
+  return '';
+}
+
 export function isNotificationSupported(): boolean {
   return typeof window !== 'undefined' && 'Notification' in window;
 }
@@ -112,13 +131,36 @@ export async function subscribeToPushNotifications(
       return null;
     }
 
-    let subscription = await registration.pushManager.getSubscription();
+    const apiUrl = getApiBaseUrl();
 
     // 1. Fetch server VAPID public key
-    const res = await fetch('/api/reminders/vapid-public-key');
+    const res = await fetch(`${apiUrl}/api/reminders/vapid-public-key`);
     if (!res.ok) throw new Error('Failed to fetch VAPID key from server');
     const { publicKey } = await res.json();
     const convertedVapidKey = urlBase64ToUint8Array(publicKey);
+
+    let subscription = await registration.pushManager.getSubscription();
+
+    // Verify existing subscription key matches current server key
+    if (subscription) {
+      let keyMatches = false;
+      const existingKey = subscription.options?.applicationServerKey;
+      if (existingKey) {
+        const existingBytes = new Uint8Array(existingKey);
+        if (existingBytes.length === convertedVapidKey.length) {
+          keyMatches = existingBytes.every((b, i) => b === convertedVapidKey[i]);
+        }
+      }
+      if (!keyMatches) {
+        console.log('🔄 Outdated VAPID key detected on device. Unsubscribing old subscription...');
+        try {
+          await subscription.unsubscribe();
+        } catch {
+          // ignore
+        }
+        subscription = null;
+      }
+    }
 
     if (!subscription) {
       // 2. Subscribe via PushManager
@@ -126,12 +168,12 @@ export async function subscribeToPushNotifications(
         userVisibleOnly: true,
         applicationServerKey: convertedVapidKey as unknown as BufferSource,
       });
-      console.log('✅ Created new PushSubscription on device:', subscription.endpoint.slice(0, 30) + '...');
+      console.log('✅ Created fresh PushSubscription on device:', subscription.endpoint.slice(0, 30) + '...');
     }
 
     // 3. Register subscription and preferences with backend
     const timezoneOffset = new Date().getTimezoneOffset(); // e.g. -330 for IST UTC+5:30
-    await fetch('/api/reminders/subscribe', {
+    const subRes = await fetch(`${apiUrl}/api/reminders/subscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -140,6 +182,9 @@ export async function subscribeToPushNotifications(
         timezoneOffset,
       }),
     });
+    if (!subRes.ok) {
+      throw new Error(`Subscribe failed with HTTP ${subRes.status}`);
+    }
 
     console.log('✅ Push subscription synchronized with server scheduler');
     return subscription;
@@ -181,8 +226,9 @@ export async function syncSettingsWithServer(settings: ReminderSettings): Promis
       return;
     }
 
+    const apiUrl = getApiBaseUrl();
     const timezoneOffset = new Date().getTimezoneOffset();
-    await fetch('/api/reminders/update-settings', {
+    await fetch(`${apiUrl}/api/reminders/update-settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -245,7 +291,8 @@ export async function sendTestNotificationNow(settings: ReminderSettings): Promi
   // If we have a push subscription, trigger a REAL server push!
   if (subscription) {
     try {
-      const res = await fetch('/api/reminders/send-test', {
+      const apiUrl = getApiBaseUrl();
+      const res = await fetch(`${apiUrl}/api/reminders/send-test`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ subscription, settings }),
@@ -326,8 +373,9 @@ export async function scheduleBackgroundPushTest(delaySeconds: number = 15): Pro
     return false;
   }
 
+  const apiUrl = getApiBaseUrl();
   try {
-    const res = await fetch('/api/reminders/schedule-test', {
+    const res = await fetch(`${apiUrl}/api/reminders/schedule-test`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -492,10 +540,11 @@ export async function getNotificationDiagnostics(): Promise<DiagnosticsReport> {
   let serverActiveSubs = 0;
 
   try {
-    const res = await fetch('/api/reminders/diagnostics');
+    const apiUrl = getApiBaseUrl();
+    const res = await fetch(`${apiUrl}/api/reminders/diagnostics`);
     if (res.ok) {
       const data = await res.json();
-      serverVapidStatus = data.vapidConfigured ? 'Configured & Online' : 'Not Configured';
+      serverVapidStatus = data.vapidConfigured ? 'Configured & Online ✅' : 'Not Configured';
       serverActiveSubs = data.activeSubscriptions || 0;
       if (data.lastPushLog) {
         if (!data.lastPushLog.success) {
