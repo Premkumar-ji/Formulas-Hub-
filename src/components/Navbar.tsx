@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Star, Moon, Sun, Home, BookOpen, Layers, Type } from 'lucide-react';
+import { Sparkles, Star, Moon, Sun, Home, BookOpen, Layers, Type, Bell } from 'lucide-react';
 import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
@@ -9,6 +9,8 @@ interface NavbarProps {
   onOpenQuickRevision: () => void;
   onOpenCheatSheet: () => void;
   onOpenFontSettings: () => void;
+  onOpenReminders: () => void;
+  isRemindersActive: boolean;
   isDark: boolean;
   onToggleTheme: () => void;
   starredCount: number;
@@ -23,6 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenQuickRevision,
   onOpenCheatSheet,
   onOpenFontSettings,
+  onOpenReminders,
+  isRemindersActive,
   isDark,
   onToggleTheme,
   starredCount,
@@ -97,6 +101,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Layers className="w-3.5 h-3.5 shrink-0" />
             <span>Cheat Sheet</span>
+          </button>
+
+          <button
+            onClick={onOpenReminders}
+            className="flex items-center justify-center gap-1 sm:gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold bg-white/15 hover:bg-white/25 text-white transition-all whitespace-nowrap active:scale-95 shrink-0 relative"
+            title="Daily Formula Reminders & Spaced Repetition Settings"
+            aria-label="Daily Formula Reminders"
+          >
+            <Bell className="w-4 h-4 shrink-0 text-amber-300" />
+            <span className="hidden sm:inline">Reminders</span>
+            {isRemindersActive && (
+              <span className="w-2 h-2 rounded-full bg-emerald-400 absolute top-1 right-1 sm:static sm:w-1.5 sm:h-1.5 animate-pulse" />
+            )}
           </button>
 
           <button

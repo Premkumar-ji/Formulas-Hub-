@@ -14,7 +14,8 @@ import {
   GraduationCap,
   Layers,
   ChevronRight,
-  WifiOff
+  WifiOff,
+  Bell
 } from 'lucide-react';
 import { PWAInstallButton } from './PWAInstallButton';
 
@@ -23,6 +24,7 @@ interface IndexViewProps {
   onSelectTopic: (topicId: string) => void;
   onOpenQuickRevision: () => void;
   onOpenFavorites: () => void;
+  onOpenReminders?: () => void;
   revisedTopicIds: Set<string>;
   onToggleTopicRevised: (topicId: string, e: React.MouseEvent) => void;
   starredFormulaIds: Set<string>;
@@ -34,6 +36,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
   onSelectTopic,
   onOpenQuickRevision,
   onOpenFavorites,
+  onOpenReminders,
   revisedTopicIds,
   onToggleTopicRevised,
   starredFormulaIds,
@@ -135,9 +138,22 @@ export const IndexView: React.FC<IndexViewProps> = ({
             </span>
           </h1>
 
-          <p className="text-purple-100/90 text-xs sm:text-base leading-relaxed mb-6 max-w-2xl">
+          <p className="text-purple-100/90 text-xs sm:text-base leading-relaxed mb-4 max-w-2xl">
             Designed for 10–20 minute rapid revision sessions. All formulas organized topic-wise with standard mathematical notation, exam shortcuts, common traps, and interactive flashcard drills.
           </p>
+
+          {onOpenReminders && (
+            <div className="mb-5 flex flex-wrap items-center gap-2">
+              <button
+                onClick={onOpenReminders}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-xs font-bold text-white transition-all shadow-sm active:scale-95 cursor-pointer backdrop-blur-sm"
+              >
+                <Bell className="w-3.5 h-3.5 text-amber-300" />
+                <span>Daily Formula Reminders & Spaced Repetition</span>
+                <span className="text-[10px] bg-emerald-400 text-purple-950 px-1.5 py-0.2 rounded-full font-bold">2-3x/day</span>
+              </button>
+            </div>
+          )}
 
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 pt-2 border-t border-white/15 w-full min-w-0">

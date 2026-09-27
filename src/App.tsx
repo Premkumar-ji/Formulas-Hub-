@@ -9,6 +9,11 @@ import { StarredView } from './components/StarredView';
 import { CheatSheetModal } from './components/CheatSheetModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { FontCustomizerModal } from './components/FontCustomizerModal';
+import { ReminderModal } from './components/ReminderModal';
+import { DailyPracticeModal } from './components/DailyPracticeModal';
+import { InAppReminderBanner } from './components/InAppReminderBanner';
+import { loadReminderSettings } from './utils/spacedRepetition';
+import { checkAndTriggerScheduledReminders } from './utils/notificationService';
 import { 
   getInitialTextFont, 
   getInitialNumberFont, 
@@ -22,7 +27,7 @@ import {
   DEFAULT_TEXT_FONT_WEIGHT,
   DEFAULT_NUMBER_FONT_WEIGHT
 } from './utils/fontManager';
-import { Type } from 'lucide-react';
+import { Type, Bell } from 'lucide-react';
 
 type AppView = 'index' | 'topic' | 'favorites' | 'cheat-sheet';
 
@@ -32,6 +37,11 @@ export default function App() {
   const [targetFormulaId, setTargetFormulaId] = useState<string | undefined>();
   const [isFlashcardOpen, setIsFlashcardOpen] = useState<boolean>(false);
   const [isFontModalOpen, setIsFontModalOpen] = useState<boolean>(false);
+  const [isReminderModalOpen, setIsReminderModalOpen] = useState<boolean>(false);
+  const [isPracticeModalOpen, setIsPracticeModalOpen] = useState<boolean>(false);
+  const [isRemindersActive, setIsRemindersActive] = useState<boolean>(() => {
+    return loadReminderSettings().enabled;
+  });
 
   // Font customization state (text font, numbers font, scale, weights)
   const [textFont, setTextFont] = useState<string>(getInitialTextFont);
@@ -102,6 +112,18 @@ export default function App() {
     }
   }, [isDark]);
 
+  // Background reminder scheduler ticker
+  useEffect(() => {
+    checkAndTriggerScheduledReminders();
+
+    // Check periodically for scheduled notification slots
+    const interval = setInterval(() => {
+      checkAndTriggerScheduledReminders();
+    }, 25000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Persist starred formulas
   useEffect(() => {
     try {
@@ -138,6 +160,9 @@ export default function App() {
         setCurrentView('favorites');
       } else if (routeKey === 'cheat-sheet') {
         setCurrentView('cheat-sheet');
+      } else if (routeKey === 'reminders') {
+        setIsReminderModalOpen(true);
+        setCurrentView('index');
       } else {
         const found = TOPICS_DATA.find(
           t => t.slug.toLowerCase() === routeKey.toLowerCase() || t.id.toLowerCase() === routeKey.toLowerCase()
@@ -237,6 +262,8 @@ export default function App() {
         onOpenQuickRevision={() => setIsFlashcardOpen(true)}
         onOpenCheatSheet={handleOpenCheatSheet}
         onOpenFontSettings={() => setIsFontModalOpen(true)}
+        onOpenReminders={() => setIsReminderModalOpen(true)}
+        isRemindersActive={isRemindersActive}
         isDark={isDark}
         onToggleTheme={handleToggleTheme}
         starredCount={starredFormulaIds.size}
@@ -252,6 +279,7 @@ export default function App() {
             onSelectTopic={handleSelectTopic}
             onOpenQuickRevision={() => setIsFlashcardOpen(true)}
             onOpenFavorites={handleOpenFavorites}
+            onOpenReminders={() => setIsReminderModalOpen(true)}
             revisedTopicIds={revisedTopicIds}
             onToggleTopicRevised={handleToggleTopicRevised}
             starredFormulaIds={starredFormulaIds}
@@ -303,6 +331,24 @@ export default function App() {
         onToggleStarFormula={handleToggleStarFormula}
       />
 
+      {/* Daily Formula Reminder & Spaced Repetition Settings Modal */}
+      <ReminderModal
+        isOpen={isReminderModalOpen}
+        onClose={() => {
+          setIsReminderModalOpen(false);
+          setIsRemindersActive(loadReminderSettings().enabled);
+        }}
+        onOpenTopic={handleSelectTopic}
+        onOpenPractice={() => setIsPracticeModalOpen(true)}
+      />
+
+      {/* Daily Spaced Revision Micro-Practice Modal */}
+      <DailyPracticeModal
+        isOpen={isPracticeModalOpen}
+        onClose={() => setIsPracticeModalOpen(false)}
+        onOpenSettings={() => setIsReminderModalOpen(true)}
+      />
+
       {/* Typography & Font Customizer Modal */}
       <FontCustomizerModal
         isOpen={isFontModalOpen}
@@ -319,6 +365,9 @@ export default function App() {
         onSelectNumberWeight={setNumberWeight}
         onResetDefaults={handleResetFonts}
       />
+
+      {/* In-App Floating Reminder Notification Banner */}
+      <InAppReminderBanner />
 
       {/* Floating Font Customizer Trigger Button */}
       <button
