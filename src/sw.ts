@@ -30,12 +30,13 @@ self.addEventListener('push', (event) => {
     }
   }
 
+  const defaultIcon = new URL('pwa-192x192.png', self.location.href).href;
   const title = data.title || '⚡ Formula Reminder';
   const body = data.body || 'Time for your daily mathematical formula revision!';
-  const icon = data.icon || '/pwa-192x192.png';
-  const badge = data.badge || '/pwa-192x192.png';
+  const icon = data.icon || defaultIcon;
+  const badge = data.badge || defaultIcon;
   const tag = data.tag || `formula-reminder-${Date.now()}`;
-  const customData = data.data || { url: '/' };
+  const customData = data.data || { url: self.registration.scope || '/' };
 
   const options: any = {
     body,
@@ -77,7 +78,7 @@ self.addEventListener('notificationclick', (event) => {
     return;
   }
 
-  const targetUrl = event.notification.data?.url || '/';
+  const targetUrl = event.notification.data?.url || self.registration.scope || '/';
 
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
@@ -104,6 +105,7 @@ self.addEventListener('notificationclick', (event) => {
 // Periodic Background Sync (supported on Android Chrome when engagement threshold is met)
 self.addEventListener('periodicsync', (event: any) => {
   if (event.tag === 'formula-daily-sync') {
+    const defaultIcon = new URL('pwa-192x192.png', self.location.href).href;
     event.waitUntil(
       fetch('/api/reminders/due')
         .then((res) => res.json())
@@ -111,10 +113,10 @@ self.addEventListener('periodicsync', (event: any) => {
           if (data && data.hasReminder) {
             return self.registration.showNotification(data.title, {
               body: data.body,
-              icon: '/pwa-192x192.png',
-              badge: '/pwa-192x192.png',
+              icon: defaultIcon,
+              badge: defaultIcon,
               tag: `formula-sync-${Date.now()}`,
-              data: data.data || { url: '/' },
+              data: data.data || { url: self.registration.scope || '/' },
             });
           }
         })
@@ -130,14 +132,15 @@ self.addEventListener('message', (event) => {
     return;
   }
   if (event.data && event.data.type === 'SHOW_NATIVE_NOTIFICATION') {
+    const defaultIcon = new URL('pwa-192x192.png', self.location.href).href;
     const { title, body, tag, data } = event.data;
     event.waitUntil(
       self.registration.showNotification(title, {
         body,
-        icon: '/pwa-192x192.png',
-        badge: '/pwa-192x192.png',
+        icon: defaultIcon,
+        badge: defaultIcon,
         tag: tag || `local-${Date.now()}`,
-        data: data || { url: '/' },
+        data: data || { url: self.registration.scope || '/' },
         renotify: true,
       } as any)
     );

@@ -62,9 +62,9 @@ export async function getActiveServiceWorkerRegistration(): Promise<ServiceWorke
   try {
     let reg = await navigator.serviceWorker.getRegistration();
     if (!reg) {
-      const swUrl = process.env.NODE_ENV === 'development' ? '/dev-sw.js?dev-sw' : '/sw.js';
+      const swUrl = process.env.NODE_ENV === 'development' ? './dev-sw.js?dev-sw' : './sw.js';
       reg = await navigator.serviceWorker.register(swUrl, {
-        scope: '/',
+        scope: './',
         type: process.env.NODE_ENV === 'development' ? 'module' : 'classic',
       });
     }
@@ -271,12 +271,13 @@ export async function sendTestNotificationNow(settings: ReminderSettings): Promi
     try {
       const registration = await getActiveServiceWorkerRegistration();
       if (registration) {
+        const iconUrl = typeof window !== 'undefined' ? new URL('pwa-192x192.png', window.location.href).href : 'pwa-192x192.png';
         await registration.showNotification(title, {
           body,
-          icon: '/pwa-192x192.png',
-          badge: '/pwa-192x192.png',
+          icon: iconUrl,
+          badge: iconUrl,
           tag: `test-${Date.now()}`,
-          data: { url: '/', isTest: true },
+          data: { url: './', isTest: true },
           renotify: true,
         } as any);
         playReminderChime();
@@ -374,13 +375,14 @@ export async function checkAndTriggerScheduledReminders(): Promise<void> {
           try {
             const reg = await getActiveServiceWorkerRegistration();
             if (reg) {
+              const iconUrl = typeof window !== 'undefined' ? new URL('pwa-192x192.png', window.location.href).href : 'pwa-192x192.png';
               const f = reminder.formulas[0];
               await reg.showNotification(`⚡ ${reminder.topicName} — Daily Formula`, {
                 body: `${f.formula}\n${f.meaning ? `💡 ${f.meaning}` : ''}`,
-                icon: '/pwa-192x192.png',
-                badge: '/pwa-192x192.png',
+                icon: iconUrl,
+                badge: iconUrl,
                 tag: `slot-${slotKey}`,
-                data: { url: '/' },
+                data: { url: './' },
                 renotify: true,
               } as any);
               playReminderChime();
@@ -501,13 +503,16 @@ export async function getNotificationDiagnostics(): Promise<DiagnosticsReport> {
         }
         lastAttempt = `${data.lastPushLog.details} (${new Date(data.lastPushLog.timestamp).toLocaleTimeString()})`;
       }
+    } else if (res.status === 404) {
+      serverVapidStatus = 'Static host (Client Service Worker active)';
+      notificationError = 'None';
     } else {
       serverVapidStatus = `Server responded HTTP ${res.status}`;
       notificationError = `Server diagnostics returned HTTP ${res.status}`;
     }
-  } catch (e: any) {
-    serverVapidStatus = 'Server unreachable';
-    notificationError = `Diagnostics fetch error: ${e?.message || e}`;
+  } catch {
+    serverVapidStatus = 'Static host / Offline mode';
+    notificationError = 'None';
   }
 
   return {
