@@ -8,6 +8,11 @@ import { TOPICS_DATA } from './src/data/topics.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+try {
+  process.chdir(__dirname);
+} catch {
+  // ignore
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -541,6 +546,7 @@ async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
+      root: __dirname,
       server: { middlewareMode: true },
       appType: 'spa',
     });

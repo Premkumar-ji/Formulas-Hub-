@@ -31,7 +31,7 @@ import {
   DEFAULT_TEXT_FONT_WEIGHT,
   DEFAULT_NUMBER_FONT_WEIGHT
 } from './utils/fontManager';
-import { Type, Bell } from 'lucide-react';
+import { Type, Bell, Github, Linkedin } from 'lucide-react';
 
 type AppView = 'index' | 'topic' | 'favorites' | 'cheat-sheet';
 
@@ -394,23 +394,66 @@ export default function App() {
       </button>
 
       {/* Clean quiet footer */}
-      <footer className="mt-auto py-6 border-t border-[var(--border)] bg-[var(--card)]/50 text-center text-xs text-[var(--ink-muted)] no-print w-full max-w-full">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 w-full max-w-full">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 text-center sm:text-left">
-            <span className="font-heading font-bold text-[var(--ink)]">Formula Universe</span>
-            <span>·</span>
-            <span>Comprehensive Math Revision for NIMCET, MCA & JEE Prep</span>
+      <footer className="mt-auto pt-6 pb-8 border-t border-[var(--border)] bg-[var(--card)]/60 text-xs text-[var(--ink-muted)] no-print w-full max-w-full">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col gap-4 w-full">
+          {/* Top row: Branding & Navigation Links */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
+              <span className="font-heading font-bold text-[var(--ink)]">Formula Universe</span>
+              <span className="text-[var(--ink-muted)]/50">·</span>
+              <span>Comprehensive Math Revision for NIMCET, MCA & JEE Prep</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 shrink-0 font-medium">
+              <button onClick={handleNavigateHome} className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                Topics Index
+              </button>
+              <button onClick={handleOpenFavorites} className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                Starred ({starredFormulaIds.size})
+              </button>
+              <button onClick={handleOpenCheatSheet} className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                Cheat Sheet
+              </button>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 shrink-0">
-            <button onClick={handleNavigateHome} className="hover:text-purple-600 transition-colors">
-              Topics Index
-            </button>
-            <button onClick={handleOpenFavorites} className="hover:text-purple-600 transition-colors">
-              Starred ({starredFormulaIds.size})
-            </button>
-            <button onClick={handleOpenCheatSheet} className="hover:text-purple-600 transition-colors">
-              Cheat Sheet
-            </button>
+
+          {/* Subtle separator */}
+          <div className="h-px w-full bg-[var(--border)]/70" />
+
+          {/* Bottom row: Copyright & Creator Social Links */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
+              <span>Copyright © {new Date().getFullYear()}</span>
+              <strong className="font-semibold text-[var(--ink)]">Prem Kumar Modi</strong>.
+              <span className="text-[var(--ink-muted)]/80">All rights reserved.</span>
+            </div>
+
+            <div className="flex items-center justify-center gap-2.5">
+              <span className="text-[11px] text-[var(--ink-muted)] hidden xs:inline">Connect with Prem:</span>
+              
+              <a
+                href="https://github.com/Premkumar-ji"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:border-purple-300 dark:hover:border-purple-700 text-[var(--ink)] hover:text-purple-600 dark:hover:text-purple-300 transition-all font-medium shadow-2xs group"
+                title="GitHub - Premkumar-ji"
+                aria-label="GitHub Profile of Prem Kumar Modi"
+              >
+                <Github className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px]">GitHub</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/prem-kumar-modi-b8291a257?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:border-blue-300 dark:hover:border-blue-700 text-[var(--ink)] hover:text-blue-600 dark:hover:text-blue-300 transition-all font-medium shadow-2xs group"
+                title="LinkedIn - Prem Kumar Modi"
+                aria-label="LinkedIn Profile of Prem Kumar Modi"
+              >
+                <Linkedin className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-[#0a66c2]" />
+                <span className="text-[11px]">LinkedIn</span>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
