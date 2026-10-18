@@ -8,6 +8,7 @@
     "start": "tsx server.ts",
     "build": "vite build",
     "preview": "vite preview",
+    "postinstall": "node -e \"import('fs').then(fs => { const p = 'node_modules/vite-plugin-pwa/dist/index.js'; if (fs.existsSync(p)) { let c = fs.readFileSync(p, 'utf8'); c = c.replaceAll('typeof __dirname !== \\\"undefined\\\" ?', 'typeof __dirname !== \\\"undefined\\\" && __dirname !== \\\".\\\" && !__dirname.startsWith(\\\".\\\") ?'); fs.writeFileSync(p, c); } });\"",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
   },

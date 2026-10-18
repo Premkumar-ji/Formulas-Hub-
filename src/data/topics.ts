@@ -2878,7 +2878,8 @@ export const TOPICS_DATA: TopicData[] = [
     "quickTips": [
       "Perpendicular distance from (x₁, y₁) to ax + by + c = 0 is |ax₁ + by₁ + c| / √(a² + b²).",
       "Distance between parallel lines ax+by+c₁=0 and ax+by+c₂=0 is |c₁ − c₂| / √(a² + b²).",
-      "Circle x² + y² + 2gx + 2fy + c = 0 has centre (−g, −f) and radius √(g² + f² − c)."
+      "Circle x² + y² + 2gx + 2fy + c = 0 has centre (−g, −f) and radius √(g² + f² − c).",
+      "Angle bisectors: Make c₁, c₂ > 0 first. '+' always gives the origin angle bisector. If a₁a₂ + b₁b₂ > 0, origin is obtuse; if < 0, origin is acute."
     ],
     "categories": [
       {
@@ -2960,6 +2961,56 @@ export const TOPICS_DATA: TopicData[] = [
             "explanation": "Calculates acute angle between two intersecting lines.",
             "mustKnow": true,
             "latex": "\\begin{aligned} \\tan  \\theta  = |(m_1 − m_2) / (1 + m_1 m_2)| \\\\ Parallel: m_1 = m_2  |  Perpendicular: m_1  \\cdot  m_2 = −1 \\end{aligned}"
+          },
+          {
+            "id": "line-angle-bisectors",
+            "title": "Angle Bisectors Between Two Lines (Acute vs Obtuse & Origin Angle)",
+            "formula": "(a₁x + b₁y + c₁) / √(a₁² + b₁²) = ± (a₂x + b₂y + c₂) / √(a₂² + b₂²)",
+            "latex": "\\frac{a_1 x + b_1 y + c_1}{\\sqrt{a_1^2 + b_1^2}} = \\pm \\frac{a_2 x + b_2 y + c_2}{\\sqrt{a_2^2 + b_2^2}}",
+            "mustKnow": true,
+            "explanation": "### 1. Equation of the Bisectors\nTwo intersecting lines in a 2D plane:\n• $L_1 : a_1x + b_1y + c_1 = 0$\n• $L_2 : a_2x + b_2y + c_2 = 0$\nEvery point $(x, y)$ lying on an angle bisector is at equal perpendicular distance from both lines. Setting the two distances equal gives:\n$$\\frac{a_1x + b_1y + c_1}{\\sqrt{a_1^2 + b_1^2}} = \\pm \\frac{a_2x + b_2y + c_2}{\\sqrt{a_2^2 + b_2^2}}$$\n• The **$+$ sign** gives one angle bisector; the **$-$ sign** gives the other.\n• The two bisectors are always **mutually perpendicular** ($m_1 \\cdot m_2 = -1$).\n• One bisects the **acute angle** between the lines, and the other bisects the **obtuse angle**.\n\n### 2. Preliminary Step: Make Constants Positive\nBefore selecting the sign, write both line equations such that $c_1 > 0$ and $c_2 > 0$:\n• If a constant is negative, multiply the **entire equation by $-1$** (all three terms).\n• This ensures the origin $(0, 0)$ is on the positive side of both lines, which makes the sign rule below work.\n• **Edge Case**: If a constant is $0$, the line passes through the origin $(0, 0)$; test a point on each bisector against the angle instead.\n\n### 3. Identifying Acute vs Obtuse Bisectors\nWith $c_1 > 0$ and $c_2 > 0$, compute the scalar quantity $a_1a_2 + b_1b_2$:\n• **If $a_1a_2 + b_1b_2 > 0$**:\n  - Acute angle bisector: choose the **$-$ sign**\n  - Obtuse angle bisector: choose the **$+$ sign**\n  - Angle containing the origin: choose the **$+$ sign** (which is obtuse)\n• **If $a_1a_2 + b_1b_2 < 0$**:\n  - Acute angle bisector: choose the **$+$ sign**\n  - Obtuse angle bisector: choose the **$-$ sign**\n  - Angle containing the origin: choose the **$+$ sign** (which is acute)\n\n**Why the Rule Works (Normal Vectors):**\nNormals $\\vec{n}_1 = (a_1, b_1)$ and $\\vec{n}_2 = (a_2, b_2)$ point toward the origin side when $c_1, c_2 > 0$. The angle containing the origin is $180^\\circ - \\theta$, where $\\theta$ is the angle between the normals. Since $\\cos\\theta$ has the sign of $a_1a_2 + b_1b_2$:\n• Dot product $> 0 \\implies \\theta$ is acute $\\implies$ origin angle $(180^\\circ - \\theta)$ is obtuse (hence $+$ gives obtuse).\n• Dot product $< 0 \\implies \\theta$ is obtuse $\\implies$ origin angle is acute (hence $+$ gives acute).\n\n### 4. Method in Steps\n1. Write both lines in general form: $ax + by + c = 0$.\n2. Ensure $c_1 > 0$ and $c_2 > 0$ (multiply by $-1$ where necessary).\n3. Calculate $a_1a_2 + b_1b_2$ from the adjusted coefficients and observe its sign.\n4. Write the bisector formula using the norms $\\sqrt{a_1^2 + b_1^2}$ and $\\sqrt{a_2^2 + b_2^2}$.\n5. Select the required sign ($+$ or $-$) from the classification rule.\n6. Cross-multiply, expand terms, and simplify into standard linear form.\n\n### 5. Step-by-Step Worked Example\nFind the acute and obtuse angle bisectors of:\n• $L_1 : 3x + 4y + 5 = 0$\n• $L_2 : 5x - 12y + 13 = 0$\n\n• **Steps 1 & 2 (Constants Check)**:\n  $c_1 = 5 > 0$ and $c_2 = 13 > 0$ (both already positive).\n• **Step 3 (Dot Product Check)**:\n  $$a_1a_2 + b_1b_2 = (3)(5) + (4)(-12) = 15 - 48 = -33 < 0$$\n• **Step 4 (Compute Norms)**:\n  $$\\sqrt{3^2 + 4^2} = 5, \\quad \\sqrt{5^2 + (-12)^2} = 13$$\n  $$\\frac{3x + 4y + 5}{5} = \\pm \\frac{5x - 12y + 13}{13}$$\n• **Acute Bisector ($+$ sign, since dot product $< 0$)**:\n  $$13(3x + 4y + 5) = 5(5x - 12y + 13)$$\n  $$39x + 52y + 65 = 25x - 60y + 65 \\implies 14x + 112y = 0 \\implies x + 8y = 0$$\n• **Obtuse Bisector ($-$ sign)**:\n  $$13(3x + 4y + 5) = -5(5x - 12y + 13)$$\n  $$39x + 52y + 65 = -25x + 60y - 65 \\implies 64x - 8y + 130 = 0 \\implies 32x - 4y + 65 = 0$$\n• **Perpendicularity Verification**:\n  Slope of acute bisector $m_1 = -1/8$; slope of obtuse bisector $m_2 = 8$.\n  $$m_1 \\cdot m_2 = \\left(-\\frac{1}{8}\\right) \\cdot (8) = -1 \\quad \\text{(Perpendicular!)}$$\n\n### 6. Quick Memory Summary\n• Bisectors formula: $\\frac{L_1}{\\sqrt{a_1^2 + b_1^2}} = \\pm \\frac{L_2}{\\sqrt{a_2^2 + b_2^2}}$\n• Make $c_1, c_2 > 0$ first.\n• The **$+$ sign ALWAYS bisects the angle containing $(0, 0)$**.\n• If $a_1a_2 + b_1b_2 > 0$: Acute uses $-$, Obtuse uses $+$.\n• If $a_1a_2 + b_1b_2 < 0$: Acute uses $+$, Obtuse uses $-$.",
+            "shortcut": "⚡ Golden Rule: First make c₁, c₂ > 0! The '+' sign ALWAYS gives the bisector of the angle containing the origin. If a₁a₂ + b₁b₂ > 0, origin angle is obtuse (so '+' = Obtuse, '−' = Acute). If a₁a₂ + b₁b₂ < 0, origin angle is acute (so '+' = Acute, '−' = Obtuse).",
+            "commonMistake": "⚠️ Forgetting to make c₁ > 0 and c₂ > 0 BEFORE evaluating a₁a₂ + b₁b₂! If any constant is negative, multiply that whole equation by −1 first.",
+            "remember": "💡 When c₁, c₂ > 0: '+' is ALWAYS the origin angle bisector. Dot product > 0 means origin angle is Obtuse; Dot product < 0 means origin angle is Acute.",
+            "tags": ["lines", "angle-bisectors", "acute", "obtuse", "origin", "coordinate-geometry", "nimcet", "jee"],
+            "table": {
+              "headers": [
+                "Condition (with c₁, c₂ > 0)",
+                "Bisector Classification & Sign Selection"
+              ],
+              "rows": [
+                {
+                  "feature": "a₁a₂ + b₁b₂ > 0 (Acute Bisector)",
+                  "value": "Use '−' sign in (a₁x + b₁y + c₁)/√(a₁² + b₁²) = ± (a₂x + b₂y + c₂)/√(a₂² + b₂²)",
+                  "latex": "\\text{Acute Bisector: use } - \\text{ sign}"
+                },
+                {
+                  "feature": "a₁a₂ + b₁b₂ > 0 (Obtuse Bisector)",
+                  "value": "Use '+' sign (also the angle containing the origin)",
+                  "latex": "\\text{Obtuse Bisector: use } + \\text{ sign (contains origin)}"
+                },
+                {
+                  "feature": "a₁a₂ + b₁b₂ < 0 (Acute Bisector)",
+                  "value": "Use '+' sign (also the angle containing the origin)",
+                  "latex": "\\text{Acute Bisector: use } + \\text{ sign (contains origin)}"
+                },
+                {
+                  "feature": "a₁a₂ + b₁b₂ < 0 (Obtuse Bisector)",
+                  "value": "Use '−' sign",
+                  "latex": "\\text{Obtuse Bisector: use } - \\text{ sign}"
+                },
+                {
+                  "feature": "Origin Rule (c₁, c₂ > 0)",
+                  "value": "The '+' sign ALWAYS bisects the angle containing the origin (0, 0)",
+                  "latex": "\\text{'+' sign always bisects the angle containing } (0,0)"
+                },
+                {
+                  "feature": "Perpendicular Property",
+                  "value": "m(acute bisector) × m(obtuse bisector) = −1 (mutually perpendicular)",
+                  "latex": "m_{\\text{acute}} \\cdot m_{\\text{obtuse}} = -1"
+                }
+              ]
+            }
           }
         ]
       },

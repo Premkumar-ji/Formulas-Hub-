@@ -1,6 +1,13 @@
+import '../preamble';
 import React, { useState } from 'react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { Download, Smartphone, Check, X, Share, PlusSquare, WifiOff } from 'lucide-react';
+
+if (typeof window !== 'undefined') {
+  (window as any).__vite_plugin_react_preamble_installed__ = true;
+  (window as any).$RefreshReg$ = (window as any).$RefreshReg$ || (() => {});
+  (window as any).$RefreshSig$ = (window as any).$RefreshSig$ || (() => (type: any) => type);
+}
 
 interface PWAInstallButtonProps {
   variant?: 'nav' | 'hero' | 'banner';

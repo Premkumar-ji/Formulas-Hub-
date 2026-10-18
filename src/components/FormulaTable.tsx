@@ -64,7 +64,7 @@ export const FormulaTable: React.FC<FormulaTableProps> = ({
 
                 {/* Formula / Value Column */}
                 <td
-                  className={`text-[var(--ink)] align-middle select-all leading-normal break-words ${
+                  className={`text-[var(--ink)] align-middle leading-normal break-words ${
                     compact ? 'px-2.5 sm:px-3 py-1.5 text-base' : 'px-2.5 sm:px-3.5 py-2.5 sm:py-3 text-[21px]'
                   }`}
                   style={{ fontSize: '21px' }}

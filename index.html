@@ -1,6 +1,29 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      // React Fast Refresh preamble definition for custom server and iframe environment
+      window.__vite_plugin_react_preamble_installed__ = true;
+      window.$RefreshReg$ = window.$RefreshReg$ || function() {};
+      window.$RefreshSig$ = window.$RefreshSig$ || function() { return function(type) { return type; }; };
+      if (typeof globalThis !== 'undefined') {
+        globalThis.$RefreshReg$ = window.$RefreshReg$;
+        globalThis.$RefreshSig$ = window.$RefreshSig$;
+      }
+
+      // Filter out known HMR WebSocket notices in iframe environment where HMR is disabled
+      (function() {
+        var origError = console.error;
+        console.error = function() {
+          var msg = arguments[0];
+          if (typeof msg === 'string' && (msg.indexOf('[vite]') !== -1 || msg.indexOf('WebSocket') !== -1 || msg.indexOf('websocket') !== -1)) {
+            console.warn.apply(console, arguments);
+            return;
+          }
+          origError.apply(console, arguments);
+        };
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#7c3aed" />
@@ -11,7 +34,6 @@
     <link rel="icon" type="image/svg+xml" href="./icon.svg" />
     <link rel="shortcut icon" href="./favicon.ico" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="alternate" type="application/manifest+json" href="./manifest.json" />
     <title>Formula Universe - Interactive Math Revision Hub</title>
     <meta name="description" content="Playful, colorful, and interactive mathematical formula revision hub topic-wise for competitive exams like NIMCET, MCA entrance, and JEE." />

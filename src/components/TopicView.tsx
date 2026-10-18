@@ -6,8 +6,6 @@ import {
   ArrowLeft, 
   ArrowRight, 
   Search, 
-  Copy, 
-  Check, 
   Star, 
   Flame, 
   AlertTriangle, 
@@ -57,9 +55,15 @@ export const TopicView: React.FC<TopicViewProps> = ({
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
   const [hiddenDefinitions, setHiddenDefinitions] = useState<Set<string>>(new Set());
-  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showTopicSwitcher, setShowTopicSwitcher] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const allFormulaIds = useMemo(
+    () => topic.categories.flatMap(c => c.formulas.map(f => f.id)),
+    [topic]
+  );
+
+  const areAllNotesHidden = allFormulaIds.length > 0 && hiddenDefinitions.size === allFormulaIds.length;
 
   const toggleDefinition = (formulaId: string) => {
     setHiddenDefinitions(prev => {
@@ -71,8 +75,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
   };
 
   const toggleAllDefinitions = () => {
-    const allFormulaIds = topic.categories.flatMap(c => c.formulas.map(f => f.id));
-    if (hiddenDefinitions.size === allFormulaIds.length) {
+    if (areAllNotesHidden) {
       setHiddenDefinitions(new Set());
     } else {
       setHiddenDefinitions(new Set(allFormulaIds));
@@ -130,19 +133,6 @@ export const TopicView: React.FC<TopicViewProps> = ({
     setCollapsedCategories(all);
   };
 
-  const copyFormula = (formula: FormulaItem) => {
-    let copyText = '';
-    if (formula.table) {
-      const rows = formula.table.rows.map(r => `• ${r.feature}: ${r.value}`).join('\n');
-      copyText = `${formula.title}:\n${rows}\n\n${formula.explanation}`;
-    } else {
-      copyText = `${formula.title}:\n${formula.formula}\n\n${formula.explanation}`;
-    }
-    navigator.clipboard.writeText(copyText).then(() => {
-      setCopiedId(formula.id);
-      setTimeout(() => setCopiedId(null), 1500);
-    });
-  };
 
   const handleToggleRevised = () => {
     if (!isRevised) {
@@ -388,7 +378,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
               title="Toggle definitions and details on all formula cards"
             >
               <BookOpen className="w-3 h-3" />
-              <span>{hiddenDefinitions.size > 0 ? 'Show All Notes' : 'Hide All Notes'}</span>
+              <span>{areAllNotesHidden ? 'Show All Notes' : 'Hide All Notes'}</span>
             </button>
           </div>
         </div>
@@ -470,7 +460,6 @@ export const TopicView: React.FC<TopicViewProps> = ({
                   <div className="cat-body p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 w-full min-w-0 max-w-full">
                     {category.formulas.map(formula => {
                       const isStarred = starredFormulaIds.has(formula.id);
-                      const isCopied = copiedId === formula.id;
                       const hasTextPart = Boolean(formula.explanation || formula.shortcut || formula.commonMistake || formula.remember);
                       const isTextHidden = hiddenDefinitions.has(formula.id);
 
@@ -500,12 +489,12 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               </div>
 
                               <div className="flex items-center gap-1 shrink-0">
-                                {hasTextPart && (
+                                {hasTextPart && !areAllNotesHidden && (
                                   <button
                                     type="button"
                                     onClick={() => toggleDefinition(formula.id)}
                                     className="p-1 sm:px-2 py-1 rounded-lg text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 transition-colors flex items-center gap-1 text-[11px] font-semibold"
-                                    title={isTextHidden ? 'Click arrow to show definition' : 'Click arrow to hide definition'}
+                                    title={isTextHidden ? 'Click to show definition' : 'Click to hide definition'}
                                   >
                                     <span className="hidden sm:inline text-[10px]">{isTextHidden ? 'Definition' : 'Hide'}</span>
                                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isTextHidden ? '-rotate-90' : 'rotate-0'}`} />
@@ -531,7 +520,7 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               <FormulaTable table={formula.table} />
                             ) : (
                               <div
-                                className="formula rounded-2xl p-2.5 sm:p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0 font-rounded text-left"
+                                className="formula rounded-2xl p-2.5 sm:p-3 mb-2.5 overflow-x-auto w-full max-w-full min-w-0 font-rounded text-left"
                                 style={{
                                   backgroundColor: 'var(--math-bg)',
                                   border: '1px solid var(--math-border)',
@@ -547,13 +536,13 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               </div>
                             )}
 
-                            {/* Arrow to hide and unhide definition and text part */}
-                            {hasTextPart && (
+                            {/* Toggle definition button - hidden completely when all notes are hidden */}
+                            {hasTextPart && !areAllNotesHidden && (
                               <button
                                 type="button"
                                 onClick={() => toggleDefinition(formula.id)}
                                 className="w-full flex items-center justify-between py-1.5 px-3 rounded-xl bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/20 text-[11px] font-semibold text-purple-700 dark:text-purple-300 transition-colors my-2 select-none"
-                                title={isTextHidden ? 'Click arrow to unhide definition & text' : 'Click arrow to hide definition & text'}
+                                title={isTextHidden ? 'Click to show definition & details' : 'Click to hide definition & details'}
                               >
                                 <span className="flex items-center gap-1.5">
                                   <BookOpen className="w-3.5 h-3.5" />
@@ -567,7 +556,16 @@ export const TopicView: React.FC<TopicViewProps> = ({
                               <div className="definition-content space-y-2 mb-2.5">
                                 {/* Explanation / Definition */}
                                 {formula.explanation && (
-                                  <div className="exp text-xs text-[var(--ink-muted)] leading-relaxed break-words bg-slate-500/[0.03] p-2.5 rounded-xl border border-[var(--border)]">
+                                  <div
+                                    className="exp text-xs text-[var(--ink-muted)] leading-relaxed break-words bg-slate-500/[0.03] p-2.5 rounded-xl border border-[var(--border)]"
+                                    style={formula.id === 'line-angle-bisectors' ? {
+                                      backgroundColor: '#fff5f5',
+                                      fontSize: '21px',
+                                      fontWeight: 'bold',
+                                      textDecorationLine: 'none',
+                                      borderColor: '#ff0000',
+                                    } : undefined}
+                                  >
                                     <span className="font-semibold text-purple-700 dark:text-purple-300 block mb-0.5 text-[11px]">
                                       📖 Definition & Theory:
                                     </span>
@@ -597,33 +595,6 @@ export const TopicView: React.FC<TopicViewProps> = ({
                                 )}
                               </div>
                             )}
-                          </div>
-
-                          {/* Card Footer Actions */}
-                          <div className="pt-2 border-t border-[var(--border)] flex items-center justify-between mt-1 min-w-0">
-                            <span className="text-[10px] text-[var(--ink-muted)] truncate mr-2">
-                              Tap formula to highlight
-                            </span>
-                            <button
-                              onClick={() => copyFormula(formula)}
-                              className={`copy text-xs font-semibold px-2.5 py-1 rounded-md transition-colors flex items-center gap-1.5 shrink-0 ${
-                                isCopied
-                                  ? 'bg-emerald-500 text-white'
-                                  : 'text-purple-600 dark:text-purple-400 hover:bg-purple-500/10'
-                              }`}
-                            >
-                              {isCopied ? (
-                                <>
-                                  <Check className="w-3.5 h-3.5" />
-                                  <span>Copied!</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy className="w-3.5 h-3.5" />
-                                  <span>Copy</span>
-                                </>
-                              )}
-                            </button>
                           </div>
                         </div>
                       );

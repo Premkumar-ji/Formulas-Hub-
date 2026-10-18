@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TopicData, FormulaItem } from '../types/formula';
 import { MathRenderer, FormattedText } from './MathRenderer';
 import { FormulaTable } from './FormulaTable';
-import { Star, ArrowLeft, Copy, Check, Trash2, ExternalLink } from 'lucide-react';
+import { Star, ArrowLeft, Trash2, ExternalLink } from 'lucide-react';
 
 interface StarredViewProps {
   topics: TopicData[];
@@ -21,8 +21,6 @@ export const StarredView: React.FC<StarredViewProps> = ({
   onBackToIndex,
   onSelectFormulaDirectly,
 }) => {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-
   // Collect all starred formulas
   const starredList: Array<{
     topicId: string;
@@ -47,20 +45,6 @@ export const StarredView: React.FC<StarredViewProps> = ({
       }
     }
   }
-
-  const handleCopy = (formula: FormulaItem) => {
-    let text = '';
-    if (formula.table) {
-      const rows = formula.table.rows.map(r => `• ${r.feature}: ${r.value}`).join('\n');
-      text = `${formula.title}:\n${rows}\n\n${formula.explanation}`;
-    } else {
-      text = `${formula.title}:\n${formula.formula}\n\n${formula.explanation}`;
-    }
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedId(formula.id);
-      setTimeout(() => setCopiedId(null), 1500);
-    });
-  };
 
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-8 w-full max-w-full min-w-0">
@@ -118,8 +102,6 @@ export const StarredView: React.FC<StarredViewProps> = ({
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0">
           {starredList.map(({ topicId, topicName, topicIcon, categoryName, formula }) => {
-            const isCopied = copiedId === formula.id;
-
             return (
               <div
                 key={formula.id}
@@ -157,7 +139,7 @@ export const StarredView: React.FC<StarredViewProps> = ({
                     <FormulaTable table={formula.table} />
                   ) : (
                     <div
-                      className="rounded-xl p-3 mb-2.5 overflow-x-auto select-all w-full max-w-full min-w-0"
+                      className="rounded-xl p-3 mb-2.5 overflow-x-auto w-full max-w-full min-w-0"
                       style={{
                         backgroundColor: 'var(--math-bg)',
                         border: '1px solid var(--math-border)',
@@ -182,24 +164,8 @@ export const StarredView: React.FC<StarredViewProps> = ({
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs mt-2 min-w-0">
-                  <span className="text-[10px] text-[var(--ink-muted)] truncate mr-2">Saved for revision</span>
-                  <button
-                    onClick={() => handleCopy(formula)}
-                    className="px-2.5 py-1 rounded-md text-xs font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 flex items-center gap-1 shrink-0"
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Copy</span>
-                      </>
-                    )}
-                  </button>
+                <div className="pt-2 border-t border-[var(--border)] flex items-center justify-between text-xs mt-1 min-w-0">
+                  <span className="text-[10px] text-[var(--ink-muted)] truncate">Saved for revision</span>
                 </div>
               </div>
             );
